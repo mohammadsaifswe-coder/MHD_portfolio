@@ -35,6 +35,8 @@ export default function HomePage() {
 
                     <HeroName />
                 </div>
+
+                <div className="h-50"></div>
             </div>
         </div>
     )
