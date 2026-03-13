@@ -18,20 +18,18 @@ export function IconCloud({ icons, images }) {
   const iconCanvasesRef = useRef([]);
   const imagesLoadedRef = useRef([]);
 
-  // 1. Dynamic Scaling Factor: Determines how "large" everything is based on screen
+  // 1. IMPROVED SCALING: Bigger on mobile, crisp on desktop
   const getScale = () => {
     if (dimensions.width === 0) return 1;
-    if (dimensions.width < 640) return 0.6; // Mobile
-    if (dimensions.width < 1024) return 0.8; // Tablet
-    if (dimensions.width < 1536) return 1.1; // Laptop/Standard Desktop
-    return 1.5; // Large Screens / Mac Retina
+    if (dimensions.width < 640) return 0.85; // Increased from 0.6 for mobile
+    if (dimensions.width < 1024) return 1.0;
+    return 1.4; // 2XL/Mac
   };
 
   useEffect(() => {
     if (!containerRef.current) return;
     const observer = new ResizeObserver((entries) => {
       for (let entry of entries) {
-        // Set canvas to parent size
         setDimensions({
           width: entry.contentRect.width,
           height: entry.contentRect.height,
@@ -42,33 +40,47 @@ export function IconCloud({ icons, images }) {
     return () => observer.disconnect();
   }, []);
 
-  const [stars] = useState(() =>
-    Array.from({ length: 120 }, () => ({
-      x: (Math.random() - 0.5) * 1200,
-      y: (Math.random() - 0.5) * 1200,
-      z: (Math.random() - 0.5) * 1200,
-      size: Math.random() * 2 + 0.5,
-    }))
-  );
+  // 2. TOUCH HANDLERS FOR MOBILE DRAGGING
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    const touch = e.touches[0];
+    setLastMousePos({ x: touch.clientX, y: touch.clientY });
+  };
 
+  const handleTouchMove = (e) => {
+    const touch = e.touches[0];
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (rect) {
+      // Updates hover/ripple effect for mobile touch
+      setMousePos({ x: touch.clientX - rect.left, y: touch.clientY - rect.top });
+    }
+    if (isDragging) {
+      const deltaX = touch.clientX - lastMousePos.x;
+      const deltaY = touch.clientY - lastMousePos.y;
+      rotationRef.current.x += deltaY * 0.004; // Slightly faster for touch
+      rotationRef.current.y -= deltaX * 0.004;
+      setLastMousePos({ x: touch.clientX, y: touch.clientY });
+    }
+  };
+
+  // 3. ICON GENERATION
   useEffect(() => {
     if (!icons && !images) return;
     const items = icons ?? images ?? [];
     const newIconCanvases = items.map((item, index) => {
       const offscreen = document.createElement("canvas");
-      offscreen.width = 80; // Higher res for retina
-      offscreen.height = 80;
+      offscreen.width = 100;
+      offscreen.height = 100;
       const offCtx = offscreen.getContext("2d");
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.src = images ? items[index] : "data:image/svg+xml;base64," + btoa(renderToString(item));
       img.onload = () => {
         if (offCtx) {
-          offCtx.clearRect(0, 0, 80, 80);
           offCtx.beginPath();
-          offCtx.arc(40, 40, 40, 0, Math.PI * 2);
+          offCtx.arc(50, 50, 50, 0, Math.PI * 2);
           offCtx.clip();
-          offCtx.drawImage(img, 0, 0, 80, 80);
+          offCtx.drawImage(img, 0, 0, 100, 100);
           imagesLoadedRef.current[index] = true;
         }
       };
@@ -84,10 +96,10 @@ export function IconCloud({ icons, images }) {
     const newIcons = [];
     const offset = 2 / numIcons;
     const increment = Math.PI * (3 - Math.sqrt(5));
-    
-    // SCALE THE SPHERE: 
-    // On desktop, we use a larger percentage of the screen
-    const sphereRadius = Math.min(dimensions.width, dimensions.height) * (dimensions.width > 1024 ? 0.42 : 0.38);
+
+    // MASSIVE RADIUS: Using 0.45 height for mobile ensures it fills the screen
+    const radiusMult = dimensions.width < 640 ? 0.45 : 0.42;
+    const sphereRadius = Math.min(dimensions.width, dimensions.height) * radiusMult;
 
     for (let i = 0; i < numIcons; i++) {
       const y = i * offset - 1 + offset / 2;
@@ -103,14 +115,21 @@ export function IconCloud({ icons, images }) {
     setIconPositions(newIcons);
   }, [icons, images, dimensions]);
 
-  // Handle Input
+  // Standard Mouse Handlers
   const handleMouseDown = (e) => { setIsDragging(true); setLastMousePos({ x: e.clientX, y: e.clientY }); };
+
   const handleMouseMove = (e) => {
     const rect = canvasRef.current?.getBoundingClientRect();
     if (rect) setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+
     if (isDragging) {
-      rotationRef.current.x += (e.clientY - lastMousePos.y) * 0.002;
-      rotationRef.current.y += (e.clientX - lastMousePos.x) * 0.002;
+      const deltaX = e.clientX - lastMousePos.x;
+      const deltaY = e.clientY - lastMousePos.y;
+
+      // NATURAL DRAG:
+      rotationRef.current.x += deltaY * 0.002;
+      rotationRef.current.y -= deltaX * 0.002;
+
       setLastMousePos({ x: e.clientX, y: e.clientY });
     }
   };
@@ -125,13 +144,14 @@ export function IconCloud({ icons, images }) {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
       const scaleFactor = getScale();
-      const baseRadius = Math.min(dimensions.width, dimensions.height) * (dimensions.width > 1024 ? 0.42 : 0.38);
+      const radiusMult = dimensions.width < 640 ? 0.45 : 0.42;
+      const baseRadius = Math.min(dimensions.width, dimensions.height) * radiusMult;
 
       if (!isDragging) {
-        rotationRef.current.y -= 0.002;
+        rotationRef.current.y -= 0.0025;
         rotationRef.current.x *= 0.98;
       }
-      
+
       const { x: rotX, y: rotY } = rotationRef.current;
       const cosX = Math.cos(rotX), sinX = Math.sin(rotX), cosY = Math.cos(rotY), sinY = Math.sin(rotY);
 
@@ -140,8 +160,8 @@ export function IconCloud({ icons, images }) {
         ctx.save();
         const r = baseRadius * rMult;
         const cosT = Math.cos(tiltAngle), sinT = Math.sin(tiltAngle);
-        for (let i = 0; i < 120; i++) {
-          const a1 = (i / 120) * Math.PI * 2, a2 = ((i + 1) / 120) * Math.PI * 2;
+        for (let i = 0; i < 100; i++) {
+          const a1 = (i / 100) * Math.PI * 2, a2 = ((i + 1) / 100) * Math.PI * 2;
           const getP = (a) => {
             const px = Math.cos(a) * r, pz = Math.sin(a) * r;
             const tx = px, ty = pz * sinT, tz = pz * cosT;
@@ -159,18 +179,9 @@ export function IconCloud({ icons, images }) {
         ctx.restore();
       };
 
-      drawRing(1.2, "#3b82f6", 0.15);
-      drawRing(1.15, "#f97316", Math.PI / 8);
-      drawRing(1.3, "#ffffff", Math.PI / 4);
-
-      // --- STARS ---
-      stars.forEach(s => {
-        const rx = s.x * cosY - s.z * sinY, rz = s.x * sinY + s.z * cosY;
-        const ry = s.y * cosX + rz * sinX;
-        const alpha = Math.max(0, (rz + 400) / 1000);
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.4})`;
-        ctx.beginPath(); ctx.arc(centerX + rx, centerY + ry, s.size * scaleFactor, 0, Math.PI * 2); ctx.fill();
-      });
+      drawRing(1.15, "#3b82f6", 0.15);
+      drawRing(1.10, "#f97316", Math.PI / 8);
+      drawRing(1.25, "#ffffff", Math.PI / 4);
 
       const sorted = iconPositions.map(icon => {
         const rx = icon.x * cosY - icon.z * sinY, rz = icon.x * sinY + icon.z * cosY;
@@ -183,9 +194,10 @@ export function IconCloud({ icons, images }) {
       for (let i = 0; i < sorted.length; i++) {
         for (let j = i + 1; j < sorted.length; j++) {
           const a = sorted[i], b = sorted[j];
-          const dist = Math.sqrt((a.x-b.x)**2 + (a.y-b.y)**2 + (a.z-b.z)**2);
-          if (dist < (baseRadius * 0.45)) {
-            ctx.beginPath(); ctx.strokeStyle = `rgba(173, 216, 230, ${0.08 * scaleFactor})`;
+          const dist = Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
+          if (dist < (baseRadius * 0.5)) {
+            // ctx.beginPath(); ctx.strokeStyle = `rgba(173, 216, 230, ${0.1 * scaleFactor})`;
+            ctx.beginPath(); ctx.strokeStyle = `rgba(173, 216, 230, ${0.2})`;
             ctx.moveTo(centerX + a.rx, centerY + a.ry); ctx.lineTo(centerX + b.rx, centerY + b.ry);
             ctx.stroke();
           }
@@ -196,21 +208,22 @@ export function IconCloud({ icons, images }) {
       // --- ICONS ---
       sorted.forEach(icon => {
         const sX = centerX + icon.rx, sY = centerY + icon.ry;
-        const dist = Math.sqrt((mousePos.x - sX)**2 + (mousePos.y - sY)**2);
-        const rippleArea = 100 * scaleFactor;
+        const dist = Math.sqrt((mousePos.x - sX) ** 2 + (mousePos.y - sY) ** 2);
+
+        // Ripple area is larger on mobile to make it easier to trigger
+        const rippleArea = (dimensions.width < 640 ? 80 : 100) * scaleFactor;
         const ripple = dist < rippleArea ? easeOutCubic(1 - dist / rippleArea) : 0;
 
-        // Scale icons based on Z-depth AND the Screen Scale Factor
-        const baseIconSize = 28 * scaleFactor;
+        const baseIconSize = (dimensions.width < 640 ? 24 : 28) * scaleFactor;
         const depthScale = ((icon.rz + baseRadius) / (baseRadius * 1.8)) + (ripple * 0.4);
-        
+
         ctx.save();
         ctx.translate(sX, sY + (ripple * 15));
         ctx.scale(depthScale, depthScale);
         ctx.globalAlpha = Math.max(0.15, (icon.rz + baseRadius) / (baseRadius * 1.4));
-        if (ripple > 0) { ctx.shadowBlur = 20; ctx.shadowColor = "#3b82f6"; }
+        if (ripple > 0) { ctx.shadowBlur = 15; ctx.shadowColor = "#3b82f6"; }
         if (iconCanvasesRef.current[icon.id] && imagesLoadedRef.current[icon.id]) {
-          ctx.drawImage(iconCanvasesRef.current[icon.id], -baseIconSize/2, -baseIconSize/2, baseIconSize, baseIconSize);
+          ctx.drawImage(iconCanvasesRef.current[icon.id], -baseIconSize / 2, -baseIconSize / 2, baseIconSize, baseIconSize);
         }
         ctx.restore();
       });
@@ -220,7 +233,7 @@ export function IconCloud({ icons, images }) {
 
     animate();
     return () => cancelAnimationFrame(animationFrameRef.current);
-  }, [iconPositions, isDragging, mousePos, dimensions, stars]);
+  }, [iconPositions, isDragging, mousePos, dimensions]);
 
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center overflow-hidden touch-none bg-transparent">
@@ -228,8 +241,15 @@ export function IconCloud({ icons, images }) {
         ref={canvasRef}
         width={dimensions.width}
         height={dimensions.height}
-        onMouseDown={handleMouseDown} onMouseMove={handleMouseMove}
-        onMouseUp={() => setIsDragging(false)} onMouseLeave={() => setIsDragging(false)}
+        // Desktop Events
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={() => setIsDragging(false)}
+        onMouseLeave={() => setIsDragging(false)}
+        // Mobile Events
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={() => setIsDragging(false)}
         className="cursor-grab active:cursor-grabbing w-full h-full"
       />
     </div>
