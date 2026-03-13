@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { IconCloud } from "@/components/ui/icon-cloud";
 import { fetchSimpleIcons } from "react-icon-cloud";
-import { IconCloud1 } from "../ui/icon-cloud-1";
+import { IconCloud } from "../ui/icon-cloud";
 
 const slugs = [
     "typescript", "javascript", "react", "html5", "css3", "nodedotjs",
@@ -67,8 +66,7 @@ export default function SkillCloud() {
 
 
             <div className="relative animate-float flex size-full  items-center justify-center bg-red-400/0">
-                {/* <IconCloud images={whiteIconUrls} /> */}
-                <IconCloud1 images={whiteIconUrls} />
+                <IconCloud images={whiteIconUrls} />
             </div>
         </>
     );

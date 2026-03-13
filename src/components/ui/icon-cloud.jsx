@@ -1,361 +1,226 @@
-import React, { useEffect, useRef, useState } from "react"
-import { renderToString } from "react-dom/server"
+import React, { useEffect, useRef, useState } from "react";
+import { renderToString } from "react-dom/server";
 
 function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3);
 }
 
-export function IconCloud({
-  icons,
-  images
-}) {
-  const canvasRef = useRef(null)
-  const [iconPositions, setIconPositions] = useState([])
-  const [isDragging, setIsDragging] = useState(false)
-  const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const [targetRotation, setTargetRotation] = useState(null)
-  const animationFrameRef = useRef(0)
-  const rotationRef = useRef({ x: 0, y: 0 })
-  const iconCanvasesRef = useRef([])
-  const imagesLoadedRef = useRef([])
+export function IconCloud({ icons, images }) {
+  const canvasRef = useRef(null);
+  const [iconPositions, setIconPositions] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const animationFrameRef = useRef(0);
+  const rotationRef = useRef({ x: 0, y: 0 });
+  const iconCanvasesRef = useRef([]);
+  const imagesLoadedRef = useRef([]);
 
-  // Create icon canvases once when icons/images change
+  // 1. Generate static stars once
+  const [stars] = useState(() =>
+    Array.from({ length: 100 }, () => ({
+      x: (Math.random() - 0.5) * 800,
+      y: (Math.random() - 0.5) * 800,
+      z: (Math.random() - 0.5) * 800,
+      size: Math.random() * 1.5 + 0.5,
+    }))
+  );
 
-
-
-
+  // 2. Create icon canvases
   useEffect(() => {
-    if (!icons && !images) return
-
-    const items = icons ?? images ?? []
-    imagesLoadedRef.current = new Array(items.length).fill(false)
+    if (!icons && !images) return;
+    const items = icons ?? images ?? [];
+    imagesLoadedRef.current = new Array(items.length).fill(false);
 
     const newIconCanvases = items.map((item, index) => {
-      const offscreen = document.createElement("canvas")
-      offscreen.width = 40
-      offscreen.height = 40
-      const offCtx = offscreen.getContext("2d")
+      const offscreen = document.createElement("canvas");
+      offscreen.width = 40;
+      offscreen.height = 40;
+      const offCtx = offscreen.getContext("2d");
 
       if (offCtx) {
-        if (images) {
-          // Handle image URLs directly
-          const img = new Image()
-          img.crossOrigin = "anonymous"
-          img.src = items[index]
-          img.onload = () => {
-            offCtx.clearRect(0, 0, offscreen.width, offscreen.height)
-
-            // Create circular clipping path
-            offCtx.beginPath()
-            offCtx.arc(20, 20, 20, 0, Math.PI * 2)
-            offCtx.closePath()
-            offCtx.clip()
-
-            // Draw the image
-            offCtx.drawImage(img, 0, 0, 40, 40)
-
-            imagesLoadedRef.current[index] = true
-          }
-        } else {
-          // Handle SVG icons
-          offCtx.scale(0.4, 0.4)
-          const svgString = renderToString(item)
-          const img = new Image()
-          img.src = "data:image/svg+xml;base64," + btoa(svgString)
-          img.onload = () => {
-            offCtx.clearRect(0, 0, offscreen.width, offscreen.height)
-            offCtx.drawImage(img, 0, 0)
-            imagesLoadedRef.current[index] = true
-          }
-        }
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = images ? items[index] : "data:image/svg+xml;base64," + btoa(renderToString(item));
+        
+        img.onload = () => {
+          offCtx.clearRect(0, 0, 40, 40);
+          offCtx.beginPath();
+          offCtx.arc(20, 20, 20, 0, Math.PI * 2);
+          offCtx.clip();
+          offCtx.drawImage(img, 0, 0, 40, 40);
+          imagesLoadedRef.current[index] = true;
+        };
       }
-      return offscreen
-    })
+      return offscreen;
+    });
+    iconCanvasesRef.current = newIconCanvases;
+  }, [icons, images]);
 
-    iconCanvasesRef.current = newIconCanvases
-  }, [icons, images])
-
-  // Generate initial icon positions on a sphere
+  // 3. Generate initial sphere positions
   useEffect(() => {
-    const items = icons ?? images ?? []
-    const newIcons = []
-    const numIcons = items.length || 20
-
-    // Fibonacci sphere parameters
-    const offset = 2 / numIcons
-    const increment = Math.PI * (3 - Math.sqrt(5))
+    const items = icons ?? images ?? [];
+    const numIcons = items.length || 20;
+    const newIcons = [];
+    const offset = 2 / numIcons;
+    const increment = Math.PI * (3 - Math.sqrt(5));
 
     for (let i = 0; i < numIcons; i++) {
-      const y = i * offset - 1 + offset / 2
-      const r = Math.sqrt(1 - y * y)
-      const phi = i * increment
-
-      const x = Math.cos(phi) * r
-      const z = Math.sin(phi) * r
-      // sphere radius
+      const y = i * offset - 1 + offset / 2;
+      const r = Math.sqrt(1 - y * y);
+      const phi = i * increment;
       newIcons.push({
-        x: x * 220,
+        x: Math.cos(phi) * r * 220,
         y: y * 220,
-        z: z * 220,
-        scale: 1,
-        opacity: 1,
+        z: Math.sin(phi) * r * 220,
         id: i,
-      })
+      });
     }
-    setIconPositions(newIcons)
-  }, [icons, images])
+    setIconPositions(newIcons);
+  }, [icons, images]);
 
-  // Handle mouse events
   const handleMouseDown = (e) => {
-    const rect = canvasRef.current?.getBoundingClientRect()
-    if (!rect || !canvasRef.current) return
-
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-
-    const ctx = canvasRef.current.getContext("2d")
-    if (!ctx) return
-
-    iconPositions.forEach((icon) => {
-      const cosX = Math.cos(rotationRef.current.x)
-      const sinX = Math.sin(rotationRef.current.x)
-      const cosY = Math.cos(rotationRef.current.y)
-      const sinY = Math.sin(rotationRef.current.y)
-
-      const rotatedX = icon.x * cosY - icon.z * sinY
-      const rotatedZ = icon.x * sinY + icon.z * cosY
-      const rotatedY = icon.y * cosX + rotatedZ * sinX
-
-      const screenX = canvasRef.current.width / 2 + rotatedX
-      const screenY = canvasRef.current.height / 2 + rotatedY
-
-      const scale = (rotatedZ + 180) / 300
-      const radius = 20 * scale
-      const dx = x - screenX
-      const dy = y - screenY
-
-      if (dx * dx + dy * dy < radius * radius) {
-        const targetX = -Math.atan2(icon.y, Math.sqrt(icon.x * icon.x + icon.z * icon.z))
-        const targetY = Math.atan2(icon.x, icon.z)
-
-        const currentX = rotationRef.current.x
-        const currentY = rotationRef.current.y
-        const distance = Math.sqrt(Math.pow(targetX - currentX, 2) + Math.pow(targetY - currentY, 2))
-
-        const duration = Math.min(2000, Math.max(800, distance * 1000))
-
-        setTargetRotation({
-          x: targetX,
-          y: targetY,
-          startX: currentX,
-          startY: currentY,
-          distance,
-          startTime: performance.now(),
-          duration,
-        })
-        return
-      }
-    })
-
-    setIsDragging(true)
-    setLastMousePos({ x: e.clientX, y: e.clientY })
-  }
+    setIsDragging(true);
+    setLastMousePos({ x: e.clientX, y: e.clientY });
+  };
 
   const handleMouseMove = (e) => {
-    const rect = canvasRef.current?.getBoundingClientRect()
-    if (rect) {
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      setMousePos({ x, y })
-    }
-
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (rect) setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
     if (isDragging) {
-      const deltaX = e.clientX - lastMousePos.x
-      const deltaY = e.clientY - lastMousePos.y
-
-      rotationRef.current = {
-        x: rotationRef.current.x + deltaY * 0.002,
-        y: rotationRef.current.y + deltaX * 0.002,
-      }
-
-      setLastMousePos({ x: e.clientX, y: e.clientY })
+      const deltaX = e.clientX - lastMousePos.x;
+      const deltaY = e.clientY - lastMousePos.y;
+      rotationRef.current.x += deltaY * 0.002;
+      rotationRef.current.y += deltaX * 0.002;
+      setLastMousePos({ x: e.clientX, y: e.clientY });
     }
-  }
+  };
 
-  const handleMouseUp = () => {
-    setIsDragging(false)
-  }
-
-  // Animation and rendering
   useEffect(() => {
-    const canvas = canvasRef.current
-    const ctx = canvas?.getContext("2d")
-    if (canvas && ctx) {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
 
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
 
+      if (!isDragging) {
+        rotationRef.current.y -= 0.003; // Constant slow spin
+        rotationRef.current.x *= 0.98;  // Stabilize tilt
+      }
+         
 
-      const animate = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
+      
+      const { x: rotX, y: rotY } = rotationRef.current;
+      const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
 
-        // --- 1. DIRECTIONAL MOTION ---
-        if (!isDragging) {
-          // Only increment Y (horizontal rotation) for left-to-right spin
-          // Increase 0.005 to make it spin faster
-          rotationRef.current.y -= 0.005;
-
-          // Slow vertical drift (optional, set to 0 to keep it perfectly level)
-          rotationRef.current.x *= 0.95;
-        }
-
-        const cosX = Math.cos(rotationRef.current.x);
-        const sinX = Math.sin(rotationRef.current.x);
-        const cosY = Math.cos(rotationRef.current.y);
-        const sinY = Math.sin(rotationRef.current.y);
-
-        // --- 2. DRAW RINGS ---
-        // --- Updated Ring Function with Color & Width ---
-        const drawRing = (radius, color, tiltAngle = 0) => {
-          ctx.save();
+      // --- DRAW RINGS (Depth Faded) ---
+      const drawRing = (radius, color, tiltAngle) => {
+        ctx.save();
+        const cosT = Math.cos(tiltAngle), sinT = Math.sin(tiltAngle);
+        for (let i = 0; i < 100; i++) {
+          const a1 = (i / 100) * Math.PI * 2, a2 = ((i + 1) / 100) * Math.PI * 2;
+          const getP = (a) => {
+            const px = Math.cos(a) * radius, pz = Math.sin(a) * radius;
+            const tx = px, ty = pz * sinT, tz = pz * cosT;
+            const rx = tx * cosY - tz * sinY, rz = tx * sinY + tz * cosY;
+            return { x: centerX + rx, y: centerY + (ty * cosX + rz * sinX), z: rz };
+          };
+          const p1 = getP(a1), p2 = getP(a2);
           ctx.beginPath();
-          ctx.lineWidth = 1.2;
           ctx.strokeStyle = color;
-
-          // Set a consistent alpha for the whole ring so it's not "too dark"
-          ctx.globalAlpha = 0.4;
-
-          // Pre-calculate tilt constants
-          const cosT = Math.cos(tiltAngle);
-          const sinT = Math.sin(tiltAngle);
-
-          for (let i = 0; i <= 120; i++) { // Increased steps for smoothness
-            const angle = (i / 120) * Math.PI * 2;
-
-            // 1. Initial coordinates on a flat plane
-            const px = Math.cos(angle) * radius;
-            const pz = Math.sin(angle) * radius;
-
-            // 2. Apply Tilt (Rotating the plane of the ring)
-            const tx = px;
-            const ty = pz * sinT;
-            const tz = pz * cosT;
-
-            // 3. Apply Sphere Rotation (The "Revolution" logic)
-            // This MUST match the icon rotation math exactly
-            const rotatedX = tx * cosY - tz * sinY;
-            const rotatedZ = tx * sinY + tz * cosY;
-            const rotatedY = ty * cosX + rotatedZ * sinX;
-
-            if (i === 0) ctx.moveTo(centerX + rotatedX, centerY + rotatedY);
-            else ctx.lineTo(centerX + rotatedX, centerY + rotatedY);
-          }
-
+          ctx.globalAlpha = Math.max(0.02, (p1.z + 200) / 600) * 0.5;
+          ctx.lineWidth = p1.z > 150 ? 1.5 : 0.8;
+          ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
           ctx.stroke();
-          ctx.restore();
-        };
-
-        drawRing(260, "#3b82f6", 0.2);           // Inner Blue (slight tilt)
-        drawRing(250, "#f97316", Math.PI / 6);    // Middle Orange (45 deg tilt)
-        drawRing(280, "#FFFFCC", -Math.PI / 5);   // Outer Blue (30 deg tilt)
-
-
-
-       
-
-        // ===================================================================
-
-        // --- 3. DRAW ICONS (With Depth Sorting) ---
-        const sortedIcons = [...iconPositions].map(icon => {
-          const rotatedX = icon.x * cosY - icon.z * sinY;
-          const rotatedZ = icon.x * sinY + icon.z * cosY;
-          const rotatedY = icon.y * cosX + rotatedZ * sinX;
-          return { ...icon, rotatedX, rotatedY, rotatedZ };
-        }).sort((a, b) => a.rotatedZ - b.rotatedZ);
-
-
-
-        sortedIcons.forEach((icon) => {
-          // --- 1. PROXIMITY CALCULATION ---
-          const screenX = centerX + icon.rotatedX;
-          const screenY = centerY + icon.rotatedY;
-
-          // Calculate distance between mouse and icon
-          const dx = mousePos.x - screenX;
-          const dy = mousePos.y - screenY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          // Ripple settings
-          const rippleRadius = 80; // How far the "water" effect reaches
-          const pressDepth = 15;   // How much it "sinks" or "pops"
-
-          let hoverScaleOffset = 0;
-          let hoverYOffset = 0;
-
-          if (distance < rippleRadius) {
-            // Create a normalized factor (1 at center of mouse, 0 at edge of rippleRadius)
-            const factor = 1 - distance / rippleRadius;
-            const easedFactor = easeOutCubic(factor);
-
-            // Effect: Icon grows slightly and "sinks" (moves down) like it's pressed into water
-            hoverScaleOffset = easedFactor * 0.4;
-            hoverYOffset = easedFactor * pressDepth;
-          }
-
-          // --- 2. APPLY TRANSFORMATIONS ---
-          const baseScale = (icon.rotatedZ + 250) / 400;
-          const finalScale = baseScale + hoverScaleOffset;
-          const opacity = Math.max(0.1, (icon.rotatedZ + 150) / 300);
-
-          ctx.save();
-          // We add hoverYOffset to the Y position to create the "press" movement
-          ctx.translate(screenX, screenY + hoverYOffset);
-          ctx.scale(finalScale, finalScale);
-          ctx.globalAlpha = opacity;
-
-          // Add a small "shadow" glow when hovered to enhance the water feel
-          if (hoverScaleOffset > 0) {
-            ctx.shadowBlur = 15 * hoverScaleOffset;
-            ctx.shadowColor = "rgba(0, 150, 255, 0.5)";
-          }
-
-          if (iconCanvasesRef.current[icon.id] && imagesLoadedRef.current[icon.id]) {
-            ctx.drawImage(iconCanvasesRef.current[icon.id], -10, -10, 24, 24);
-          }
-          ctx.restore();
-        });
-
-        animationFrameRef.current = requestAnimationFrame(animate);
+        }
+        ctx.restore();
       };
 
 
 
+        
+
+      drawRing(260, "#3b82f6", 0.2);
+      drawRing(250, "#f97316", Math.PI / 6);
+      drawRing(280, "#fafacc", Math.PI / 4);
 
 
 
 
-      animate()
-    }
+    
 
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
+      // --- DRAW STARS ---
+      stars.forEach(s => {
+        const rx = s.x * cosY - s.z * sinY, rz = s.x * sinY + s.z * cosY;
+        const ry = s.y * cosX + rz * sinX;
+        const alpha = Math.max(0, (rz + 200) / 600);
+        if (alpha > 0) {
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.6})`;
+          ctx.beginPath(); ctx.arc(centerX + rx, centerY + ry, s.size, 0, Math.PI * 2); ctx.fill();
+        }
+      });
+
+      // --- DEPTH SORT ICONS ---
+      const sorted = iconPositions.map(icon => {
+        const rx = icon.x * cosY - icon.z * sinY, rz = icon.x * sinY + icon.z * cosY;
+        const ry = icon.y * cosX + rz * sinX;
+        return { ...icon, rx, ry, rz };
+      }).sort((a, b) => a.rz - b.rz);
+
+      // --- DRAW CONNECTIONS ---
+      ctx.save();
+      for (let i = 0; i < sorted.length; i++) {
+        for (let j = i + 1; j < sorted.length; j++) {
+          const a = sorted[i], b = sorted[j];
+          const dist = Math.sqrt((a.x-b.x)**2 + (a.y-b.y)**2 + (a.z-b.z)**2);
+          if (dist < 90) {
+            const avgZ = (a.rz + b.rz) / 2;
+            // const alpha = Math.max(0, (avgZ + 100) / 350) * (avgZ > 100 ? 0.4 : 0.1);
+            const alpha = 0.09;
+            ctx.beginPath(); ctx.strokeStyle = `rgba(173, 216, 230, ${alpha})`;
+            ctx.moveTo(centerX + a.rx, centerY + a.ry); ctx.lineTo(centerX + b.rx, centerY + b.ry);
+            ctx.stroke();
+          }
+        }
       }
+      ctx.restore();
+
+      // --- DRAW ICONS (Water Ripple Logic) ---
+      sorted.forEach(icon => {
+        const sX = centerX + icon.rx, sY = centerY + icon.ry;
+        const dist = Math.sqrt((mousePos.x - sX)**2 + (mousePos.y - sY)**2);
+        const ripple = dist < 80 ? easeOutCubic(1 - dist / 80) : 0;
+
+        const scale = ((icon.rz + 250) / 400) + (ripple * 0.3);
+        ctx.save();
+        ctx.translate(sX, sY + (ripple * 12));
+        ctx.scale(scale, scale);
+        ctx.globalAlpha = Math.max(0.1, (icon.rz + 150) / 350);
+        if (ripple > 0) { ctx.shadowBlur = 10; ctx.shadowColor = "#3b82f6"; }
+        if (iconCanvasesRef.current[icon.id] && imagesLoadedRef.current[icon.id]) {
+          ctx.drawImage(iconCanvasesRef.current[icon.id], -12, -12, 24, 24);
+        }
+        ctx.restore();
+      });
+
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
-  }, [icons, images, iconPositions, isDragging, mousePos, targetRotation])
+
+    animate();
+    return () => cancelAnimationFrame(animationFrameRef.current);
+  }, [iconPositions, isDragging, mousePos, stars]);
 
   return (
     <canvas
       ref={canvasRef}
-      width={600}
-      height={500}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      className="rounded-lg"
-      aria-label="Interactive 3D Icon Cloud"
-      role="img" />
+      width={700} height={500}
+      onMouseDown={handleMouseDown} onMouseMove={handleMouseMove}
+      onMouseUp={() => setIsDragging(false)} onMouseLeave={() => setIsDragging(false)}
+      className="cursor-grab active:cursor-grabbing"
+    />
   );
 }
