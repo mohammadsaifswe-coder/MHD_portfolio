@@ -5,7 +5,7 @@ export default function YearRings() {
 
     const newLocal = "absolute h-20 w-9 rounded-[100%] border border-white/40 animate-[spin_8s_linear_infinite]";
     return (
-        <div className="relative flex h-fit w-fit p-10 items-center justify-center overflow-hidden ">
+        <div className="relative flex h-fit w-fit p-10 m-0 items-center justify-center overflow-hidden ">
             <span className="text-[8px] font-bold text-white tracking-widest">©{currentYear}</span>
 
             <div className="absolute inset-0 flex items-center justify-center">
