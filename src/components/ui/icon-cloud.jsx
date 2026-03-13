@@ -18,6 +18,14 @@ export function IconCloud({ icons, images }) {
   const iconCanvasesRef = useRef([]);
   const imagesLoadedRef = useRef([]);
 
+  const [stars] = useState(() =>
+    Array.from({ length: 150 }, () => ({
+      x: (Math.random() - 0.5) * 1000,
+      y: (Math.random() - 0.5) * 1000,
+      z: (Math.random() - 0.5) * 1000,
+      size: Math.random() * 1.5 + 0.5,
+    }))
+  );
   // 1. IMPROVED SCALING: Bigger on mobile, crisp on desktop
   const getScale = () => {
     if (dimensions.width === 0) return 1;
@@ -140,6 +148,12 @@ export function IconCloud({ icons, images }) {
     if (!canvas || !ctx || dimensions.width === 0) return;
 
     const animate = () => {
+
+
+      // Inside the animate function, before drawing icons
+
+
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
@@ -181,7 +195,7 @@ export function IconCloud({ icons, images }) {
 
       drawRing(1.15, "#3b82f6", 0.15);
       drawRing(1.10, "#f97316", Math.PI / 8);
-      drawRing(1.25, "#ffffff", Math.PI / 4);
+      drawRing(1.15, "#ffffff", Math.PI / 4);
 
       const sorted = iconPositions.map(icon => {
         const rx = icon.x * cosY - icon.z * sinY, rz = icon.x * sinY + icon.z * cosY;
@@ -204,6 +218,21 @@ export function IconCloud({ icons, images }) {
         }
       }
       ctx.restore();
+
+
+      stars.forEach(s => {
+        const rx = s.x * cosY - s.z * sinY;
+        const rz = s.x * sinY + s.z * cosY;
+        const ry = s.y * cosX + rz * sinX;
+
+        // Depth-based opacity for particles
+        const alpha = Math.max(0, (rz + 400) / 1000);
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.4})`;
+        ctx.beginPath();
+        ctx.arc(centerX + rx, centerY + ry, s.size * scaleFactor, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
       // --- ICONS ---
       sorted.forEach(icon => {
