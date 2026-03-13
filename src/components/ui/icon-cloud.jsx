@@ -7,6 +7,8 @@ function easeOutCubic(t) {
 
 export function IconCloud({ icons, images }) {
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [iconPositions, setIconPositions] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
@@ -16,82 +18,99 @@ export function IconCloud({ icons, images }) {
   const iconCanvasesRef = useRef([]);
   const imagesLoadedRef = useRef([]);
 
-  // 1. Generate static stars once
+  // 1. Dynamic Scaling Factor: Determines how "large" everything is based on screen
+  const getScale = () => {
+    if (dimensions.width === 0) return 1;
+    if (dimensions.width < 640) return 0.6; // Mobile
+    if (dimensions.width < 1024) return 0.8; // Tablet
+    if (dimensions.width < 1536) return 1.1; // Laptop/Standard Desktop
+    return 1.5; // Large Screens / Mac Retina
+  };
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        // Set canvas to parent size
+        setDimensions({
+          width: entry.contentRect.width,
+          height: entry.contentRect.height,
+        });
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const [stars] = useState(() =>
-    Array.from({ length: 100 }, () => ({
-      x: (Math.random() - 0.5) * 800,
-      y: (Math.random() - 0.5) * 800,
-      z: (Math.random() - 0.5) * 800,
-      size: Math.random() * 1.5 + 0.5,
+    Array.from({ length: 120 }, () => ({
+      x: (Math.random() - 0.5) * 1200,
+      y: (Math.random() - 0.5) * 1200,
+      z: (Math.random() - 0.5) * 1200,
+      size: Math.random() * 2 + 0.5,
     }))
   );
 
-  // 2. Create icon canvases
   useEffect(() => {
     if (!icons && !images) return;
     const items = icons ?? images ?? [];
-    imagesLoadedRef.current = new Array(items.length).fill(false);
-
     const newIconCanvases = items.map((item, index) => {
       const offscreen = document.createElement("canvas");
-      offscreen.width = 40;
-      offscreen.height = 40;
+      offscreen.width = 80; // Higher res for retina
+      offscreen.height = 80;
       const offCtx = offscreen.getContext("2d");
-
-      if (offCtx) {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.src = images ? items[index] : "data:image/svg+xml;base64," + btoa(renderToString(item));
-        
-        img.onload = () => {
-          offCtx.clearRect(0, 0, 40, 40);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = images ? items[index] : "data:image/svg+xml;base64," + btoa(renderToString(item));
+      img.onload = () => {
+        if (offCtx) {
+          offCtx.clearRect(0, 0, 80, 80);
           offCtx.beginPath();
-          offCtx.arc(20, 20, 20, 0, Math.PI * 2);
+          offCtx.arc(40, 40, 40, 0, Math.PI * 2);
           offCtx.clip();
-          offCtx.drawImage(img, 0, 0, 40, 40);
+          offCtx.drawImage(img, 0, 0, 80, 80);
           imagesLoadedRef.current[index] = true;
-        };
-      }
+        }
+      };
       return offscreen;
     });
     iconCanvasesRef.current = newIconCanvases;
   }, [icons, images]);
 
-  // 3. Generate initial sphere positions
   useEffect(() => {
+    if (dimensions.width === 0) return;
     const items = icons ?? images ?? [];
-    const numIcons = items.length || 20;
+    const numIcons = items.length;
     const newIcons = [];
     const offset = 2 / numIcons;
     const increment = Math.PI * (3 - Math.sqrt(5));
+    
+    // SCALE THE SPHERE: 
+    // On desktop, we use a larger percentage of the screen
+    const sphereRadius = Math.min(dimensions.width, dimensions.height) * (dimensions.width > 1024 ? 0.42 : 0.38);
 
     for (let i = 0; i < numIcons; i++) {
       const y = i * offset - 1 + offset / 2;
       const r = Math.sqrt(1 - y * y);
       const phi = i * increment;
       newIcons.push({
-        x: Math.cos(phi) * r * 220,
-        y: y * 220,
-        z: Math.sin(phi) * r * 220,
+        x: Math.cos(phi) * r * sphereRadius,
+        y: y * sphereRadius,
+        z: Math.sin(phi) * r * sphereRadius,
         id: i,
       });
     }
     setIconPositions(newIcons);
-  }, [icons, images]);
+  }, [icons, images, dimensions]);
 
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setLastMousePos({ x: e.clientX, y: e.clientY });
-  };
-
+  // Handle Input
+  const handleMouseDown = (e) => { setIsDragging(true); setLastMousePos({ x: e.clientX, y: e.clientY }); };
   const handleMouseMove = (e) => {
     const rect = canvasRef.current?.getBoundingClientRect();
     if (rect) setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
     if (isDragging) {
-      const deltaX = e.clientX - lastMousePos.x;
-      const deltaY = e.clientY - lastMousePos.y;
-      rotationRef.current.x += deltaY * 0.002;
-      rotationRef.current.y += deltaX * 0.002;
+      rotationRef.current.x += (e.clientY - lastMousePos.y) * 0.002;
+      rotationRef.current.y += (e.clientX - lastMousePos.x) * 0.002;
       setLastMousePos({ x: e.clientX, y: e.clientY });
     }
   };
@@ -99,32 +118,32 @@ export function IconCloud({ icons, images }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx) return;
+    if (!canvas || !ctx || dimensions.width === 0) return;
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
+      const scaleFactor = getScale();
+      const baseRadius = Math.min(dimensions.width, dimensions.height) * (dimensions.width > 1024 ? 0.42 : 0.38);
 
       if (!isDragging) {
-        rotationRef.current.y -= 0.003; // Constant slow spin
-        rotationRef.current.x *= 0.98;  // Stabilize tilt
+        rotationRef.current.y -= 0.002;
+        rotationRef.current.x *= 0.98;
       }
-         
-
       
       const { x: rotX, y: rotY } = rotationRef.current;
-      const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
-      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      const cosX = Math.cos(rotX), sinX = Math.sin(rotX), cosY = Math.cos(rotY), sinY = Math.sin(rotY);
 
-      // --- DRAW RINGS (Depth Faded) ---
-      const drawRing = (radius, color, tiltAngle) => {
+      // --- RINGS ---
+      const drawRing = (rMult, color, tiltAngle) => {
         ctx.save();
+        const r = baseRadius * rMult;
         const cosT = Math.cos(tiltAngle), sinT = Math.sin(tiltAngle);
-        for (let i = 0; i < 100; i++) {
-          const a1 = (i / 100) * Math.PI * 2, a2 = ((i + 1) / 100) * Math.PI * 2;
+        for (let i = 0; i < 120; i++) {
+          const a1 = (i / 120) * Math.PI * 2, a2 = ((i + 1) / 120) * Math.PI * 2;
           const getP = (a) => {
-            const px = Math.cos(a) * radius, pz = Math.sin(a) * radius;
+            const px = Math.cos(a) * r, pz = Math.sin(a) * r;
             const tx = px, ty = pz * sinT, tz = pz * cosT;
             const rx = tx * cosY - tz * sinY, rz = tx * sinY + tz * cosY;
             return { x: centerX + rx, y: centerY + (ty * cosX + rz * sinX), z: rz };
@@ -132,56 +151,41 @@ export function IconCloud({ icons, images }) {
           const p1 = getP(a1), p2 = getP(a2);
           ctx.beginPath();
           ctx.strokeStyle = color;
-          ctx.globalAlpha = Math.max(0.02, (p1.z + 200) / 600) * 0.5;
-          ctx.lineWidth = p1.z > 150 ? 1.5 : 0.8;
+          ctx.globalAlpha = Math.max(0.01, (p1.z + r) / (r * 3));
+          ctx.lineWidth = (p1.z > 0 ? 1.5 : 0.5) * scaleFactor;
           ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
           ctx.stroke();
         }
         ctx.restore();
       };
 
+      drawRing(1.2, "#3b82f6", 0.15);
+      drawRing(1.15, "#f97316", Math.PI / 8);
+      drawRing(1.3, "#ffffff", Math.PI / 4);
 
-
-        
-
-      drawRing(260, "#3b82f6", 0.2);
-      drawRing(250, "#f97316", Math.PI / 6);
-      drawRing(280, "#fafacc", Math.PI / 4);
-
-
-
-
-    
-
-      // --- DRAW STARS ---
+      // --- STARS ---
       stars.forEach(s => {
         const rx = s.x * cosY - s.z * sinY, rz = s.x * sinY + s.z * cosY;
         const ry = s.y * cosX + rz * sinX;
-        const alpha = Math.max(0, (rz + 200) / 600);
-        if (alpha > 0) {
-          ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.6})`;
-          ctx.beginPath(); ctx.arc(centerX + rx, centerY + ry, s.size, 0, Math.PI * 2); ctx.fill();
-        }
+        const alpha = Math.max(0, (rz + 400) / 1000);
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.4})`;
+        ctx.beginPath(); ctx.arc(centerX + rx, centerY + ry, s.size * scaleFactor, 0, Math.PI * 2); ctx.fill();
       });
 
-      // --- DEPTH SORT ICONS ---
       const sorted = iconPositions.map(icon => {
         const rx = icon.x * cosY - icon.z * sinY, rz = icon.x * sinY + icon.z * cosY;
         const ry = icon.y * cosX + rz * sinX;
         return { ...icon, rx, ry, rz };
       }).sort((a, b) => a.rz - b.rz);
 
-      // --- DRAW CONNECTIONS ---
+      // --- CONNECTIONS ---
       ctx.save();
       for (let i = 0; i < sorted.length; i++) {
         for (let j = i + 1; j < sorted.length; j++) {
           const a = sorted[i], b = sorted[j];
           const dist = Math.sqrt((a.x-b.x)**2 + (a.y-b.y)**2 + (a.z-b.z)**2);
-          if (dist < 90) {
-            const avgZ = (a.rz + b.rz) / 2;
-            // const alpha = Math.max(0, (avgZ + 100) / 350) * (avgZ > 100 ? 0.4 : 0.1);
-            const alpha = 0.09;
-            ctx.beginPath(); ctx.strokeStyle = `rgba(173, 216, 230, ${alpha})`;
+          if (dist < (baseRadius * 0.45)) {
+            ctx.beginPath(); ctx.strokeStyle = `rgba(173, 216, 230, ${0.08 * scaleFactor})`;
             ctx.moveTo(centerX + a.rx, centerY + a.ry); ctx.lineTo(centerX + b.rx, centerY + b.ry);
             ctx.stroke();
           }
@@ -189,20 +193,24 @@ export function IconCloud({ icons, images }) {
       }
       ctx.restore();
 
-      // --- DRAW ICONS (Water Ripple Logic) ---
+      // --- ICONS ---
       sorted.forEach(icon => {
         const sX = centerX + icon.rx, sY = centerY + icon.ry;
         const dist = Math.sqrt((mousePos.x - sX)**2 + (mousePos.y - sY)**2);
-        const ripple = dist < 80 ? easeOutCubic(1 - dist / 80) : 0;
+        const rippleArea = 100 * scaleFactor;
+        const ripple = dist < rippleArea ? easeOutCubic(1 - dist / rippleArea) : 0;
 
-        const scale = ((icon.rz + 250) / 400) + (ripple * 0.3);
+        // Scale icons based on Z-depth AND the Screen Scale Factor
+        const baseIconSize = 28 * scaleFactor;
+        const depthScale = ((icon.rz + baseRadius) / (baseRadius * 1.8)) + (ripple * 0.4);
+        
         ctx.save();
-        ctx.translate(sX, sY + (ripple * 12));
-        ctx.scale(scale, scale);
-        ctx.globalAlpha = Math.max(0.1, (icon.rz + 150) / 350);
-        if (ripple > 0) { ctx.shadowBlur = 10; ctx.shadowColor = "#3b82f6"; }
+        ctx.translate(sX, sY + (ripple * 15));
+        ctx.scale(depthScale, depthScale);
+        ctx.globalAlpha = Math.max(0.15, (icon.rz + baseRadius) / (baseRadius * 1.4));
+        if (ripple > 0) { ctx.shadowBlur = 20; ctx.shadowColor = "#3b82f6"; }
         if (iconCanvasesRef.current[icon.id] && imagesLoadedRef.current[icon.id]) {
-          ctx.drawImage(iconCanvasesRef.current[icon.id], -12, -12, 24, 24);
+          ctx.drawImage(iconCanvasesRef.current[icon.id], -baseIconSize/2, -baseIconSize/2, baseIconSize, baseIconSize);
         }
         ctx.restore();
       });
@@ -212,15 +220,18 @@ export function IconCloud({ icons, images }) {
 
     animate();
     return () => cancelAnimationFrame(animationFrameRef.current);
-  }, [iconPositions, isDragging, mousePos, stars]);
+  }, [iconPositions, isDragging, mousePos, dimensions, stars]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={700} height={500}
-      onMouseDown={handleMouseDown} onMouseMove={handleMouseMove}
-      onMouseUp={() => setIsDragging(false)} onMouseLeave={() => setIsDragging(false)}
-      className="cursor-grab active:cursor-grabbing"
-    />
+    <div ref={containerRef} className="w-full h-full flex items-center justify-center overflow-hidden touch-none bg-transparent">
+      <canvas
+        ref={canvasRef}
+        width={dimensions.width}
+        height={dimensions.height}
+        onMouseDown={handleMouseDown} onMouseMove={handleMouseMove}
+        onMouseUp={() => setIsDragging(false)} onMouseLeave={() => setIsDragging(false)}
+        className="cursor-grab active:cursor-grabbing w-full h-full"
+      />
+    </div>
   );
 }

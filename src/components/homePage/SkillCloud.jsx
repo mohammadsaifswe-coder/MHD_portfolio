@@ -60,12 +60,7 @@ export default function SkillCloud() {
     return (
         <>
 
-
-          
-
-
-
-            <div className="relative animate-float flex size-full  items-center justify-center bg-red-400/0">
+            <div className="relative animate-float flex items-center justify-center w-full h-[40vh] md:h-[70vh] lg:h-[90vh] 2xl:h-[90vh]">
                 <IconCloud images={whiteIconUrls} />
             </div>
         </>
