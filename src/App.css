@@ -1,0 +1,17 @@
+/* The Animation Keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px); /* Moves up by 20 pixels */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* The Reusable Class */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
