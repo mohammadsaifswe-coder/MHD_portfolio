@@ -4,7 +4,7 @@ import React from 'react'
 export default function HeroName() {
     return (
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-15">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-15 mb-10">
 
             <div className='text-white flex flex-col md:flex-row items-baseline gap-0 md:gap-4 select-none '>
                 {/* KBK - Scaled for mobile */}
@@ -18,7 +18,20 @@ export default function HeroName() {
                         Businesssolutions
                     </span>
                     {/* The blue line from your image */}
-                    <div className='h-px md:h-1 w-1/3 bg-green-500 mt-2 absolute -bottom-3 right-0' />
+                    {/* <div className='h-px md:h-1 w-1/3 bg-green-500 mt-2 absolute -bottom-3 right-0' /> */}
+
+                    <div
+                        className='
+                            h-1.5 md:h-1.2 
+                            w-[50%] 
+                            absolute -bottom-2 md:-bottom-4 
+                            right-0 select-none pointer-events-none rounded-full
+                        '
+                        style={{
+                            backgroundImage: `linear-gradient(to right, transparent 0%, #00FF41 100%)`,
+                            filter: 'drop-shadow(0px 1px 2px rgba(0, 255, 65, 0.4))'
+                        }}
+                    />
                 </div>
             </div>
 
