@@ -12,7 +12,7 @@ const WORKS = [
         id: 1,
         title: 'Digital Marketing',
         img: digitaMarketing,
-        tags: ['SEO & SEM', 'Social Strategy', 'Content Ads', 'Analytics']
+        tags: ['SEO & SEM', 'Social Strategy', 'Content Ads', 'Analytics', 'SEO & SEM']
     },
     {
         id: 2,
@@ -69,26 +69,119 @@ export default function SelectedWorks() {
     };
 
     return (
-        <section className="h-fit md:min-h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10">
+        <section className="h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 pb-20 sm:pb-20">
 
             {/* background */}
             <div
-                className="absolute bottom-0 left-0 w-full h-[25vh] md:h-[30vh] lg:h-[30vh] bg-cover bg-top z-20 pointer-events-none"
+                className="absolute bottom-0 left-0 w-full h-[25vh] md:h-[30vh] lg:h-[45vh] bg-cover bg-top z-20 pointer-events-none"
                 style={{ backgroundImage: `url(${SelectedWorksBg})` }}
             />
 
-            {/* buttons */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:left-[45%] lg:translate-x-0 flex gap-8 font-bold text-sm text-zinc-500 z-40">
-                <div className="flex ">
 
-                    <button onClick={() => paginate(-1)} className="hover:text-white transition-colors">← PREV</button>
-                    <button onClick={() => paginate(1)} className="hover:text-white transition-colors">NEXT →</button>
-                </div>
-                <div className="flex items-center z-30 pointer-events-none pr-2 pb-2 lg:pr-0 lg:pb-0">
-                    <span className="text-3xl lg:text-4xl font-black text-white">20</span>
-                    <span className="text-3xl lg:text-4xl font-black text-[#00C950]">26</span>
+            {/* BOTTOM BAR - Positioned at the very bottom */}
+            <div className="absolute bottom-6 left-0 w-full z-50">
+                <div className="container mx-auto px-6">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0">
+
+                        {/* 1. TAGS SECTION - Stays on the left, takes more space on desktop */}
+                        <div className="w-full lg:w-2/5 flex justify-center lg:justify-start">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={page}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="flex flex-wrap justify-center lg:justify-start gap-2"
+                                >
+                                    {WORKS[page].tags.map((tag, index) => (
+                                        <div
+                                            key={index}
+                                            className="px-3 py-1 border border-white/10 bg-white/5 backdrop-blur-md rounded-full whitespace-nowrap"
+                                        >
+                                            <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                                                {tag}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+
+                        {/* 2. NAVIGATION SECTION - Centered on all screens */}
+                        <div className="flex items-center justify-center gap-6 order-last lg:order-none">
+                            <button
+                                onClick={() => paginate(-1)}
+                                className="p-2 text-zinc-500 hover:text-white transition-all hover:-translate-x-1 cursor-pointer"
+                            >
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+                            </button>
+
+                            {/* -------------------   UI for BUTon   ------------------- */}
+
+
+
+
+
+
+
+                            <div className="flex flex-col items-center gap-2">
+                                <div className="flex items-center gap-3">
+                                    <div className="relative w-10 h-10 flex items-center justify-center">
+                                        <svg className="absolute w-full h-full -rotate-90">
+                                            <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-zinc-800" />
+                                            <motion.circle
+                                                cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-[#00C950]"
+                                                strokeDasharray="113"
+                                                animate={{ strokeDashoffset: 113 - (113 * (page + 1)) / WORKS.length }}
+                                                transition={{ type: "spring", stiffness: 50 }}
+                                            />
+                                        </svg>
+                                        <span className="text-[11px] font-black text-white">0{page + 1}</span>
+                                    </div>
+
+
+                                    <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
+
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+                            {/* -------------------   UI for BUTon   ------------------- */}
+
+
+
+
+                            <button
+                                onClick={() => paginate(1)}
+                                className="p-2 text-zinc-500 hover:text-white transition-all hover:translate-x-1 cursor-pointer"
+                            >
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+                            </button>
+                        </div>
+
+                        {/* 3. YEAR SECTION - Right aligned on desktop */}
+                        <div className="w-full lg:w-2/5 flex items-center justify-center lg:justify-end">
+                            <div className="flex items-baseline select-none">
+                                <span className="text-4xl lg:text-5xl font-black text-white/90">20</span>
+                                <span className="text-4xl lg:text-5xl font-black text-[#00C950]">26</span>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
+
+
 
             <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative h-auto min-h-[75vh] ">
 
@@ -126,7 +219,7 @@ export default function SelectedWorks() {
                 </div>
 
                 {/* image slider */}
-                <div className="relative h-[40vh] sm:h-[50vh] md:h-[50vh] lg:h-[50vh] w-full flex items-center justify-center animate-float  order-1 lg:order-2">
+                <div className="relative h-[40vh] sm:h-[50vh] md:h-[50vh] lg:h-[70vh] w-full flex items-center justify-center animate-float  order-1 lg:order-2">
 
                     <div className="relative w-full h-full overflow-hidden rounded-2xl">
 
