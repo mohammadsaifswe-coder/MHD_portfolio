@@ -36,7 +36,7 @@ const WORKS = [
         id: 5,
         title: 'Graphic Design',
         img: graphicDesign,
-        tags: ['Brand Identity', 'Typography', 'Print Media', 'Illustration']
+        tags: ['Brand Identity', 'Typography', 'Print Media', 'Illustration', 'Typography']
     },
 ]
 
@@ -80,7 +80,7 @@ export default function SelectedWorks() {
 
             {/* BOTTOM BAR - Positioned at the very bottom */}
             <div className="absolute bottom-6 left-0 w-full z-50">
-                <div className="container mx-auto px-6">
+                <div className="container mx-auto">
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0">
 
                         {/* 1. TAGS SECTION - Stays on the left, takes more space on desktop */}
@@ -169,7 +169,7 @@ export default function SelectedWorks() {
                         </div>
 
                         {/* 3. YEAR SECTION - Right aligned on desktop */}
-                        <div className="w-full lg:w-2/5 flex items-center justify-center lg:justify-end">
+                        <div className="w-full lg:w-2/5 items-center justify-center lg:justify-end hidden lg:flex">
                             <div className="flex items-baseline select-none">
                                 <span className="text-4xl lg:text-5xl font-black text-white/90">20</span>
                                 <span className="text-4xl lg:text-5xl font-black text-[#00C950]">26</span>
