@@ -43,7 +43,7 @@ export default function HomePage() {
             </div>
 
             <SelectedWorks />
-            <div className="h-50 bg-black"></div>
+            <div className="h-50 bg-gray-300/20"></div>
 
         </>
     )

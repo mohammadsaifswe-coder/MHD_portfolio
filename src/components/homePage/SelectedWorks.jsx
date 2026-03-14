@@ -69,7 +69,7 @@ export default function SelectedWorks() {
     };
 
     return (
-        <section className="h-fit md:min-h-screen w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10">
+        <section className="h-fit md:min-h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10">
 
             {/* background */}
             <div
@@ -79,17 +79,21 @@ export default function SelectedWorks() {
 
             {/* buttons */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:left-[45%] lg:translate-x-0 flex gap-8 font-bold text-sm text-zinc-500 z-40">
-                <button onClick={() => paginate(-1)} className="hover:text-white transition-colors">← PREV</button>
-                <button onClick={() => paginate(1)} className="hover:text-white transition-colors">NEXT →</button>
+                <div className="flex ">
+
+                    <button onClick={() => paginate(-1)} className="hover:text-white transition-colors">← PREV</button>
+                    <button onClick={() => paginate(1)} className="hover:text-white transition-colors">NEXT →</button>
+                </div>
+                <div className="flex items-center z-30 pointer-events-none pr-2 pb-2 lg:pr-0 lg:pb-0">
+                    <span className="text-3xl lg:text-4xl font-black text-white">20</span>
+                    <span className="text-3xl lg:text-4xl font-black text-[#00C950]">26</span>
+                </div>
             </div>
 
             <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative h-auto min-h-[75vh] ">
 
                 {/* year */}
-                <div className="absolute bottom-0 right-0 flex items-center z-30 pointer-events-none pr-2 pb-2 lg:pr-0 lg:pb-0">
-                    <span className="text-3xl lg:text-4xl font-black text-white">20</span>
-                    <span className="text-3xl lg:text-4xl font-black text-[#00C950]">26</span>
-                </div>
+
 
                 {/* titles */}
                 <div className="flex flex-col gap-6 z-40 order-2 lg:order-1">
@@ -122,7 +126,7 @@ export default function SelectedWorks() {
                 </div>
 
                 {/* image slider */}
-                <div className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-full w-full flex items-center justify-center animate-float  order-1 lg:order-2">
+                <div className="relative h-[40vh] sm:h-[50vh] md:h-[50vh] lg:h-[50vh] w-full flex items-center justify-center animate-float  order-1 lg:order-2">
 
                     <div className="relative w-full h-full overflow-hidden rounded-2xl">
 
@@ -166,7 +170,7 @@ export default function SelectedWorks() {
 
             </div>
 
-           
+
         </section>
     )
 }
