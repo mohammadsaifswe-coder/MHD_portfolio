@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
-
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 // Assets
 import serbg from '../../assets/home/test.png';
 import ser21 from '../../assets/home/test.png';
@@ -12,12 +12,14 @@ const SERVICE_DATA = [
         description: "We build modern, scalable websites and applications that help businesses grow and perform efficiently across all platforms.",
         mainImg: ser21,
         list: ["UI/UX Design", "Web Development", "Mobile App Development", "E-commerce Solutions", "Custom Web Applications", "CRM / ERP Systems"],
+        rating: 4.5,
     },
     {
         title: "Photoshopy",
         description: "We provide professional photo editing and creative design services that transform ordinary images into stunning visuals for brands, businesses, and personal projects.",
         mainImg: ser22,
         list: ["Photo Retouching", "Background Removal", "Color Correction", "Image Manipulation", "Product Photo Editing", "Creative Poster"],
+        rating: 5,
     },
 ];
 
@@ -165,7 +167,7 @@ const HomeService = () => {
                 </div>
 
 
-          
+
             </div>
 
 
@@ -199,15 +201,25 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                 />
             </div>
 
-            <div className='flex flex-col justify-between items-start lg:gap-4 gap-2'>
-                <h2 className='text-3xl'>{item.title}</h2>
-                <p className='lg:text-sm text-xs leading-tight max-w-md'>{item.description}</p>
+            <div className='flex flex-col justify-between items-start lg:gap-4 gap-2 mx-8'>
+                <h2 className='text-3xl font-semibold'>{item.title}</h2>
+                <p className='lg:text-sm text-xs leading-loose font-light tracking-wider  max-w-md'>{item.description}</p>
 
-                <div className='border-t w-full opacity-30' />
+                {/* <div className='border-t w-full opacity-30' /> */}
+                <div className='flex flex-col gap-2'>
+                    <div className='flex items-center gap-1 text-[#FFD700]'>
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                      {  item?.rating === 4.5 ? <FaStarHalfAlt />:<FaStar />}
+                    </div>
+                </div>
+                    <div className='border-t w-full opacity-30' />
 
                 <ul className='text-xs grid lg:grid-cols-1 grid-cols-2 lg:gap-3 gap-2'>
                     {item.list.map((listItem, listIdx) => (
-                        <li key={listIdx} className='flex gap-1'>
+                        <li key={listIdx} className='flex gap-1 text-[14px]'>
                             <span className='text-[#07C42C]'>//</span>
                             <span>{listItem}</span>
                         </li>
