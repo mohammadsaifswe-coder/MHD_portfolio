@@ -5,10 +5,13 @@ import SkillCloud from '@/components/homePage/SkillCloud'
 import BlinkingAvailable from '@/components/homePage/BlinkingAvailable'
 import HeroName from '@/components/homePage/HeroName'
 import SelectedWorks from '@/components/homePage/SelectedWorks'
+import HomeService from '@/components/homePage/HomeService'
 
 export default function HomePage() {
     return (
         <>
+
+            {/* hero section */}
             <div
                 className="md:min-h-screen w-full bg-zinc-950 bg-cover bg-center bg-no-repeat overflow-x-hidden pt-5"
                 style={{ backgroundImage: `url(${heroBg})` }}
@@ -42,7 +45,14 @@ export default function HomePage() {
                 </div>
             </div>
 
+            {/* selected works section */}
+
             <SelectedWorks />
+
+            {/* Services section */}
+
+            <HomeService/>
+
             <div className="h-50 bg-gray-300/20"></div>
 
         </>
