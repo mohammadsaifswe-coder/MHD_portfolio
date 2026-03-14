@@ -138,12 +138,8 @@ const HomeService = () => {
 
 
     return (
-        <div className='h-auto relative md:py-15 text-white overflow-hidden'>
-            {/* <div
-                className='bg-center absolute inset-0 bg-cover z-0'
-                style={{ backgroundImage: `url(${dynamicBg})` }}
-            /> */}
-
+        <div className='h-auto relative py-10 md:py-15 text-white overflow-hidden'>
+         
 
             <div
                 className='absolute inset-0 bg-center bg-cover z-0 transition-all duration-1000 ease-in-out'
@@ -206,7 +202,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
             style={slideStyle}
             className='flex md:min-w-[88%] min-w-full justify-start md:flex-row flex-col md:items-stretch items-center gap-5 relative'
         >
-            <div className='lg:max-w-62.5 max-w-57.5 w-full flex items-center justify-center'>
+            <div className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center'>
                 <img
                     className='w-full md:h-full overflow-hidden lg:object-cover object-contain'
                     style={imgStyle}
@@ -245,7 +241,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                 </button>
             </div>
 
-            <div className='flex justify-center items-center gap-3 md:static fixed bottom-4 right-4'>
+            <div className='flex justify-center items-center gap-3 md:static fixed bottom-0 md:bottom-4 right-4'>
                 <button
                     onClick={onNext}
                     className='cursor-pointer lg:p-6 p-3 rounded-full bg-black shadow-[inset_0px_0px_16px_0px_gray,0px_0px_2px_1px_black] active:scale-95 transition-transform'
