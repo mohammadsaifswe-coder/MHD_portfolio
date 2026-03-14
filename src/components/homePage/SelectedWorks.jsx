@@ -69,7 +69,7 @@ export default function SelectedWorks() {
     };
 
     return (
-        <section className="h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 pb-20 sm:pb-20">
+        <section className="h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 smpt-10 pb-20 sm:pb-20">
 
             {/* background */}
             <div
@@ -84,7 +84,7 @@ export default function SelectedWorks() {
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0">
 
                         {/* 1. TAGS SECTION - Stays on the left, takes more space on desktop */}
-                        <div className="w-full lg:w-2/5 flex justify-center lg:justify-start">
+                        <div className="w-full lg:w-2/5 hidden lg:flex justify-center lg:justify-start">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={page}
@@ -109,7 +109,7 @@ export default function SelectedWorks() {
                         </div>
 
                         {/* 2. NAVIGATION SECTION - Centered on all screens */}
-                        <div className="flex items-center justify-center gap-6 order-last lg:order-none">
+                        <div className="flex items-center justify-center gap-6 order-last lg:order-0">
                             <button
                                 onClick={() => paginate(-1)}
                                 className="p-2 text-zinc-500 hover:text-white transition-all hover:-translate-x-1 cursor-pointer"
@@ -219,12 +219,12 @@ export default function SelectedWorks() {
                 </div>
 
                 {/* image slider */}
-                <div className="relative h-[40vh] sm:h-[50vh] md:h-[50vh] lg:h-[70vh] w-full flex items-center justify-center animate-float  order-1 lg:order-2">
+                {/* 1. Main Wrapper: Remove fixed h-[50vh] and use flex-col */}
+                <div className="relative w-full flex flex-col items-center justify-center order-1 lg:order-2">
 
-                    <div className="relative w-full h-full overflow-hidden rounded-2xl">
-
+                    {/* 2. Image Box: Give this a specific height or aspect ratio */}
+                    <div className="relative w-full h-[40vh] sm:h-[50vh] lg:h-[65vh] overflow-hidden rounded-2xl animate-float">
                         <AnimatePresence custom={direction} mode="popLayout">
-
                             <motion.div
                                 key={page}
                                 custom={direction}
@@ -244,21 +244,41 @@ export default function SelectedWorks() {
                                     if (swipe < -10000) paginate(1);
                                     else if (swipe > 10000) paginate(-1);
                                 }}
-                                className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing "
+                                className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
                             >
-
                                 <img
                                     src={WORKS[page].img}
                                     className="w-full h-full object-contain rounded-2xl"
                                     alt="work preview"
                                 />
-
                             </motion.div>
-
                         </AnimatePresence>
-
                     </div>
 
+                    {/* 3. Tags: Now placed OUTSIDE the absolute image container, sitting naturally below it */}
+                    <div className="flex lg:hidden w-full justify-center mt-6 z-50">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={page}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.3 }}
+                                className="flex flex-wrap justify-center gap-2 px-4"
+                            >
+                                {WORKS[page].tags.map((tag, index) => (
+                                    <div
+                                        key={index}
+                                        className="px-3 py-1.5 border border-white/10 bg-white/5 backdrop-blur-md rounded-full"
+                                    >
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 whitespace-nowrap">
+                                            {tag}
+                                        </span>
+                                    </div>
+                                ))}
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
                 </div>
 
             </div>
