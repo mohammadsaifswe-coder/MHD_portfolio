@@ -6,7 +6,7 @@ export default function HeroName() {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-15">
 
-            <div className='text-white flex flex-col md:flex-row items-baseline gap-0 md:gap-4 select-none'>
+            <div className='text-white flex flex-col md:flex-row items-baseline gap-0 md:gap-4 select-none '>
                 {/* KBK - Scaled for mobile */}
                 <span className='text-[18vw] md:text-[120px] lg:text-[150px] font-bold leading-none tracking-tighter'>
                     KBK
@@ -22,7 +22,7 @@ export default function HeroName() {
                 </div>
             </div>
 
-            <button className='text-white border border-white p-2 h-fit rounded-md'>
+            <button className='border text-white rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors'>
                 START A PROJECT
             </button>
         </div>
