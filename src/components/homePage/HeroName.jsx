@@ -22,7 +22,7 @@ export default function HeroName() {
 
                     <div
                         className='
-                            h-1.5 md:h-1.2 
+                            h-1 md:h-1.5 
                             w-[50%] 
                             absolute -bottom-2 md:-bottom-4 
                             right-0 select-none pointer-events-none rounded-full
@@ -35,7 +35,7 @@ export default function HeroName() {
                 </div>
             </div>
 
-            <button className='border text-white rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors'>
+            <button className='border text-white rounded-md lg:px-4 px-3 lg:py-2 py-4 text-md    font-medium cursor-pointer hover:bg-white hover:text-black transition-colors'>
                 START A PROJECT
             </button>
         </div>
