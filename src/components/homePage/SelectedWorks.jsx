@@ -69,7 +69,7 @@ export default function SelectedWorks() {
     };
 
     return (
-        <section className="h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 smpt-10 pb-20 sm:pb-20">
+        <section className="h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 smpt-10 pb-30 sm:pb-20">
 
             {/* background */}
             <div
