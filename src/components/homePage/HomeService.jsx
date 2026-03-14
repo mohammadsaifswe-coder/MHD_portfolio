@@ -3,7 +3,7 @@ import { FiArrowRight } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 // Assets
 import serbg from '../../assets/home/test.png';
-import ser21 from '../../assets/home/test.png';
+import ser21 from '../../assets/home/test-2.png';
 import ser22 from '../../assets/home/test.png';
 
 const SERVICE_DATA = [
@@ -133,12 +133,26 @@ const HomeService = () => {
         setTouchEnd(null);
     };
 
+
+    const dynamicBg = extendSlides[current]?.mainImg || serbg;
+
+
     return (
         <div className='h-auto relative md:py-15 text-white overflow-hidden'>
-            <div
+            {/* <div
                 className='bg-center absolute inset-0 bg-cover z-0'
-                style={{ backgroundImage: `url(${serbg})` }}
+                style={{ backgroundImage: `url(${dynamicBg})` }}
+            /> */}
+
+
+            <div
+                className='absolute inset-0 bg-center bg-cover z-0 transition-all duration-1000 ease-in-out'
+                style={{
+                    backgroundImage: `url(${dynamicBg})`,
+                    opacity: 1,
+                }}
             />
+
             <div className='absolute inset-0 bg-[#232323]/70 backdrop-blur-md' />
 
             <div className='container w-full h-full flex flex-col justify-center gap-10 relative z-10 mx-auto px-4'>
@@ -212,10 +226,10 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                         <FaStar />
                         <FaStar />
                         <FaStar />
-                      {  item?.rating === 4.5 ? <FaStarHalfAlt />:<FaStar />}
+                        {item?.rating === 4.5 ? <FaStarHalfAlt /> : <FaStar />}
                     </div>
                 </div>
-                    <div className='border-t w-full opacity-30' />
+                <div className='border-t w-full opacity-30' />
 
                 <ul className='text-xs grid lg:grid-cols-1 grid-cols-2 lg:gap-3 gap-2'>
                     {item.list.map((listItem, listIdx) => (
