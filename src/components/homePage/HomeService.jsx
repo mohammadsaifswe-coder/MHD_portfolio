@@ -2,9 +2,9 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 // Assets
-import serbg from '../../assets/home/test.png';
-import ser21 from '../../assets/home/test-2.png';
-import ser22 from '../../assets/home/test.png';
+import serbg from '../../assets/home/test.webp';
+import ser21 from '../../assets/home/test-2.webp';
+import ser22 from '../../assets/home/test.webp';
 
 const SERVICE_DATA = [
     {

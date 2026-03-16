@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import SelectedWorksBg from '../../assets/home/selected-works.png'
-import development from '../../assets/home/development.png'
-import digitaMarketing from '../../assets/home/digitaMarketing.png'
-import media from '../../assets/home/media.png'
-import uiux from '../../assets/home/uiux.png'
-import graphicDesign from '../../assets/home/graphicDesign.png'
+import SelectedWorksBg from '../../assets/home/selected-works.webp'
+import development from '../../assets/home/development.webp'
+import digitaMarketing from '../../assets/home/digitaMarketing.webp'
+import media from '../../assets/home/media.webp'
+import uiux from '../../assets/home/uiux.webp'
+import graphicDesign from '../../assets/home/graphicDesign.webp'
 
 const WORKS = [
     {
