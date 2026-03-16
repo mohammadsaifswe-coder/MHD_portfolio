@@ -231,7 +231,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                 />
             </div>
 
-            <div className='flex flex-col justify-between items-start lg:gap-4 gap-2 mx-8'>
+            <div className='flex flex-col justify-between items-start lg:gap-4 gap-2 mx-8 pb-15 sm:pb-0 '>
                 <h2 className='text-3xl font-semibold'>{item.title}</h2>
                 <p className='lg:text-sm text-xs leading-loose font-light tracking-wider  max-w-md'>{item.description}</p>
 
@@ -256,7 +256,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                     ))}
                 </ul>
 
-                <button className='border rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors'>
+                <button className='border rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors sm:static absolute bottom-1 left-5 '>
                     START A PROJECT
                 </button>
             </div>
