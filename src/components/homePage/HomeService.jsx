@@ -234,7 +234,6 @@ const HomeService = () => {
 };
 
 const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed }) => {
-    // Logic updated to use the speed variable for CSS transitions
     const slideStyle = {
         transform: `translateX(calc(-${current * 100}% + ${drag}%))`,
         transition: isTransition ? `transform ${speed}ms ease` : '',
@@ -259,7 +258,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                 />
             </div>
 
-            <div className='flex flex-col justify-between items-start lg:gap-2 gap-2 mx-8 pb-15 sm:pb-0 '>
+            <div className='flex flex-col justify-between items-start lg:gap-2 gap-2 mx-8 pb-15 sm:pb-0 md:w-[35%] '>
                 <h2 className='text-3xl font-semibold'>{item.title}</h2>
                 <p className='lg:text-sm text-xs leading-relaxed font-light tracking-wide  max-w-md'>{item.description}</p>
 
@@ -300,15 +299,6 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
         </div>
     );
 };
-
-
-
-
-
-
-
-
-
 
 
 export default HomeService;
