@@ -6,6 +6,7 @@ import BlinkingAvailable from '@/components/homePage/BlinkingAvailable'
 import HeroName from '@/components/homePage/HeroName'
 import SelectedWorks from '@/components/homePage/SelectedWorks'
 import HomeService from '@/components/homePage/HomeService'
+import Process from '@/components/homePage/Process'
 
 export default function HomePage() {
     return (
@@ -52,6 +53,8 @@ export default function HomePage() {
             {/* Services section */}
 
             <HomeService/>
+
+            <Process/>
 
             <div className="h-50 bg-gray-300/20"></div>
 

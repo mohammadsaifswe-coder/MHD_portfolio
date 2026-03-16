@@ -240,14 +240,14 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
     };
 
     const imgStyle = {
-        transform: idx === current + 1 ? 'translateX(-25%) scale(0.4)' : 'scale(1)',
+        transform: idx === current + 1 ? 'translateX(-25%) scale(0.5)' : 'scale(1)',
         transition: isTransition ? `transform ${speed}ms ease` : '',
     };
 
     return (
         <div
             style={slideStyle}
-            className='flex md:min-w-[90%] min-w-full justify-start md:flex-row flex-col md:items-stretch items-center gap-5 relative'
+            className='flex md:min-w-[85%] min-w-full justify-start md:flex-row flex-col md:items-stretch items-center gap-5 relative'
         >
             <div className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center'>
                 <img
