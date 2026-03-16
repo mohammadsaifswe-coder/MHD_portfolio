@@ -3,22 +3,50 @@ import { FiArrowRight } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 // Assets
 import serbg from '../../assets/home/test.webp';
+import development from '../../assets/home/service/development.webp';
+import dmimg from '../../assets/home/service/digital-marketing.webp';
+import brand from '../../assets/home/service/brand-designing.webp';
+import media from '../../assets/home/service/media.webp';
+import uiux from '../../assets/home/service/uiux.webp';
+
+
 import ser21 from '../../assets/home/test-2.webp';
 import ser22 from '../../assets/home/test.webp';
 
 const SERVICE_DATA = [
     {
         title: "Development",
-        description: "We build modern, scalable websites and applications that help businesses grow and perform efficiently across all platforms.",
-        mainImg: ser21,
-        list: ["UI/UX Design", "Web Development", "Mobile App Development", "E-commerce Solutions", "Custom Web Applications", "CRM / ERP Systems"],
+        description: "We develop scalable websites and mobile applications tailored to meet diverse business needs. Our web development services in Hyderabad focus on delivering high performance, strong security, and seamless functionality across all devices and platforms.",
+        mainImg: development,
+        list: ["Business Website Development", "WordPress", "API Development", "Front End Development", "JavaScript", "Mobile App Development"],
         rating: 4.5,
     },
     {
-        title: "Photoshopy",
-        description: "We provide professional photo editing and creative design services that transform ordinary images into stunning visuals for brands, businesses, and personal projects.",
-        mainImg: ser22,
-        list: ["Photo Retouching", "Background Removal", "Color Correction", "Image Manipulation", "Product Photo Editing", "Creative Poster"],
+        title: "Digital Marketing",
+        description: "We provide digital marketing solutions designed to increase brand visibility and drive targeted traffic. As the Best Digital Marketing Agency in Hyderabad, we help businesses grow by generating valuable leads through strategic and well-planned online marketing campaigns.",
+        mainImg: dmimg,
+        list: ["Search Engine Optimization (SEO)", "Social Media Marketing", "Google Ads & PPC Campaigns", "Performance Marketing", "Email Marketing", "Lead Generation"],
+        rating: 5,
+    },
+    {
+        title: "Branding & Creative Design",
+        description: "We build powerful brand identities and creative visual solutions that help businesses stand out and leave a lasting impression. As a leading graphic design company in Hyderabad, we deliver designs that strengthen brand recognition and connect effectively with your audience.",
+        mainImg: brand,
+        list: ["Logo Design", "Brand Identity Design", "Marketing Creatives", "Corporate Branding", "Visual Identity Design", "Creative Designs"],
+        rating: 5,
+    },
+    {
+        title: "Media Production & Content Creation",
+        description: "We develop professional media content that strengthens brand identity and helps businesses deliver impactful marketing messages through powerful visual storytelling. As experienced corporate film makers in Hyderabad, we create engaging videos that effectively showcase your brand and connect with your audience.",
+        mainImg: media,
+        list: ["Promotional & Advertising Videos", "Corporate Video Production", "Product Photography for Marketing"],
+        rating: 5,
+    },
+    {
+        title: "Innovative UI/UX Design for Digital Platforms",
+        description: "We create intuitive and engaging digital experiences that focus on usability and accessibility. Inspired by the best UI UX design websites, our solutions deliver modern and user-friendly interfaces that guide visitors smoothly across web and mobile platforms, enhancing overall interaction and user satisfaction.",
+        mainImg: uiux,
+        list: ["UX Research", "Website UI Design", "Wireframing & Prototyping", "Product Interface Design", "Mobile App UI Design"],
         rating: 5,
     },
 ];
@@ -231,12 +259,12 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                 />
             </div>
 
-            <div className='flex flex-col justify-between items-start lg:gap-4 gap-2 mx-8 pb-15 sm:pb-0 '>
+            <div className='flex flex-col justify-between items-start lg:gap-2 gap-2 mx-8 pb-15 sm:pb-0 '>
                 <h2 className='text-3xl font-semibold'>{item.title}</h2>
-                <p className='lg:text-sm text-xs leading-loose font-light tracking-wider  max-w-md'>{item.description}</p>
+                <p className='lg:text-sm text-xs leading-relaxed font-light tracking-wide  max-w-md'>{item.description}</p>
 
                 {/* <div className='border-t w-full opacity-30' /> */}
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col'>
                     <div className='flex items-center gap-1 text-[#FFD700]'>
                         <FaStar />
                         <FaStar />
@@ -272,5 +300,15 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
         </div>
     );
 };
+
+
+
+
+
+
+
+
+
+
 
 export default HomeService;
