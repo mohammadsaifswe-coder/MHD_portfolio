@@ -30,7 +30,7 @@ const END_CLONE_INDEX = TOTAL_SERVICE + REAL_SLIDE_COUNT;
 const REAL_END_INDEX = TOTAL_SERVICE + REAL_SLIDE_COUNT - 1;
 
 // Updated Speed Variable
-const SLOW_SPEED = 1800;
+// const SLOW_SPEED = 1800;
 
 const HomeService = () => {
     const [current, setCurrent] = useState(INITIAL_INDEX);
@@ -49,18 +49,38 @@ const HomeService = () => {
         SERVICE_DATA[1],
     ], []);
 
+
+
+    const getSpeed = () => {
+        if (window.innerWidth < 640) return 500;   // mobile
+        if (window.innerWidth < 1024) return 1200; // tablet
+        return 1800;                               // desktop
+    };
+
+    const [speed, setSpeed] = useState(getSpeed());
+
+    useEffect(() => {
+        const handleResize = () => {
+            setSpeed(getSpeed());
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
     // Infinite loop logic updated with SLOW_SPEED
     useEffect(() => {
         if (current === END_CLONE_INDEX) {
             setTimeout(() => {
                 setIsTransition(false);
                 setCurrent(INITIAL_INDEX);
-            }, SLOW_SPEED);
+            }, speed);
         } else if (current === TOTAL_SERVICE - 1) {
             setTimeout(() => {
                 setIsTransition(false);
                 setCurrent(REAL_END_INDEX);
-            }, SLOW_SPEED);
+            }, speed);
         }
     }, [current]);
 
@@ -74,7 +94,7 @@ const HomeService = () => {
     // Animation lock updated with SLOW_SPEED
     useEffect(() => {
         if (isAnimating) {
-            const timer = setTimeout(() => setIsAnimating(false), SLOW_SPEED);
+            const timer = setTimeout(() => setIsAnimating(false), speed);
             return () => clearTimeout(timer);
         }
     }, [isAnimating]);
@@ -139,7 +159,7 @@ const HomeService = () => {
 
     return (
         <div className='h-auto relative py-10 md:py-15 text-white overflow-hidden'>
-         
+
 
             <div
                 className='absolute inset-0 bg-center bg-cover z-0 transition-all duration-1000 ease-in-out'
@@ -171,7 +191,7 @@ const HomeService = () => {
                             drag={drag}
                             isTransition={isTransition}
                             onNext={nextSlide}
-                            speed={SLOW_SPEED}
+                            speed={speed}
                         />
                     ))}
                 </div>
@@ -200,7 +220,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
     return (
         <div
             style={slideStyle}
-            className='flex md:min-w-[88%] min-w-full justify-start md:flex-row flex-col md:items-stretch items-center gap-5 relative'
+            className='flex md:min-w-[90%] min-w-full justify-start md:flex-row flex-col md:items-stretch items-center gap-5 relative'
         >
             <div className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center'>
                 <img
@@ -241,7 +261,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                 </button>
             </div>
 
-            <div className='flex justify-center items-center gap-3 md:static fixed bottom-0 md:bottom-4 right-4'>
+            <div className='flex justify-center items-center gap-3 md:static fixed bottom-1 md:bottom-4 right-4'>
                 <button
                     onClick={onNext}
                     className='cursor-pointer lg:p-6 p-3 rounded-full bg-black shadow-[inset_0px_0px_16px_0px_gray,0px_0px_2px_1px_black] active:scale-95 transition-transform'
