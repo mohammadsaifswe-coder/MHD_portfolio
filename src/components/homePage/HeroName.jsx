@@ -1,11 +1,9 @@
-// HeroName.jsx
 import React from 'react'
 
 export default function HeroName() {
     return (
         <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
 
-            {/* Title */}
             <div className='text-white flex items-baseline gap-4 select-none'>
                 <span className='text-[18vw] md:text-[120px] lg:text-[150px] font-bold leading-none tracking-tighter'>
                     KBK
@@ -31,7 +29,7 @@ export default function HeroName() {
                 </div>
             </div>
 
-            {/* Button */}
+
             <button
                 className="
         border text-white rounded-md
