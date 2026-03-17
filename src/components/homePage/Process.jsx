@@ -33,7 +33,7 @@ const processSteps = [
 
 export default function Process() {
   return (
-    <section className="bg-black text-white pt-20 pb-40 px-6 md:px-10 min-h-screen flex flex-col justify-center overflow-hidden h-full ">
+    <section className="bg-black text-white pt-20 pb-10 md:pb-40 px-6 md:px-10 min-h-screen flex flex-col justify-center overflow-hidden h-full ">
       <h3 className="container text-4xl md:text-5xl font-medium mb-12 md:mb-16 md:ml-10">The Process</h3>
 
       <div className="relative flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0">
