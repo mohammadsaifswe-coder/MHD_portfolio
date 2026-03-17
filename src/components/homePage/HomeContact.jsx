@@ -36,7 +36,7 @@ export default function HomeContact() {
 
 
     return (
-        <section className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
+        <section className="contianer relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
 
             <div className="absolute top-0 left-20 z-0 pointer-events-none overflow-hidden">
                 <img
@@ -127,7 +127,7 @@ export default function HomeContact() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10">
                         <button
                             type="submit"
-                            className="border border-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white"
+                            className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white"
                         >
                             Submit Message
                         </button>
