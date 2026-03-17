@@ -15,7 +15,7 @@ export default function HomeContact() {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        const blockedChars = /[<>!#?*$]/g;
+        const blockedChars = /[<>!#?*]/g;
 
         const sanitizedValue = value.replace(blockedChars, "");
 
