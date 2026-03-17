@@ -1,85 +1,107 @@
 import React from 'react';
-import bgImage from '../../assets/home/bg-green.webp';
+import bgImage from '../../assets/home/process/bg-green.webp';
+import Image1 from '../../assets/home/process/Image1.webp';
+import Image2 from '../../assets/home/process/Image2.webp';
+import Image3 from '../../assets/home/process/Image3.webp';
 
 const processSteps = [
   {
     id: 'S1',
     title: 'Mission',
-    subtitle: 'Empowering Businesses Through Technology',
-    description: 'I begin by clarifying your goals, audience, and the insights set a clear direction and define what success means for you.',
+    subtitle: 'Supporting Business Success with Digital Excellence',
+    description: 'KBK Business Solutions is committed to helping businesses succeed through creative marketing strategies, advanced technology, and effective digital solutions tailored to their needs.',
     bgImage: bgImage,
+    icon: Image1
   },
   {
     id: 'S2',
     title: 'Vision',
-    subtitle: 'Building a Future-Ready Digital World',
-    description: 'I translate strategy into visual identity and structure. Every element serves a purpose: accessible, and ready for growth.',
+    subtitle: 'Building Strong Digital Foundations for Businesses',
+    description: 'Our vision is to empower brands with innovative digital tools and strategies that improve visibility, strengthen brand identity, and drive long-term growth.',
     bgImage: bgImage,
+    icon: Image2
   },
   {
     id: 'S3',
     title: 'Goals',
-    subtitle: 'Driving Measurable Business Success',
-    description: 'I build and launch your site in Framer or Webflow, then hand over an easy editor. You stay in control, with fast performance and room to scale.',
+    subtitle: 'Delivering High-Performance Digital Experiences',
+    description: 'We design and develop websites and digital solutions that focus on speed, user experience, and scalability, ensuring your business stays competitive in the digital marketplace.',
     bgImage: bgImage,
+    icon: Image3
   },
 ];
 
 export default function Process() {
   return (
-    <section className="bg-black text-white py-20 px-6 md:px-10 min-h-screen flex flex-col justify-center overflow-hidden">
+    <section className="bg-black text-white pt-20 pb-40 px-6 md:px-10 min-h-screen flex flex-col justify-center overflow-hidden h-full ">
       <h3 className="text-4xl md:text-5xl font-medium mb-12 md:mb-16 md:ml-10">The Process</h3>
 
       <div className="relative flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0">
-        
-        {/* Dotted Line - Moved to Z-[-1] to ensure it stays behind cards */}
-        <div className="hidden lg:block absolute top-1/2 left-[15%] right-[15%] h-px border-t border-dashed border-blue-400 opacity-40 z-0 pointer-events-none" />
+
+
 
         {processSteps.map((step, index) => (
           <div
             key={step.id}
             className={`
-              relative group w-full md:max-w-95 aspect-square 
-              border border-white/20 p-8 flex flex-col justify-between
-              transition-all duration-500 ease-in-out cursor-pointer
-              bg-black overflow-hidden
-              /* Mobile: Standard stack | Desktop: Stepped stack */
-              hover:scale-105 hover:-translate-y-4 hover:shadow-2xl
-              /* Crucial: higher z-index on hover to bring card to top */
-              z-10 hover:z-50
+                relative group w-full 
+                max-w-full sm:max-w-sm md:max-w-md lg:max-w-95
+                
+                min-h-50 sm:min-h-70 md:min-h-90 
+                
+                border border-white/20 
+                p-4 sm:p-6 md:p-7 lg:p-8
+                
+                flex flex-col justify-between
+                transition-all duration-500 ease-in-out cursor-pointer
+                bg-black overflow-hidden
+                
+                z-10 hover:z-50
+                md:transform-[translate(var(--tx),var(--ty))]
+                hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-[1.02] md:hover:scale-105
             `}
-            style={{ 
-              // Inline style for desktop offset only
-              // We use a media query check via window or just keep it simple with a CSS variable if needed, 
-              // but here is the standard approach using standard tailwind for responsiveness:
-              transform: typeof window !== 'undefined' && window.innerWidth > 768 
-                ? `translate(${index * -40}px, ${index * 40}px)` 
-                : 'none'
+            style={{
+              '--tx': `${index * -20}px`,
+              '--ty': `${index * 20}px`,
             }}
           >
-            {/* Background Image Layer */}
-            <div 
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-cover bg-center scale-110 group-hover:scale-100"
+            {/* Background */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 bg-cover bg-center scale-110 group-hover:scale-100"
               style={{ backgroundImage: `url(${step.bgImage})` }}
             />
-            
-            {/* Gradient Overlay for better text readability on hover */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-0 transition-opacity duration-500" />
 
-            {/* Content Overlay */}
+
+            {/* Content */}
             <div className="relative z-10 h-full flex flex-col">
-              <div className="mb-4">
-                <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center overflow-hidden mb-8 bg-black/20">
-                   <div className="w-12 h-12 bg-linear-to-tr from-gray-500 to-transparent rounded-full animate-pulse" />
+
+              {/* Top */}
+              <div className="mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16
+          rounded-full border border-white/30 
+          flex items-center justify-center 
+          overflow-hidden mb-4 sm:mb-5 md:mb-6 bg-black/20"
+                >
+                  <img src={step.icon} alt="" className="w-full h-full object-contain" />
                 </div>
-                
-                <h4 className="text-xl font-light tracking-widest uppercase mb-4">{step.title}</h4>
-                <p className="text-lg font-medium leading-tight mb-6">{step.subtitle}</p>
+
+                <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 leading-snug">
+                  {step.title}
+                </h4>
+
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-snug">
+                  {step.subtitle}
+                </p>
               </div>
 
-              <div className="mt-auto pt-6 border-t border-white/20 flex items-end gap-4">
-                <span className="text-5xl font-bold leading-none">{step.id}</span>
-                <p className="text-[10px] leading-relaxed opacity-70 uppercase tracking-tighter">
+              {/* Bottom */}
+              <div className="mt-auto pt-3 sm:pt-4 border-t border-white/20 flex items-end gap-2 sm:gap-3">
+
+                <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-none">
+                  {step.id}
+                </span>
+
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] leading-tight opacity-70 uppercase tracking-tight">
                   {step.description}
                 </p>
               </div>
