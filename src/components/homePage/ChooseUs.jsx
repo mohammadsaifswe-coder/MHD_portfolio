@@ -85,7 +85,7 @@ export default function ChooseUs() {
 
                 {/* Right Image Column */}
                 <div className="lg:col-span-5 relative">
-                    <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                    <div className="rounded-2xl overflow-hidden ">
                         <img
                             src={Choose}
                             alt="Creative team collaborating"
