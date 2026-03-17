@@ -199,7 +199,7 @@ const HomeService = () => {
 
             <div className='absolute inset-0 bg-[#232323]/70 backdrop-blur-md' />
 
-            <div className='container w-full h-full flex flex-col justify-center gap-10 relative z-10 mx-auto px-4'>
+            <div className='container w-full h-full flex flex-col justify-center gap-10 relative z-10 mx-auto'>
                 <h1 className='text-5xl font-semibold'>Services</h1>
 
                 <div

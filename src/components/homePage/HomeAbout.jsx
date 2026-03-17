@@ -5,11 +5,11 @@ import Background from '../../assets/home/Background.webp';
 
 export default function HomeAbout() {
     return (
-        <section className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20 py-16 lg:py-0 flex items-center">
+        <section className="relative min-h-screen w-full bg-black text-white overflow-hidden py-16 lg:py-10 flex items-center">
             
 
             {/* 12-column grid to control precise widths */}
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 items-center relative z-10 w-full">
+            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 items-center relative z-10 w-full">
 
                 {/* Left Content Side - Takes 70% (8/12 columns) */}
                 <div className="lg:col-span-8 space-y-6 order-2 lg:order-1 lg:text-left flex flex-col items-center lg:items-start z-30 relative text-start">
@@ -38,7 +38,7 @@ export default function HomeAbout() {
                     </button>
 
                     <div className="pt-8 w-full">
-                        <p className="text-gray-500 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium">Find me on</p>
+                        <p className="text-gray-500 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium text-center">Find me on</p>
                         <div className="flex gap-4 justify-center lg:justify-start">
                             {[Instagram, Linkedin, Twitter, Facebook].map((Icon, idx) => (
                                 <a
