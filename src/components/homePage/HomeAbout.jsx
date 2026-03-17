@@ -5,19 +5,22 @@ import Background from '../../assets/home/Background.webp';
 
 export default function HomeAbout() {
     return (
-        <section className="relative min-h-screen w-full bg-black text-white overflow-hidden py-16 lg:py-10 flex items-center">
-            
+        <section className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20 py-16 lg:py-10 flex items-center">
+                <span className="text-green-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase block lg:hidden absolute left-[5vw] top-5 z-99 ">
+                About KBK
+            </span>
+
 
             {/* 12-column grid to control precise widths */}
-            <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 items-center relative z-10 w-full">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 items-center relative z-10 w-full">
 
                 {/* Left Content Side - Takes 70% (8/12 columns) */}
                 <div className="lg:col-span-8 space-y-6 order-2 lg:order-1 lg:text-left flex flex-col items-center lg:items-start z-30 relative text-start">
-                    <span className="text-green-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase">
+                    <span className="text-green-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase hidden lg:block">
                         About KBK
                     </span>
 
-                    <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight">
+                    <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl font-medium leading-tight mt-5">
                         KBK Business Solutions – <br className="hidden sm:block" />
                         <span className="text-gray-300">Complete IT & Digital Growth Partner</span>
                     </h2>
@@ -33,18 +36,18 @@ export default function HomeAbout() {
                         to improve brand visibility and business performance.
                     </p>
 
-                    <button className="flex items-center gap-2 bg-gray-200 hover:bg-white text-black px-8 py-3 rounded-full font-bold transition-all duration-300 group">
+                    <button className="flex items-center gap-2 bg-gray-200 hover:bg-white text-black px-8 py-3 rounded-full font-bold transition-all duration-300 group cursor-pointer">
                         Learn More <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
 
                     <div className="pt-8 w-full">
-                        <p className="text-gray-500 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium text-center">Find me on</p>
+                        <p className="text-gray-500 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium">Find me on</p>
                         <div className="flex gap-4 justify-center lg:justify-start">
                             {[Instagram, Linkedin, Twitter, Facebook].map((Icon, idx) => (
                                 <a
                                     key={idx}
                                     href="#"
-                                    className="p-3 bg-zinc-900/50 border border-white/10 rounded-full hover:bg-green-600 hover:border-green-600 transition-all duration-300"
+                                    className="p-3 bg-zinc-900/50 border border-white/10 rounded-full hover:bg-green-600/30 hover:border-green-600 transition-all duration-300"
                                 >
                                     <Icon size={18} />
                                 </a>
@@ -83,7 +86,7 @@ export default function HomeAbout() {
                    
 
 
-                    <div className="relative z-20 w-[85%] sm:w-[70%] lg:w-[130%] mt-auto 
+                    <div className="relative z-20 w-[85%] sm:w-[70%] lg:w-[90%] mt-auto 
                   after:content-[''] after:absolute after:inset-x-0 after:bottom-0 
                   after:h-1/3 after:bg-linear-to-t after:from-black after:to-transparent after:z-30 ">
                         <img
