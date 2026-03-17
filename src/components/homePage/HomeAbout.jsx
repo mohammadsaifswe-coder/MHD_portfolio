@@ -7,24 +7,25 @@ export default function HomeAbout() {
   return (
     <section className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20 py-16 lg:py-0 flex items-center">
       
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center relative z-10 w-full">
+      {/* 12-column grid to control precise widths */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 items-center relative z-10 w-full">
         
-        {/* Left Content Side */}
-        <div className="space-y-6 order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start">
+        {/* Left Content Side - Takes 70% (8/12 columns) */}
+        <div className="lg:col-span-8 space-y-6 order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start z-30 relative">
           <span className="text-green-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase">
             About KBK
           </span>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
             KBK Business Solutions – <br className="hidden sm:block" />
             <span className="text-gray-300">Complete IT & Digital Growth Partner</span>
           </h2>
 
-          <p className="text-green-500 font-semibold text-base sm:text-lg">
+          <p className="text-green-500 font-semibold text-base sm:text-lg lg:text-xl">
             Web Development | UI/UX Design | Digital Marketing | UI/UX Designer
           </p>
 
-          <p className="text-gray-400 leading-relaxed max-w-xl text-sm sm:text-base">
+          <p className="text-gray-400 leading-relaxed max-w-2xl text-sm sm:text-base lg:text-lg">
             KBK Business Solutions helps businesses grow with smart IT services and
             result-driven digital marketing. We design and develop websites, mobile
             apps, user-friendly interfaces, and powerful online marketing strategies
@@ -51,37 +52,37 @@ export default function HomeAbout() {
           </div>
         </div>
 
-        {/* Right Image Side (Background contained here) */}
-        <div className="relative flex  justify-center items-end order-1 lg:order-2 py-10 lg:py-0">
+        {/* Right Image Side - Takes 50% relative width but stays in 4/12 grid, overlapping left */}
+        <div className="lg:col-span-4 relative flex justify-center lg:justify-end items-end order-1 lg:order-2 self-end lg:-ml-20 xl:-ml-32">
           
           {/* Square Background Image Wrapper */}
           <div 
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
             style={{
               backgroundImage: `url(${Background})`,
               backgroundSize: 'contain',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center bottom',
               backgroundRepeat: 'no-repeat',
               aspectRatio: '1 / 1', 
-              width: '100%',
-              maxWidth: '600px',
+              width: '140%', // Made slightly larger to pop behind content
+              maxWidth: '700px',
               margin: 'auto'
             }}
           />
 
           {/* Large Outline Text */}
           <h1 
-            className="absolute bottom-6 sm:bottom-12 lg:bottom-16 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:-left-20 text-[8vw] sm:text-[9vw] md:text-[7vw]  lg:text-[5vw] font-black text-transparent select-none pointer-events-none z-99 whitespace-nowrap leading-none"
-            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)' }}
+            className="absolute bottom-0 lg:bottom-10 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:-left-40 text-[9vw] sm:text-[9vw] md:text-[8vw]   lg:text-[5vw] font-black text-transparent select-none pointer-events-none z-99 whitespace-nowrap leading-none"
+            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.6)' }}
           >
             Dr. Bharath Kumar
           </h1>
 
-          {/* Portrait Image */}
+          {/* Portrait Image - Pushed to bottom */}
           <img
             src={bharatSirProf}
             alt="Dr. Bharath Kumar portrait"
-            className="relative z-20 w-[75%] sm:w-[65%] lg:w-full max-w-112.5 object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+            className="relative z-20 w-[85%] sm:w-[70%] lg:w-[130%] max-w-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] mt-auto"
           />
         </div>
 
