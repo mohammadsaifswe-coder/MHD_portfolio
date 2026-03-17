@@ -66,7 +66,7 @@ export default function ChooseUs() {
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         </p>
 
-                        <button className="group relative flex items-center gap-3 bg-white hover:bg-green-500 text-black px-7 py-3 rounded-full font-bold text-sm transition-all duration-300 ease-in-out hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] active:scale-95 cursor-pointer">
+                        <button className="group relative flex items-center gap-3 bg-white hover:bg-green-500 text-black px-7 py-3 rounded-full font-bold text-sm transition-all duration-300 ease-in-out hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] active:scale-95 cursor-pointer ">
                             <span className="relative z-10">Get Started Now</span>
 
                             {/* Arrow Container with sliding animation */}

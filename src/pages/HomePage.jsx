@@ -9,6 +9,7 @@ import HomeService from '@/components/homePage/HomeService'
 import Process from '@/components/homePage/Process'
 import HomeAbout from '@/components/homePage/HomeAbout'
 import ChooseUs from '@/components/homePage/ChooseUs'
+import Counter from '@/components/homePage/Counter'
 
 export default function HomePage() {
     return (
@@ -61,6 +62,8 @@ export default function HomePage() {
             <HomeAbout/>
 
             <ChooseUs/>
+
+            <Counter/>
 
             <div className="h-50 bg-gray-300/20"></div>
 
