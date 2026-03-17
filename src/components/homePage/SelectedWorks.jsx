@@ -8,36 +8,41 @@ import uiux from '../../assets/home/uiux.webp'
 import graphicDesign from '../../assets/home/graphicDesign.webp'
 
 const WORKS = [
+
     {
         id: 1,
-        title: 'Digital Marketing',
-        img: digitaMarketing,
-        tags: ['SEO & SEM', 'Social Strategy', 'Content Ads', 'Analytics', 'SEO & SEM']
-    },
-    {
-        id: 2,
         title: 'Development',
         img: development,
         tags: ['React/Next.js', 'E-Commerce', 'Cloud Architecture', 'Custom API']
     },
+
     {
-        id: 3,
-        title: 'Media Service',
-        img: media,
-        tags: ['Video Production', 'Photography', 'Motion Graphics', 'Post-Production']
-    },
-    {
-        id: 4,
+        id: 2,
         title: 'UI/UX Design',
         img: uiux,
         tags: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems']
     },
     {
-        id: 5,
+        id: 3,
         title: 'Graphic Design',
         img: graphicDesign,
         tags: ['Brand Identity', 'Typography', 'Print Media', 'Illustration', 'Typography']
     },
+    {
+        id: 4,
+        title: 'Digital Marketing',
+        img: digitaMarketing,
+        tags: ['SEO & SEM', 'Social Strategy', 'Content Ads', 'Analytics', 'SEO & SEM']
+    },
+
+    {
+        id: 5,
+        title: 'Media Service',
+        img: media,
+        tags: ['Video Production', 'Photography', 'Motion Graphics', 'Post-Production']
+    },
+
+
 ]
 
 const slideVariants = {

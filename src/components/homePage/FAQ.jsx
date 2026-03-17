@@ -51,7 +51,7 @@ export default function FAQ() {
                 </div>
 
                 {/* FAQ List Container */}
-                <div className="w-full max-w-5xl border-t border-zinc-800">
+                <div className="w-full border-t border-zinc-800">
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
