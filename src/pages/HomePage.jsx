@@ -7,6 +7,7 @@ import HeroName from '@/components/homePage/HeroName'
 import SelectedWorks from '@/components/homePage/SelectedWorks'
 import HomeService from '@/components/homePage/HomeService'
 import Process from '@/components/homePage/Process'
+import HomeAbout from '@/components/homePage/HomeAbout'
 
 export default function HomePage() {
     return (
@@ -55,6 +56,8 @@ export default function HomePage() {
             <HomeService/>
 
             <Process/>
+
+            <HomeAbout/>
 
             <div className="h-50 bg-gray-300/20"></div>
 

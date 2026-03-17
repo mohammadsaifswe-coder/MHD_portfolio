@@ -54,7 +54,7 @@ export default function Process() {
                 
                 flex flex-col justify-between
                 transition-all duration-500 ease-in-out cursor-pointer
-                bg-black overflow-hidden
+                bg-[#0A0A0A] overflow-hidden
                 
                 z-10 hover:z-50
                 md:transform-[translate(var(--tx),var(--ty))]
