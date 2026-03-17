@@ -10,6 +10,7 @@ import Process from '@/components/homePage/Process'
 import HomeAbout from '@/components/homePage/HomeAbout'
 import ChooseUs from '@/components/homePage/ChooseUs'
 import Counter from '@/components/homePage/Counter'
+import FAQ from '@/components/homePage/FAQ'
 
 export default function HomePage() {
     return (
@@ -64,6 +65,8 @@ export default function HomePage() {
             <ChooseUs/>
 
             <Counter/>
+
+            <FAQ/>
 
             <div className="h-50 bg-gray-300/20"></div>
 
