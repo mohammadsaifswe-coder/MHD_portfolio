@@ -61,7 +61,7 @@ export default function HomePage() {
 
             <Process/>
 
-            <HomeAbout/>
+            <HomeAbout/>    
 
             <ChooseUs/>
 
@@ -71,7 +71,7 @@ export default function HomePage() {
 
             <HomeContact/>
 
-            <div className="h-50 bg-gray-300/20"></div>
+            {/* <div className="h-50 bg-gray-300/20"></div> */}
 
         </>
     )
