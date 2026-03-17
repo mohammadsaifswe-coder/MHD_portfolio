@@ -6,7 +6,7 @@ import Background from '../../assets/home/Background.webp';
 export default function HomeAbout() {
     return (
         <section className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20 py-16 lg:py-10 flex items-center">
-                <span className="text-green-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase block lg:hidden absolute left-[5vw] top-5 z-99 ">
+            <span className="text-green-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase block lg:hidden absolute left-[5vw] top-5 z-99 ">
                 About KBK
             </span>
 
@@ -60,8 +60,14 @@ export default function HomeAbout() {
                 <div className="lg:col-span-4 relative flex justify-center lg:justify-end items-end order-1 lg:order-2  lg:-ml-20 xl:-ml-32">
 
                     {/* Square Background Image Wrapper */}
+
                     <div
-                        className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+                        className="absolute inset-0 flex items-center justify-center pointer-events-none 
+             after:content-[''] after:absolute after:inset-x-0 after:top-0 
+             after:h-1/3 after:bg-linear-to-b after:from-black after:to-transparent after:z-0 
+             
+             before:content-[''] before:absolute before:inset-y-0 before:right-0 
+             before:w-1/3 before:bg-linear-to-l before:from-black before:to-transparent before:z-0"
                         style={{
                             backgroundImage: `url(${Background})`,
                             backgroundSize: 'contain',
@@ -73,7 +79,6 @@ export default function HomeAbout() {
                             margin: 'auto'
                         }}
                     />
-
                     {/* Large Outline Text */}
                     <h1
                         className="absolute bottom-0 lg:bottom-2 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-0 text-[9vw] sm:text-[9vw] md:text-[8vw]   lg:text-[4vw] font-black text-transparent select-none pointer-events-none z-99 whitespace-nowrap leading-none"
@@ -83,7 +88,7 @@ export default function HomeAbout() {
                     </h1>
 
                     {/* Portrait Image - Pushed to bottom */}
-                   
+
 
 
                     <div className="relative z-20 w-[85%] sm:w-[70%] lg:w-[90%] mt-auto 
