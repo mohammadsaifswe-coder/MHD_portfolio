@@ -38,13 +38,16 @@ export default function HomeContact() {
     return (
         <section className="contianer relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
 
-            <div className="absolute top-0 left-20 z-0 pointer-events-none overflow-hidden">
+            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
                 <img
                     src={counterBG}
-                    alt=""
-                    className="w-full h-full object-cover  rotate-180 opacity-80 scale-100"
+                    alt={counterBG}
+                    className="w-full max-w-4xl h-auto object-cover rotate-180 opacity-80 scale-100"
+                    style={{
+                        maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+                        WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+                    }}
                 />
-
             </div>
 
             <div className="relative z-10 w-full max-w-4xl flex flex-col items-center">
@@ -62,7 +65,7 @@ export default function HomeContact() {
                             <label className="text-xs uppercase tracking-widest">Name <span className='text-green-500'>*</span></label>
                             <input
                                 type="text"
-                                name="name" 
+                                name="name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] transition-colors outline-none text-lg text-white"
@@ -96,7 +99,7 @@ export default function HomeContact() {
                         </div>
 
                         <div className="flex flex-col gap-2 group relative">
-                            <label className="text-xs uppercase tracking-widest text-white">Budget in USD</label>
+                            <label className="text-xs uppercase tracking-widest text-white">Budget in INR</label>
                             <select
                                 name="budget"
                                 value={formData.budget}
@@ -104,9 +107,9 @@ export default function HomeContact() {
                                 className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pr-8 text-white"
                             >
                                 <option className="bg-black" value="Select range">Select range</option>
-                                <option className="bg-black" value="$5k - $10k">$5k - $10k</option>
-                                <option className="bg-black" value="$10k - $25k">$10k - $25k</option>
-                                <option className="bg-black" value="$25k+">$25k+</option>
+                                <option className="bg-black" value="₹5k - ₹10k">₹5k - ₹10k</option>
+                                <option className="bg-black" value="₹10k - ₹25k">₹10k - ₹25k</option>
+                                <option className="bg-black" value="₹25k+">₹25k+</option>
                             </select>
                             <span className="absolute right-0 bottom-4 pointer-events-none opacity-50 text-xs">▼</span>
                         </div>
@@ -127,7 +130,7 @@ export default function HomeContact() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10">
                         <button
                             type="submit"
-                            className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white"
+                            className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer"
                         >
                             Submit Message
                         </button>

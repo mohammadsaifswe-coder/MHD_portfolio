@@ -66,13 +66,29 @@ export default function Counter() {
             className='relative w-full py-10 md:py-40 px-6 overflow-hidden bg-black'
         >
             {/* Background Glow/Image Wrapper */}
-            <div
+            {/* <div
                 className="absolute inset-0 pointer-events-none opacity-80"
                 style={{
                     backgroundImage: `url(${counterBG})`,
                     backgroundSize: 'cover', // Cover looks better for section backgrounds
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
+                }}
+            /> */}
+
+
+
+
+            <div
+                className="absolute inset-0 pointer-events-none opacity-80"
+                style={{
+                    backgroundImage: `url(${counterBG})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    // The Magic Part:
+                    maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
                 }}
             />
 
