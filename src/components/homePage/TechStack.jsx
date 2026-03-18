@@ -104,7 +104,7 @@ export default function TechStack() {
     }, [activeTab]);
     return (
         <div className="min-h-screen bg-black text-white py-16 px-4 font-sans">
-            <div className="max-w-6xl mx-auto text-center">
+            <div className="container mx-auto text-center">
                 <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-8">
                     Our Tech Stack
                 </h2>
