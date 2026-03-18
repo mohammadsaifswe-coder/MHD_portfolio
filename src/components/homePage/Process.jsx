@@ -104,7 +104,7 @@ export default function Process() {
                     {step.id}
                   </span>
 
-                  <p className="text-[8px] sm:text-[9px] md:text-[10px] leading-tight opacity-70 uppercase tracking-wide">
+                  <p className="text-[8px] sm:text-[9px] md:text-[14px] leading-tight   tracking-wideest">
                     {step.description}
                   </p>
                 </div>

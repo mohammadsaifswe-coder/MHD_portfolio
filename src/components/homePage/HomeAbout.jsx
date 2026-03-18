@@ -6,7 +6,7 @@ import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 export default function HomeAbout() {
     return (
-        <section className="relative min-h-screen w-full bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-14 py-16 lg:py-10 flex items-center">
+        <section className="relative  w-full bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-14 py-16 lg:py-10 flex items-center">
             <span className="text-green-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase block lg:hidden absolute left-[5vw] top-5 z-99 ">
                 About KBK
             </span>
