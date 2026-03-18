@@ -36,7 +36,7 @@ export default function HomeContact() {
 
 
     return (
-        <section className="contianer relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
+        <section className="contianer relative  bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
 
             <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
                 <img

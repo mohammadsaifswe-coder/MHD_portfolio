@@ -47,7 +47,7 @@ export default function FAQ() {
     };
 
     return (
-        <section className="bg-black text-white py-20 min-h-screen flex flex-col items-center ">
+        <section className="bg-black text-white py-20  flex flex-col items-center ">
 
             <div className="container">
 
