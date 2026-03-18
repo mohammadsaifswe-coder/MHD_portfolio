@@ -8,7 +8,7 @@ export default function FAQ() {
         {
             number: "01",
             question: "What makes a company the best digital marketing agency in Hyderabad?",
-            answer: "A top agency combines local market expertise with global trends, focusing on measurable ROI, transparent reporting, and a multi-channel approach tailored to specific business goals."
+            answer: "The best digital marketing agency in Hyderabad combines industry experience with innovative marketing strategies. They focus on SEO, social media, and paid ads to deliver measurable business growth."
         },
         {
             number: "02",
@@ -18,17 +18,27 @@ export default function FAQ() {
         {
             number: "03",
             question: "How does a ROI digital marketing agency benefit businesses?",
-            answer: "By focusing on conversion rates and customer acquisition costs, an ROI-driven agency ensures that every rupee spent on marketing contributes directly to your bottom line."
+            answer: "A ROI digital marketing agency focuses on strategies that generate measurable results and higher returns. They optimize campaigns using data and analytics to improve conversions and revenue."
         },
         {
             number: "04",
             question: "Can a digital marketing agency online manage campaigns remotely?",
-            answer: "Absolutely. With modern collaboration tools and real-time data dashboards, campaigns can be managed, optimized, and reported on from anywhere in the world."
+            answer: "Yes, a digital marketing agency online can manage campaigns from anywhere using digital tools and analytics platforms. This allows businesses to run effective marketing campaigns regardless of location"
         },
         {
             number: "05",
             question: "Why should businesses invest in digital marketing services in Hyderabad?",
-            answer: "Hyderabad is a rapidly growing tech hub. Investing in digital services here allows businesses to tap into a massive, tech-savvy audience and stay ahead of local competitors."
+            answer: "Digital marketing services in Hyderabad help businesses increase brand visibility and reach their target audience online. They also provide cost-effective strategies to generate leads and boost sales.."
+        },
+        {
+            number: "06",
+            question: "How do online digital marketing agencies help small businesses grow?",
+            answer: "Online digital marketing agencies use SEO, social media, and targeted advertising to attract new customers. These strategies help small businesses increase website traffic and strengthen their online presence"
+        },
+        {
+            number: "07",
+            question: "What factors should be considered before hiring a digital marketing agency in Hyderabad?",
+            answer: "Businesses should review the agency’s experience, client reviews, and portfolio before hiring. A reliable agency will offer clear strategies, transparent communication, and measurable results"
         }
     ];
 
