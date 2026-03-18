@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 // Adobe & Creative Tools
 import adobe_after_effects_icon from '../../assets/techstack/adobe-after-effects-icon.svg';
+import coreldraw_icon from '../../assets/techstack/coreldraw-icon.svg';
 import adobe_illustrator_icon from '../../assets/techstack/adobe-illustrator-icon.svg';
 import adobe_photoshop from '../../assets/techstack/adobe-photoshop.svg';
+import maya_icon from '../../assets/techstack/maya-icon.svg';
 import adobe_premiere_pro_icon from '../../assets/techstack/adobe-premiere-pro-icon.svg';
-import coreldraw_icon from '../../assets/techstack/coreldraw-icon.svg';
 import figma from '../../assets/techstack/figma.svg';
+import canva_icon from '../../assets/techstack/canva-icon.svg';
+import blender_icon from '../../assets/techstack/blender-icon.svg';
+import adobe_express from '../../assets/techstack/Adobe-express.svg';
+import DaVinci_Resolve from '../../assets/techstack/DaVinci_Resolve.svg';
 
 // Development & Frameworks
 import react from '../../assets/techstack/react.svg';
@@ -68,11 +73,11 @@ const TECH_DATA = {
         { name: 'Photoshop', logo: adobe_photoshop },
         { name: 'Premiere Pro', logo: adobe_premiere_pro_icon },
         { name: 'CorelDraw', logo: coreldraw_icon },
-        { name: 'After Effects', logo: adobe_after_effects_icon },
-        { name: 'Illustrator', logo: adobe_illustrator_icon },
-        { name: 'Photoshop', logo: adobe_photoshop },
-        { name: 'Premiere Pro', logo: adobe_premiere_pro_icon },
-        { name: 'CorelDraw', logo: coreldraw_icon },
+        { name: 'Canva', logo: canva_icon },
+        { name: 'Blender', logo: blender_icon },
+        { name: 'Maya', logo: maya_icon },
+        { name: 'Adobe Express', logo: adobe_express },
+        { name: 'DaVinci Resolve', logo: DaVinci_Resolve },
     ]
 };
 
