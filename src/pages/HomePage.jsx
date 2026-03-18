@@ -12,6 +12,7 @@ import ChooseUs from '@/components/homePage/ChooseUs'
 import Counter from '@/components/homePage/Counter'
 import FAQ from '@/components/homePage/FAQ'
 import HomeContact from '@/components/homePage/HomeContact'
+import TechStack from '@/components/homePage/TechStack'
 
 export default function HomePage() {
     return (
@@ -63,6 +64,8 @@ export default function HomePage() {
 
             <HomeAbout/>    
 
+            <TechStack/>
+
             <ChooseUs/>
 
             <Counter/>
@@ -70,6 +73,8 @@ export default function HomePage() {
             <FAQ/>
 
             <HomeContact/>
+
+            
 
             {/* <div className="h-50 bg-gray-300/20"></div> */}
 
