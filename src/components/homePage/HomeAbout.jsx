@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoveRight, X } from 'lucide-react';
+import { Mail, MoveRight, X } from 'lucide-react';
 import bharatSirProf from '../../assets/home/Bharth-Sir-prof.webp';
 import Background from '../../assets/home/Background.webp';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
@@ -48,7 +48,7 @@ export default function HomeAbout() {
                                 { Icon: FaInstagram, link: "https://www.instagram.com/bharathkakkireniofficial/" },
                                 { Icon: FaLinkedin, link: "https://www.linkedin.com/in/bharathkumarkakkireni" },
                                 { Icon: X, link: "https://x.com/KakkireniB?s=20" },
-                                { Icon: FaFacebook, link: "https://www.facebook.com/yourusername" }
+                                { Icon: Mail, link: "mailto:info@kbkbusinesssolutions.com" }
                             ].map(({ Icon, link }, idx) => (
                                 <a
                                     key={idx}
