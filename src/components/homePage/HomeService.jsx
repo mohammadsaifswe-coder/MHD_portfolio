@@ -251,7 +251,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
         >
             <div className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center'>
                 <img
-                    className='w-full md:h-full overflow-hidden lg:object-cover object-contain'
+                    className='w-full md:h-full overflow-hidden lg:object-cover object-contain rounded-xl'
                     style={imgStyle}
                     src={item.mainImg}
                     alt={item.title}
