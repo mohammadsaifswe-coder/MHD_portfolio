@@ -7,7 +7,7 @@ export default function BlinkingAvailable() {
         const fetchLocation = async () => {
             try {
                 // ip-api.com is much more reliable for frontend-only requests
-                const response = await fetch("http://ip-api.com/json/");
+                const response = await fetch("https://ipapi.co/json/");
                 const data = await response.json();
 
                 if (data && data.status === "success" && data.city) {
