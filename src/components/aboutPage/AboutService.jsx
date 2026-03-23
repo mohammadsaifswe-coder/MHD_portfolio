@@ -82,7 +82,7 @@ export default function AboutService() {
                                     {service.desc}
                                 </p>
 
-                                <button className="flex items-center gap-2 text-sm font-medium hover:gap-4 transition-all">
+                                <button className="flex items-center gap-2 text-sm font-medium hover:gap-4 transition-all cursor-pointer">
                                     <span>→</span> View Details
                                 </button>
                             </div>
@@ -97,7 +97,7 @@ export default function AboutService() {
 
                 {/* Know All Service */}
 
-                <div className="group flex flex-col sm:flex-row items-center bg-[#b3b3b3] rounded-2xl sm:rounded-full p-2 pr-2 w-fit gap-3 transition-all duration-300 my-5 mx-auto">
+                <div className="group flex flex-col sm:flex-row items-center bg-[#b3b3b3] rounded-2xl sm:rounded-full p-2 pr-2 w-fit gap-3 transition-all duration-300 my-10 mx-auto">
 
                     {/* Icon Container with 180deg Vertical Rotation on Hover */}
                     <div className="flex items-center justify-center bg-black text-green-400 w-10 h-10 rounded-full transition-transform duration-700 group-hover:transform-[rotateY(180deg)]">
