@@ -3,6 +3,8 @@ import cardHover from '../../assets/about/card-hover.webp'
 import first from '../../assets/about/first.webp'
 import second from '../../assets/about/second.webp'
 import third from '../../assets/about/third.webp'
+import { SlEnergy } from "react-icons/sl";
+import { NavLink } from 'react-router-dom'
 
 const services = [
     {
@@ -61,7 +63,7 @@ export default function AboutService() {
                                     backgroundSize: 'contain',
                                     backgroundPosition: 'center',
                                     backgroundRepeat: 'no-repeat',
-                                    
+
                                 }}
                             />
 
@@ -92,6 +94,31 @@ export default function AboutService() {
 
 
                 </div>
+
+                {/* Know All Service */}
+
+                <div className="group flex flex-col sm:flex-row items-center bg-[#b3b3b3] rounded-2xl sm:rounded-full p-2 pr-2 w-fit gap-3 transition-all duration-300 my-5 mx-auto">
+
+                    {/* Icon Container with 180deg Vertical Rotation on Hover */}
+                    <div className="flex items-center justify-center bg-black text-green-400 w-10 h-10 rounded-full transition-transform duration-700 group-hover:transform-[rotateY(180deg)]">
+                        <SlEnergy/>
+                    </div>
+
+                    {/* Main Text */}
+                    <p className="text-[10px] md:text-[14px] text-black text-center sm:text-left">
+                        We Strive To Lead The way In The business
+                    </p>
+
+                    {/* NavLink Section */}
+                    <NavLink
+                        to="/services"
+                        className="bg-[#d1d1d1] sm:bg-transparent px-3 py-1 rounded-full text-[10px] md:text-[14px] text-black hover:text-green-700 transition-colors whitespace-nowrap"
+                    >
+                        Know All Services
+                    </NavLink>
+
+                </div>
+
             </div>
         </section>
     )
