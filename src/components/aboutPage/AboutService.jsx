@@ -10,17 +10,17 @@ const services = [
     {
         title: "Digital Marketing",
         icon: first,
-        desc: "We design driven engagement, attract new customers, and boost social media."
+        desc: "We develop data-driven marketing strategies that strengthen brand visibility and expand your reach across digital platforms. As providers of the best digital marketing in Hyderabad, we focus on attracting the right audience, generating quality leads, and helping businesses achieve sustainable online growth."
     },
     {
         title: "Product Design",
         icon: second,
-        desc: "We design driven engagement, attract new customers, and boost social media."
+        desc: "We focus on designing intuitive and creative digital products that improve user experience and interaction. Our expert graphic design services transform your ideas into powerful visual designs that strengthen your brand presence."
     },
     {
         title: "App Development",
         icon: third,
-        desc: "We design driven engagement, attract new customers, and boost social media."
+        desc: "Our mobile app development solutions are designed to deliver speed, efficiency, and excellent user experience. As a leading website development company in Hyderabad, we help businesses establish a strong digital presence."
     }
 ];
 
@@ -37,11 +37,13 @@ export default function AboutService() {
 
                         <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-6">
 
-                            <h2 className="text-2xl md:text-3xl tracking-wider bg-linear-to-r from-white to-[#555555] bg-clip-text text-transparent">
-                                Boost Your Brand With Power
+                            <h2 className="text-2xl md:text-3xl tracking-wider bg-linear-to-r from-white to-[#555555] bg-clip-text text-transparent sm:w-1/2 w-full">
+                                Boost Your Brand With Powerful Digital Solutions
                             </h2>
                             <p className="text-white text-sm leading-relaxed max-w-sm">
-                                Enhance your brand's visibility and growth using innovative, marketing solutions crafted expertly.
+                                Enhance your brand’s visibility and growth using innovative,
+                                marketing solutions crafted expertly.
+
                             </p>
                         </div>
                     </div>
@@ -53,8 +55,19 @@ export default function AboutService() {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-10 overflow-hidden transition-all duration-500 hover:border-green-500/30"
+                            className="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-10 overflow-hidden transition-all duration-500 hover:border-green-500/30 "
                         >
+
+                            <div className="absolute bottom-0 w-full pb-5 flex flex-col gap-10 ">
+
+                                <div className="border-b border-white/10 w-3/4" />
+
+                                <button className="flex items-center gap-2 text-sm font-medium hover:gap-4 transition-all cursor-pointer">
+                                    <span>→</span> View Details
+                                </button>
+                            </div>
+
+
                             {/* Background Hover Image Effect */}
                             <div
                                 className="absolute top-0 left-1/2 -translate-x-1/2  w-30 h-30 md:w-full md:h-40 opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-10"
@@ -78,13 +91,10 @@ export default function AboutService() {
                                     {service.title}
                                 </h3>
 
-                                <p className="text-gray-400 text-sm leading-relaxed mb-10 border-b border-white/10 pb-10">
+                                <p className="text-gray-400 text-sm leading-relaxed mb-10  pb-10">
                                     {service.desc}
                                 </p>
 
-                                <button className="flex items-center gap-2 text-sm font-medium hover:gap-4 transition-all cursor-pointer">
-                                    <span>→</span> View Details
-                                </button>
                             </div>
 
                             {/* Bottom Glow Effect */}
@@ -101,7 +111,7 @@ export default function AboutService() {
 
                     {/* Icon Container with 180deg Vertical Rotation on Hover */}
                     <div className="flex items-center justify-center bg-black text-green-400 w-10 h-10 rounded-full transition-transform duration-700 group-hover:transform-[rotateY(180deg)]">
-                        <SlEnergy/>
+                        <SlEnergy />
                     </div>
 
                     {/* Main Text */}
