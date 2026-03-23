@@ -10,9 +10,9 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    port: 5173,      // You can change 3000 to any port you prefer
-    strictPort: true, // If true, Vite will exit if the port is already in use
-    host: true,       // Exposes the project on your local network (useful for mobile testing)
+    port: 5173,      
+    strictPort: true,
+    host: true,    
   },
   resolve: {
     alias: {
