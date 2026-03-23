@@ -6,7 +6,7 @@ import Background from '../../assets/about/Background.webp'
 
 export default function AboutBanner() {
   return (
-    <section className=" relative w-full h-120 sm:h-150 overflow-hidden bg-black flex items-start sm:items-center pt-10 sm:pt-0 px-10 lg:px-20">
+    <section className="relative w-full h-120 sm:h-150 overflow-hidden bg-black flex items-start sm:items-center pt-10 sm:pt-0 ">
       
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center opacity-100"
@@ -29,7 +29,7 @@ export default function AboutBanner() {
         <img src={Aeroplane} alt="airplane" className="w-50 md:w-50 " />
       </div>
 
-      <div className=" container relative z-20 text-white">
+      <div className="container relative z-20 text-white">
         <h1 className="text-6xl md:text-8xl font-black uppercase ">
           ABOUT <span className="text-3xl md:text-5xl ">us</span>
         </h1>
