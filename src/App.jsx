@@ -3,14 +3,18 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Footer from './components/global/Footer'
+import AboutPage from './pages/AboutPage'
+import Header from './components/global/Header'
 
 export default function App() {
   return (
     <>
+      <Header />
       <Routes>
-        <Route path='/' element={<HomePage/>}/>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about' element={<AboutPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   )
 }
