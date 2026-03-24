@@ -94,10 +94,10 @@ export default function RecentWorks() {
                                         src={item.img}
                                         alt={item.title || "Project Image"}
                                         loading="lazy"
-                                        className="h-full w-full object-cover transition-transform duration-1000 will-change-transform group-hover/card:scale-110"
+                                        className="h-full w-full object-cover object-top transition-transform duration-1000 will-change-transform group-hover/card:scale-110"
                                     />
 
-                                    <a href={item?.link} target='_blank' className="absolute opacity-0 group-hover/card:opacity-100 top-1 right-1/3 bg-green-500 hover:bg-green-400 text-black px-4 py-2 rounded-full font-extrabold text-[10px] uppercase shrink-0 transition-transform active:scale-95 z-99 cursor-pointer ">
+                                    <a href={item?.link} target='_blank' className="absolute opacity-0 group-hover/card:opacity-100 top-3 right-1/3 bg-green-500 hover:bg-green-400 text-black px-4 py-2 rounded-full font-extrabold text-[10px] uppercase shrink-0 transition-transform active:scale-95 z-99 cursor-pointer ">
                                         Live Demo ↗
                                     </a>
 
