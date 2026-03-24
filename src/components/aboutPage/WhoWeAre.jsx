@@ -2,6 +2,7 @@ import React from 'react'
 import {  LuFingerprint, LuPlus } from "react-icons/lu";
 import { IoDiamondOutline } from "react-icons/io5";
 import headBtn from '../../assets/about/head-btn.webp'
+import who from '../../assets/about/who.webp'
 
 export default function WhoWeAre() {
     return (
@@ -53,11 +54,11 @@ export default function WhoWeAre() {
 
                 {/* Left: Image with Custom Shape Clip */}
                 <div className="lg:col-span-5 relative group">
-                    <div className="rounded-[40px] overflow-hidden aspect-4/5 relative">
+                    <div className=" overflow-hidden aspect-4/5 relative">
                         <img
-                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80"
+                            src={who}
                             alt="Team Collaboration"
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-100 scale-90 rounded-[40px]"
                         />
                         {/* Overlay Shape (Simulating the Figma Clip) */}
                         <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
