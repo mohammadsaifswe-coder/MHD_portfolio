@@ -1,4 +1,5 @@
 import AboutBanner from '@/components/aboutPage/AboutBanner'
+import AboutContact from '@/components/aboutPage/AboutContact'
 import AboutService from '@/components/aboutPage/AboutService'
 import CTAAbout from '@/components/aboutPage/CTAAbout'
 import OurAchivements from '@/components/aboutPage/OurAchivements'
@@ -17,6 +18,7 @@ export default function AboutPage() {
         <OurAchivements/>
         <OurExperts/>
         <CTAAbout/>
+        <AboutContact/>
     </>
   )
 }
