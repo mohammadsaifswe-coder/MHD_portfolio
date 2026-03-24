@@ -73,8 +73,8 @@ export default function OurExperts() {
     }, [isPaused]);
 
     return (
-        <section className="bg-black py-20 px-4 md:px-10 overflow-hidden">
-            <div className="max-w-7xl mx-auto">
+        <section className="bg-black py-20  overflow-hidden">
+            <div className="container">
 
                 {/* Header Section */}
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-16">
