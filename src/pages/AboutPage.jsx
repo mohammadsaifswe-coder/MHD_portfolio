@@ -1,5 +1,6 @@
 import AboutBanner from '@/components/aboutPage/AboutBanner'
 import AboutService from '@/components/aboutPage/AboutService'
+import RecentWorks from '@/components/aboutPage/RecentWorks'
 import WhoWeAre from '@/components/aboutPage/WhoWeAre'
 import React from 'react'
 
@@ -9,6 +10,7 @@ export default function AboutPage() {
         <AboutBanner/>
         <AboutService/>
         <WhoWeAre/>
+        <RecentWorks/>
     </>
   )
 }
