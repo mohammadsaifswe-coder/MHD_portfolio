@@ -5,6 +5,8 @@ import HHK from '../../assets/about/HHK.webp'
 import RSG from '../../assets/about/RSG.webp'
 import BK from '../../assets/about/BK.webp'
 import UCG from '../../assets/about/UCG.webp'
+import counterBG from '../../assets/home/counterBG.webp'
+
 const projects = [
     { id: 1, img: BBL, title: "Beauty Bay Lounge", link: "https://beautybaylounge.com/" },
     { id: 2, img: BK, title: "Bhavys Kitchen", link: "https://bhavyskitchen.com/" },
@@ -56,12 +58,12 @@ export default function RecentWorks() {
     }, [totalDots]);
 
     return (
-        <section className="bg-black py-20">
+        <section className="bg-black pb-10">
             <div className="container mx-auto ">
                 {/* Header */}
                 <div className="text-center mb-12">
                     <span className="text-green-500 uppercase tracking-widest text-[10px] font-bold">Recent Works</span>
-                    <h2 className="text-white text-3xl md:text-5xl font-semibold mt-4">
+                    <h2 className="text-2xl md:text-3xl tracking-wider bg-linear-to-r from-white to-[#555555] bg-clip-text text-transparent w-full text-center mt-4">
                         Projects That Turned Ideas Into Powerful Results
                     </h2>
                 </div>
@@ -138,18 +140,51 @@ export default function RecentWorks() {
                     </div>
                 </div>
 
-                {/* Bottom CTA with Glow */}
-                <div className="relative mt-20 flex flex-col items-center gap-4">
-                    <div className="absolute -top-10 w-64 h-32 bg-green-500/10 blur-[100px] rounded-full pointer-events-none" />
 
-                    <div className="flex flex-wrap items-center justify-center gap-3 relative z-10 bg-white/5 border border-white/10 px-6 py-3 rounded-full">
-                        <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black">
-                            <span className="text-sm">★</span>
+
+                {/* Bottom CTA with Glow */}
+                <div className="relative h-80 w-full flex items-center justify-center overflow-hidden">
+                    {/* 1. Background Image with Masking */}
+                    <div
+                        className="absolute inset-0 pointer-events-none opacity-40"
+                        style={{
+                            backgroundImage: `url(${counterBG})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+                        }}
+                    />
+
+                    {/* 2. Background Glow Effect */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-48 bg-green-500/20 blur-[120px] rounded-full pointer-events-none" />
+
+                    {/* 3. CTA Content Container */}
+                    <div className="relative z-10 flex flex-col items-center gap-6 px-4">
+                        <div className="flex flex-wrap items-center justify-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-6 py-4 rounded-full shadow-2xl">
+                            {/* Star Icon */}
+                            <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-black shadow-[0_0_20px_rgba(34,197,94,0.4)]">
+                                <span className="text-lg">★</span>
+                            </div>
+
+                            {/* Text and Link */}
+                            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+                                <p className="text-gray-300 text-sm md:text-base font-medium">
+                                    Let's make something great work together.
+                                </p>
+                                <div className="hidden sm:block w-px h-4 bg-white/20" />
+                                <a
+                                    href="#"
+                                    className="text-green-500 font-bold hover:text-green-400 transition-colors tracking-tight text-sm md:text-base"
+                                >
+                                    Get Free Quote
+                                </a>
+                            </div>
                         </div>
-                        <p className="text-gray-400 text-sm">Let's make something great work together.</p>
-                        <a href="#" className="text-green-500 font-bold ml-2 hover:underline tracking-tight">Get Free Quote</a>
                     </div>
                 </div>
+
             </div>
 
         </section>
