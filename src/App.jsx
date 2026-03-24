@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 import Footer from './components/global/Footer'
 import AboutPage from './pages/AboutPage'
 import Header from './components/global/Header'
+import ServicePage from './pages/ServicePage'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
+        <Route path='/service' element={<ServicePage />} />
       </Routes>
       <Footer />
     </>
