@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 const experts = [
-    {
-        id: 1,
-        name: 'Dr. Bharath Kumar Kakkireni',
-        role: 'Chairman & CEO',
-        img: 'https://kbk.group/img/sir-bio.png'
-    },
+    // {
+    //     id: 1,
+    //     name: 'Dr. Bharath Kumar Kakkireni',
+    //     role: 'Chairman & CEO',
+    //     img: 'https://kbk.group/img/sir-bio.png'
+    // },
     {
         id: 2,
         name: 'Mrs. Jaya Vyshnavi',
