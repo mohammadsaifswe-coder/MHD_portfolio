@@ -86,7 +86,7 @@ export default function MainServices() {
         const timer = setInterval(() => {
             const nextIndex = (index + 1) % services.length;
             paginate(nextIndex);
-        }, 5000);
+        }, 10000);
         return () => clearInterval(timer);
     }, [index]);
 
@@ -172,9 +172,14 @@ export default function MainServices() {
                                         </li>
                                     ))}
                                 </ul>
-                                <button className="group relative w-24 h-24 rounded-full border border-gray-600 flex items-center justify-center text-[10px] uppercase tracking-tighter hover:border-white transition-all">
+                                <button className="group relative w-24 h-24 rounded-full border border-gray-600 flex items-center justify-center text-[10px] uppercase tracking-tighter hover:border-white transition-all cursor-pointer">
                                     <span className="group-hover:scale-110 transition-transform">Get Free <br /> Quote ↗</span>
                                 </button>
+
+
+
+            
+                                
                             </div>
                         </motion.div>
                     </AnimatePresence>
