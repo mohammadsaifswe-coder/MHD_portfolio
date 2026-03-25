@@ -181,51 +181,7 @@ export default function MainServices() {
                 </div>
 
                 {/* 3. Navigation Dots */}
-                {/* <div className="absolute right-4 flex flex-col gap-4">
-                    {services.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => paginate(i)}
-                            className={`w-2 rounded-full transition-all ${i === index ? 'bg-white h-8' : 'bg-gray-600 h-2'}`}
-                        />
-                    ))}
-                </div> */}
-
-
-                {/* Animation 1 */}
-                {/* <div className="absolute right-4 flex flex-col items-center gap-6">
-                    {services.map((_, i) => {
-                        const isActive = i === index;
-
-                        return (
-                            <button
-                                key={i}
-                                onClick={() => paginate(i)}
-                                className="relative flex items-center justify-center w-2 h-2"
-                            >
-                                <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="liquid-pill" // Magic key for layout transitions
-                                        className={`absolute w-2 bg-white rounded-full z-10`}
-                                        
-                                        initial={{ height: 8 }}
-                                        animate={{ height: 32 }}
-                                        transition={{
-                                            type: "spring",
-                                            stiffness: 300,
-                                            damping: 40,
-                                            mass: 6
-                                        }}
-                                    />
-                                )}
-                            </button>
-                        );
-                    })}
-                </div> */}
-
-
+                        
 
                 <div className="absolute right-4 flex flex-col items-center gap-6">
                     {services.map((service, i) => {
@@ -256,7 +212,7 @@ export default function MainServices() {
                                             mass: 6
                                         }}
                                     >
-                                        <div className="absolute top-1 left-[2px] w-[2px] h-[4px] bg-white/30 rounded-full blur-[0.2px]" />
+                                        <div className="absolute top-1 left-0.5 w-0.5 h-1 bg-white/30 rounded-full blur-[0.2px]" />
                                     </motion.div>
                                 )}
                             </button>
