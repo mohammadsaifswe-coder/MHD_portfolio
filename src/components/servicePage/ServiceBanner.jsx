@@ -37,7 +37,7 @@ export default function ServiceBanner() {
                     />
                 </div>
 
-                <div className="flex items-center gap-8 md:gap-12 text-white text-sm md:text-base font-medium tracking-wide">
+                <div className="flex items-center gap-2 sm:gap-8 md:gap-12 text-white text-sm md:text-base font-medium tracking-wide">
                     <span className="hover:text-green-400 cursor-pointer transition-colors">Approach</span>
                     <span className="hover:text-green-400 cursor-pointer transition-colors">Creativity</span>
                     <span className="hover:text-green-400 cursor-pointer transition-colors">Experienced</span>
