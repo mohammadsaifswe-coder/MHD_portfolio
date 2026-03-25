@@ -68,8 +68,8 @@ export default function MainServices() {
     }, []);
 
     return (
-        <section className="  relative h-screen w-full bg-black">
-            <div className="container  flex items-center overflow-hidden">
+        <section className="  relative  w-full bg-black py-10">
+            <div className="container flex items-center overflow-hidden">
 
                 {/* 1. Static Sidebar Label */}
                 <div className="hidden lg:flex flex-col items-start w-32 h-full border-r border-zinc-800/50 pr-4 py-10">
@@ -115,7 +115,7 @@ export default function MainServices() {
                 </div>
 
                 {/* 2. Content Area */}
-                <div className="flex-1 relative h-150 flex items-center justify-center">
+                <div className="flex-1 relative h-fit flex items-center justify-center">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={services[index].id}
