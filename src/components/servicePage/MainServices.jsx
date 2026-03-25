@@ -16,7 +16,7 @@ const services = [
         desc: "Our UI/UX design services focus on creating intuitive and visually engaging digital experiences that prioritize user interaction. As one of the trusted UI UX design companies in Hyderabad, we design modern interfaces that are easy to navigate, visually appealing, and optimized to enhance user engagement across websites and mobile applications. ",
         list: ["User Experience Research", "Website Interface Design", "Wireframes & Interactive Prototypes", "Product Interface Design", "Mobile Application UI Design"],
         img: uiux,
-        accentCode: "#4ade80"
+        accentCode: "#E6517E"
     },
     {
         id: 2,
