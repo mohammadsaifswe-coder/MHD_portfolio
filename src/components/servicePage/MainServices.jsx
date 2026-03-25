@@ -6,6 +6,7 @@ import media from '../../assets/service/media.webp'
 import branding from '../../assets/service/branding.webp'
 import webdev from '../../assets/service/webdev.webp'
 import dm from '../../assets/service/dm.webp'
+import bgover from '../../assets/service/bg-over.webp'
 
 const services = [
     {
@@ -93,7 +94,6 @@ export default function MainServices() {
     return (
         <section className="relative w-full bg-black py-10 overflow-hidden">
             <div className="container flex items-center min-h-150 gap-10">
-
                 {/* 1. Sidebar */}
                 <div className="hidden lg:flex flex-col items-start w-32 pr-4 py-10">
                     <h2 className="text-white text-3xl font-semibold mb-16">Services</h2>
@@ -137,17 +137,38 @@ export default function MainServices() {
                             {/* Image with Gradient Border */}
                             <div className="w-full md:w-[40%] flex justify-center">
                                 <div
-                                    className="relative p-[1.5px] rounded-[40px] transition-all duration-700 w-full max-w-md aspect-4/5"
+                                    className="relative p-[1.5px] rounded-[40px] transition-all duration-700 w-full max-w-md aspect-4/5 overflow-hidden"
                                     style={{
                                         background: `linear-gradient(to bottom, #ffffff, ${services[index].accentCode})`,
                                         boxShadow: `0 20px 50px -12px ${services[index].accentCode}66`
                                     }}
                                 >
-                                    <div className="bg-black rounded-[39px] overflow-hidden h-full">
+                                    <div className="bg-black rounded-[39px] overflow-hidden h-full relative">
+
+                                        {/* 1. Background Overlay - Stays at the back */}
                                         <img
+                                            src={bgover}
+                                            alt="bgover"
+                                            className="absolute inset-0 z-0 w-full h-full object-cover opacity-100"
+                                        />
+
+                                        {/* 2. Main Service Image - Brought to the front */}
+                                        <motion.img
+                                            key={services[index].img} // Key ensures animation triggers on change
+                                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                                            transition={{ duration: 0.5 }}
                                             src={services[index].img}
                                             alt={services[index].title}
-                                            className="w-full h-full object-contain"
+                                            className="relative z-10 w-full h-full object-contain"
+                                        />
+
+                                        {/* 3. Bottom Gradient Fade (Optional: Adds more depth) */}
+                                        <div
+                                            className="absolute inset-x-0 bottom-0 h-1/3 z-20 pointer-events-none"
+                                            style={{
+                                                background: `linear-gradient(to top, black, transparent)`
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -178,15 +199,15 @@ export default function MainServices() {
 
 
 
-            
-                                
+
+
                             </div>
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
                 {/* 3. Navigation Dots */}
-                        
+
 
                 <div className="absolute right-4 flex flex-col items-center gap-6">
                     {services.map((service, i) => {
