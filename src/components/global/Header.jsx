@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { Menu, X } from 'lucide-react' // Using lucide-react for icons
-import logo from '/kbk-logo.webp'
+import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import logo from '/kbk-logo.webp';
+
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
 
     const navLinks = [
         { name: "Home", to: "/" },
@@ -13,61 +17,121 @@ export default function Header() {
         { name: "Contact", to: "/contact" },
     ];
 
-    const toggleMenu = () => setIsOpen(!isOpen);
+    useEffect(() => {
+        const controlNavbar = () => {
+            if (typeof window !== 'undefined') {
+                if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                    setIsVisible(false);
+                } else {
+                    setIsVisible(true);
+                }
+                setLastScrollY(window.scrollY);
+            }
+        };
+        window.addEventListener('scroll', controlNavbar);
+        return () => window.removeEventListener('scroll', controlNavbar);
+    }, [lastScrollY]);
 
     return (
-        <nav className="relative w-full z-50">
-            {/* Main Bar */}
-            <div className="w-full bg-linear-to-b from-[#000000] to-[#111111] h-16 flex items-center justify-between px-6 md:justify-center text-white border-b border-white/5">
+        <>
+            <motion.nav 
+                initial={{ y: 0, opacity: 1 }}
+                animate={{ y: isVisible ? 0 : -100, opacity: isVisible ? 1 : 0 }}
+                transition={{ duration: 0.4, ease: "circOut" }}
+                className="fixed top-0 left-0 w-full z-50"
+            >
+                <div className="w-full bg-black/80 backdrop-blur-lg h-16 flex items-center justify-between px-6 border-b border-white/5">
+                    
+                    {/* Logo - Visible on all screens */}
+                    <div className="sm:hidden flex  items-center">
+                        <img src={logo} alt="KBK Logo" className="h-10 w-auto object-contain" />
+                    </div>
 
-                {/* Desktop Links - Hidden on Mobile */}
-                <div className="hidden md:flex gap-10">
-                    {navLinks.map((link) => (
-                        <NavLink
-                            key={link.to}
-                            to={link.to}
-                            className={({ isActive }) =>
-                                `transition-colors duration-200 hover:text-blue-400 ${isActive ? 'text-blue-400 font-semibold' : ''}`
-                            }
-                        >
-                            {link.name}
-                        </NavLink>
-                    ))}
-                </div>
+                    {/* Desktop Links */}
+                    <div className="hidden md:flex gap-10 mx-auto">
+                        {navLinks.map((link) => (
+                            <NavLink
+                                key={link.to}
+                                to={link.to}
+                                className={({ isActive }) =>
+                                    `text-sm tracking-widest transition-colors duration-300 hover:text-blue-400 ${isActive ? 'text-blue-400 font-bold' : 'text-gray-300'}`
+                                }
+                            >
+                                {link.name}
+                            </NavLink>
+                        ))}
+                    </div>
 
-                {/* Brand Name for Mobile */}
-                <div className="md:hidden flex items-center justify-start h-full">
-                    <img
-                        src={logo}
-                        alt="KBK Logo"
-                        className="h-18 w-auto object-contain max-w-37.5"
-                    />
-                </div>
-
-                {/* Hamburger Button - Mobile Only */}
-                <button onClick={toggleMenu} className="md:hidden text-white focus:outline-none">
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
-            </div>
-
-            {/* Mobile Dropdown Menu */}
-            <div className={`
-                absolute top-16 left-0 w-full bg-black/95 backdrop-blur-md transition-all duration-300 ease-in-out md:hidden flex flex-col items-center gap-6 py-10
-                ${isOpen ? "opacity-100 translate-y-0 visible" : "opacity-0 -translate-y-5 invisible"}
-            `}>
-                {navLinks.map((link) => (
-                    <NavLink
-                        key={link.to}
-                        to={link.to}
-                        onClick={() => setIsOpen(false)} // Auto-close menu on link click
-                        className={({ isActive }) =>
-                            `text-xl tracking-widest ${isActive ? 'text-blue-400' : 'text-white'}`
-                        }
+                    {/* Hamburger Button */}
+                    <button 
+                        onClick={() => setIsOpen(true)} 
+                        className="md:hidden text-white p-2 hover:bg-white/10 rounded-full transition-colors"
                     >
-                        {link.name}
-                    </NavLink>
-                ))}
-            </div>
-        </nav>
-    )
+                        <Menu size={24} />
+                    </button>
+                </div>
+            </motion.nav>
+
+            {/* Mobile Sidebar Menu */}
+            <AnimatePresence>
+                {isOpen && (
+                    <>
+                        {/* 1. Dark Backdrop Overlay */}
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsOpen(false)}
+                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-60 md:hidden"
+                        />
+
+                        {/* 2. Side Drawer (Right to Left) */}
+                        <motion.div 
+                            initial={{ x: "100%" }} // Start off-screen to the right
+                            animate={{ x: 0 }}      // Slide in
+                            exit={{ x: "100%" }}     // Slide out
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="fixed top-0 right-0 h-full w-[75%] max-w-sm bg-[#0a0a0a] border-l border-white/10 z-70 md:hidden p-8 flex flex-col"
+                        >
+                            {/* Close Button Inside Drawer */}
+                            <div className="flex justify-end mb-8">
+                                <button onClick={() => setIsOpen(false)} className="text-white p-2">
+                                    <X size={30} />
+                                </button>
+                            </div>
+
+                            {/* Navigation Links with Staggered Fade */}
+                            <div className="flex flex-col gap-8">
+                                {navLinks.map((link, i) => (
+                                    <motion.div
+                                        key={link.to}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: i * 0.1 }}
+                                    >
+                                        <NavLink
+                                            to={link.to}
+                                            onClick={() => setIsOpen(false)}
+                                            className={({ isActive }) =>
+                                                `text-2xl font-light tracking-[0.2em] transition-all ${isActive ? 'text-blue-400 pl-4 border-l-2 border-blue-400' : 'text-gray-400'}`
+                                            }
+                                        >
+                                            {link.name}
+                                        </NavLink>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            {/* Optional: Mobile Footer Info */}
+                            {/* <div className="mt-auto pt-10 border-t border-white/5">
+                                <p className="text-[10px] text-gray-600 uppercase tracking-widest">
+                                    Developed with love by Nayan
+                                </p>
+                            </div> */}
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
+        </>
+    );
 }
