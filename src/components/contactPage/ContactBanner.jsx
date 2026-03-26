@@ -19,7 +19,7 @@ export default function ContactBanner() {
                 alt="abstract element"
                 className="absolute bottom-0 left-0 w-32 md:w-48 animate-pulse z-10"
             />
-          
+
 
             <img
                 src={rocket}
@@ -27,7 +27,7 @@ export default function ContactBanner() {
                 className="sm:block hidden absolute top-2/3 sm:top-10 sm:right-[4%] right-0 w-40 md:w-28 z-10 animate-float"
             />
 
-           
+
 
             <div className="container relative z-20 text-white w-full ">
                 <div className="relative w-fit my-24"  >
@@ -41,9 +41,7 @@ export default function ContactBanner() {
                 <div className=" w-full sm:w-2/3 flex justify-end items-start gap-5">
                     <div className="border-b w-14 mt-2 border-gray-400 hidden sm:block" />
                     <p className="text-gray-300 text-lg md:text-base md:max-w-2/3 max-w-full font-light leading-relaxed text-left w-full sm:w-1/2">
-                        We're designing digital experiences that enrich
-                        human lives and it helps to grow your business
-                        globally trends.
+                        We create impactful digital experiences that connect people with brands. Our goal is to help businesses grow, adapt to modern digital trends, and expand their reach in today's competitive global marketplace.
                     </p>
                 </div>
             </div>
