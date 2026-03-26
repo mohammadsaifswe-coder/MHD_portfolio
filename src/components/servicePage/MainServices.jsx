@@ -295,27 +295,31 @@ export default function MainServices() {
     return (
         <section className="relative w-full bg-black py-10 overflow-hidden">
             <div className="container flex items-center min-h-150 gap-10">
-                
+
                 {/* 1. Sidebar (Desktop) */}
                 <div className="hidden lg:flex flex-col items-start w-32 pr-4 py-10">
                     <h2 className="text-white text-3xl font-semibold mb-16">Services</h2>
                     <div className="flex flex-col gap-5">
-                        {services.map((service, i) => (
-                            <motion.div
-                                key={service.id}
-                                onClick={() => paginate(i)}
-                                animate={{
-                                    scale: i === index ? 1.1 : 1.0,
-                                    opacity: i === index ? 1 : 0.4,
-                                    x: i === index ? 5 : 0
-                                }}
-                                className="cursor-pointer origin-left"
-                            >
-                                <h3 className={`text-sm font-medium ${i === index ? 'text-green-400' : 'text-gray-400'}`}>
-                                    {service.name}
-                                </h3>
-                            </motion.div>
-                        ))}
+                        {services.map((service, i) => {
+                            const isActive = i === index;
+                            return (
+                                <motion.div
+                                    key={service.id}
+                                    onClick={() => paginate(i)}
+                                    animate={{
+                                        scale: isActive ? 1.1 : 1.0,
+                                        opacity: isActive ? 1 : 0.4,
+                                        x: isActive ? 5 : 0
+                                    }}
+                                    whileHover={{ scale: 1.1, opacity: 1, x: 5 }}
+                                    className="cursor-pointer origin-left"
+                                >
+                                    <h3 className={`text-white text-sm font-medium leading-tight max-w-30 ${isActive ? 'text-green-400' : 'text-gray-400'}`}>
+                                        {service.name}
+                                    </h3>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -397,6 +401,6 @@ export default function MainServices() {
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     );
 }
