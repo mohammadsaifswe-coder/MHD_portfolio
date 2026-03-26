@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import counterBG from '../../assets/home/counterBG.webp';
 
 export default function AboutContact() {
-
-
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,8 +14,8 @@ export default function AboutContact() {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
+        // Strict blocking: prevents user from even typing these characters
         const blockedChars = /[<>!#?*]/g;
-
         const sanitizedValue = value.replace(blockedChars, "");
 
         setFormData((prev) => ({
@@ -24,29 +23,66 @@ export default function AboutContact() {
             [name]: sanitizedValue
         }));
 
+        // Optional: show a small warning in console or a toast if they try to use blocked chars
         if (value !== sanitizedValue) {
-            console.warn("Special characters < and > are not allowed for security.");
+            toast.error("Special characters are blocked for security", { id: 'blocked-char' });
         }
-
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // 1. Validation Logic
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!formData.name.trim()) {
+            return toast.error("Please enter your name");
+        }
+        if (!emailPattern.test(formData.email)) {
+            return toast.error("Please enter a valid email address");
+        }
+        if (formData.budget === 'Select range') {
+            return toast.error("Please select a budget range");
+        }
+
+        // 2. Success Logic
         console.log("Final Form Submission:", formData);
+        toast.success("Message sent! We'll get back to you soon.");
+        
+        // Reset form after successful submission
+        setFormData({
+            name: '',
+            email: '',
+            interest: 'Web Development',
+            budget: 'Select range',
+            details: ''
+        });
     };
 
-
     return (
-        <section className="contianer relative  bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden">
-
-
+        <section className=" relative bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden py-20">
+            {/* TOAST PROVIDER - Styled for Dark UI */}
+            <Toaster 
+                position="top-right"
+                toastOptions={{
+                    style: {
+                        background: '#111',
+                        color: '#fff',
+                        border: '1px solid #333',
+                        fontSize: '14px'
+                    },
+                    success: { iconTheme: { primary: '#07C42C', secondary: '#fff' } },
+                    error: { iconTheme: { primary: '#ff4b4b', secondary: '#fff' } }
+                }}
+            />
 
             <div className="relative z-10 w-full max-w-4xl flex flex-col items-center">
-
                 <form className="w-full space-y-10" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-
+                        
+                        {/* Name */}
                         <div className="flex flex-col gap-2 group">
-                            <label className="text-xs uppercase tracking-widest">Name <span className='text-green-500'>*</span></label>
+                            <label className="text-xs uppercase tracking-widest text-gray-400">Name <span className='text-green-500'>*</span></label>
                             <input
                                 type="text"
                                 name="name"
@@ -56,10 +92,11 @@ export default function AboutContact() {
                             />
                         </div>
 
+                        {/* Email */}
                         <div className="flex flex-col gap-2 group">
-                            <label className="text-xs uppercase tracking-widest text-white">Email <span className='text-green-500'>*</span></label>
+                            <label className="text-xs uppercase tracking-widest text-gray-400">Email <span className='text-green-500'>*</span></label>
                             <input
-                                type="email"
+                                type="text" // Using text to handle custom email validation via regex on submit
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -67,8 +104,9 @@ export default function AboutContact() {
                             />
                         </div>
 
+                        {/* Interest */}
                         <div className="flex flex-col gap-2 group relative">
-                            <label className="text-xs uppercase tracking-widest text-white">You are interested in</label>
+                            <label className="text-xs uppercase tracking-widest text-gray-400">You are interested in</label>
                             <select
                                 name="interest"
                                 value={formData.interest}
@@ -82,8 +120,9 @@ export default function AboutContact() {
                             <span className="absolute right-0 bottom-4 pointer-events-none opacity-50 text-xs">▼</span>
                         </div>
 
+                        {/* Budget */}
                         <div className="flex flex-col gap-2 group relative">
-                            <label className="text-xs uppercase tracking-widest text-white">Budget in INR</label>
+                            <label className="text-xs uppercase tracking-widest text-gray-400">Budget in INR</label>
                             <select
                                 name="budget"
                                 value={formData.budget}
@@ -99,8 +138,9 @@ export default function AboutContact() {
                         </div>
                     </div>
 
+                    {/* Details */}
                     <div className="flex flex-col gap-2 group pt-4">
-                        <label className="text-xs uppercase tracking-widest text-white">Project details</label>
+                        <label className="text-xs uppercase tracking-widest text-gray-400">Project details</label>
                         <textarea
                             name="details"
                             value={formData.details}
@@ -124,7 +164,6 @@ export default function AboutContact() {
                         </div>
                     </div>
                 </form>
-
             </div>
         </section>
     );
