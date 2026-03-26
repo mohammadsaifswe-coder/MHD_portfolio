@@ -262,60 +262,60 @@ const variants = {
 
 export default function MainServices() {
     const [[index, direction], setIndex] = useState([0, 0]);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // 1. Detect Screen Size
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const paginate = (newIndex) => {
-        // Wrap index around services length
         const wrappedIndex = (newIndex + services.length) % services.length;
         const dir = newIndex > index ? 1 : -1;
         setIndex([wrappedIndex, dir]);
     };
 
-    // DRAG HANDLER: Translates drag movement into pagination
     const handleDragEnd = (event, info) => {
-        const swipeThreshold = 50; 
-        if (info.offset.y < -swipeThreshold) {
-            // Dragged Up
-            paginate(index + 1);
-        } else if (info.offset.y > swipeThreshold) {
-            // Dragged Down
-            paginate(index - 1);
-        }
+        const swipeThreshold = 50;
+        if (info.offset.y < -swipeThreshold) paginate(index + 1);
+        else if (info.offset.y > swipeThreshold) paginate(index - 1);
     };
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            paginate(index + 1);
-        }, 10000);
-        return () => clearInterval(timer);
-    }, [index]);
+    // Shared drag props to keep code clean
+    const dragProps = {
+        drag: "y",
+        dragConstraints: { top: 0, bottom: 0 },
+        dragElastic: 0.1,
+        onDragEnd: handleDragEnd,
+    };
 
     return (
-        <section className="relative w-full bg-black py-10 overflow-hidden touch-none">
+        <section className="relative w-full bg-black py-10 overflow-hidden">
             <div className="container flex items-center min-h-150 gap-10">
-                {/* 1. Sidebar */}
+                
+                {/* 1. Sidebar (Desktop) */}
                 <div className="hidden lg:flex flex-col items-start w-32 pr-4 py-10">
                     <h2 className="text-white text-3xl font-semibold mb-16">Services</h2>
                     <div className="flex flex-col gap-5">
-                        {services.map((service, i) => {
-                            const isActive = i === index;
-                            return (
-                                <motion.div
-                                    key={service.id}
-                                    onClick={() => paginate(i)}
-                                    animate={{
-                                        scale: isActive ? 1.1 : 1.0,
-                                        opacity: isActive ? 1 : 0.4,
-                                        x: isActive ? 5 : 0
-                                    }}
-                                    whileHover={{ scale: 1.1, opacity: 1, x: 5 }}
-                                    className="cursor-pointer origin-left"
-                                >
-                                    <h3 className={`text-white text-sm font-medium leading-tight max-w-30 ${isActive ? 'text-green-400' : 'text-gray-400'}`}>
-                                        {service.name}
-                                    </h3>
-                                </motion.div>
-                            );
-                        })}
+                        {services.map((service, i) => (
+                            <motion.div
+                                key={service.id}
+                                onClick={() => paginate(i)}
+                                animate={{
+                                    scale: i === index ? 1.1 : 1.0,
+                                    opacity: i === index ? 1 : 0.4,
+                                    x: i === index ? 5 : 0
+                                }}
+                                className="cursor-pointer origin-left"
+                            >
+                                <h3 className={`text-sm font-medium ${i === index ? 'text-green-400' : 'text-gray-400'}`}>
+                                    {service.name}
+                                </h3>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
 
@@ -329,68 +329,50 @@ export default function MainServices() {
                             initial="enter"
                             animate="center"
                             exit="exit"
-                            // DRAG CONFIGURATION
-                            drag="y"
-                            dragConstraints={{ top: 0, bottom: 0 }}
-                            dragElastic={0.1}
-                            onDragEnd={handleDragEnd}
-                            // -----------------
+                            // Apply drag to WHOLE wrapper ONLY on Desktop
+                            {...(!isMobile ? dragProps : {})}
                             transition={{ duration: 0.6, ease: "easeInOut" }}
-                            className="flex flex-col md:flex-row items-center gap-12 w-full cursor-grab active:cursor-grabbing"
+                            className={`flex flex-col md:flex-row items-center gap-12 w-full ${!isMobile ? 'cursor-grab active:cursor-grabbing' : ''}`}
                         >
-                            {/* Image with Gradient Border */}
-                            <div className="w-full md:w-[40%] flex justify-center pointer-events-none">
-                                <div
-                                    className="relative p-[1.5px] rounded-[40px] transition-all duration-700 w-full max-w-md aspect-4/5 overflow-hidden"
+                            {/* Image Container - Drag is enabled here on Mobile */}
+                            <div className="w-full md:w-[40%] flex justify-center">
+                                <motion.div
+                                    // Apply drag ONLY on Mobile here
+                                    {...(isMobile ? dragProps : {})}
+                                    className="relative p-[1.5px] rounded-[40px] transition-all duration-700 w-full max-w-md aspect-4/5 overflow-hidden cursor-grab active:cursor-grabbing touch-none"
                                     style={{
                                         background: `linear-gradient(to bottom, #ffffff, ${services[index].accentCode})`,
                                         boxShadow: `0 20px 50px -12px ${services[index].accentCode}66`
                                     }}
                                 >
-                                    <div className="bg-black rounded-[39px] overflow-hidden h-full relative">
-                                        <img
-                                            src={bgover}
-                                            alt="bgover"
-                                            className="absolute inset-0 z-0 w-full h-full object-cover opacity-100"
-                                        />
+                                    <div className="bg-black rounded-[39px] overflow-hidden h-full relative pointer-events-none">
+                                        <img src={bgover} alt="" className="absolute inset-0 z-0 w-full h-full object-cover" />
                                         <motion.img
                                             key={services[index].img}
-                                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                                            transition={{ duration: 0.5 }}
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
                                             src={services[index].img}
-                                            alt={services[index].title}
-                                            className="relative z-10 w-full h-full object-contain"
+                                            className="relative z-10 w-full h-full object-contain p-8"
                                         />
-                                        <div
-                                            className="absolute inset-x-0 bottom-0 h-1/3 z-20 pointer-events-none"
-                                            style={{ background: `linear-gradient(to top, black, transparent)` }}
-                                        />
+                                        <div className="absolute inset-x-0 bottom-0 h-1/3 z-20" style={{ background: `linear-gradient(to top, black, transparent)` }} />
                                     </div>
-                                </div>
+                                </motion.div>
                             </div>
 
-                            {/* Text Info */}
-                            <div className="w-full md:w-1/2 text-white select-none">
-                                <h3 className="text-2xl md:text-[34px] font-bold mb-6 leading-tight">
-                                    {services[index].title}
-                                </h3>
-                                <p className="text-gray-400 text-md mb-8 max-w-lg">
-                                    {services[index].desc}
-                                </p>
+                            {/* Text Info - No drag here on mobile, so user can scroll the page */}
+                            <div className="w-full md:w-1/2 text-white">
+                                <h3 className="text-2xl md:text-[34px] font-bold mb-6 leading-tight">{services[index].title}</h3>
+                                <p className="text-gray-400 text-md mb-8 max-w-lg">{services[index].desc}</p>
                                 <ul className="grid grid-cols-2 gap-4 mb-10">
                                     {services[index].list.map((item, i) => (
                                         <li key={i} className="flex items-center text-gray-300 text-sm">
-                                            <span
-                                                className="w-2 h-2 rounded-full mr-3"
-                                                style={{ backgroundColor: services[index].accentCode }}
-                                            />
+                                            <span className="w-2 h-2 rounded-full mr-3" style={{ backgroundColor: services[index].accentCode }} />
                                             {item}
                                         </li>
                                     ))}
                                 </ul>
-                                <button className="group relative w-24 h-24 rounded-full border border-gray-600 flex items-center justify-center text-[10px] uppercase tracking-tighter hover:border-white transition-all cursor-pointer">
-                                    <span className="group-hover:scale-110 transition-transform">Get Free <br /> Quote ↗</span>
+                                <button className="group relative w-24 h-24 rounded-full border border-gray-600 flex items-center justify-center text-[10px] uppercase hover:border-white transition-all">
+                                    <span>Get Free <br /> Quote ↗</span>
                                 </button>
                             </div>
                         </motion.div>
@@ -399,31 +381,20 @@ export default function MainServices() {
 
                 {/* 3. Navigation Dots */}
                 <div className="absolute right-4 flex flex-col items-center gap-6">
-                    {services.map((service, i) => {
-                        const isActive = i === index;
-                        return (
-                            <button
-                                key={service.id}
-                                onClick={() => paginate(i)}
-                                className="relative flex items-center justify-center w-2 h-2"
-                            >
-                                <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="liquid-pill"
-                                        className="absolute w-2 rounded-full z-10"
-                                        style={{
-                                            backgroundColor: service.accentCode || '#3b82f6',
-                                            boxShadow: `0 0 12px ${service.accentCode || '#3b82f6'}aa`
-                                        }}
-                                        initial={{ height: 8 }}
-                                        animate={{ height: 32 }}
-                                        transition={{ type: "spring", stiffness: 300, damping: 40, mass: 6 }}
-                                    />
-                                )}
-                            </button>
-                        );
-                    })}
+                    {services.map((service, i) => (
+                        <button key={service.id} onClick={() => paginate(i)} className="relative flex items-center justify-center w-2 h-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                            {i === index && (
+                                <motion.div
+                                    layoutId="liquid-pill"
+                                    className="absolute w-2 rounded-full z-10"
+                                    style={{ backgroundColor: service.accentCode || '#3b82f6' }}
+                                    animate={{ height: 32 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 40 }}
+                                />
+                            )}
+                        </button>
+                    ))}
                 </div>
             </div>
         </section>
