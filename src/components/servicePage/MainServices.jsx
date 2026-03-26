@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import uiux from '../../assets/service/uiux.webp'
+// import uiux from 'https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774499228/uiux_b1ffnt.webp'
 import media from '../../assets/service/media.webp'
 import branding from '../../assets/service/branding.webp'
 import webdev from '../../assets/service/webdev.webp'
@@ -15,7 +16,8 @@ const services = [
         title: "Innovative UI/UX Design for Modern Digital Platforms",
         desc: "Our UI/UX design services focus on creating intuitive and visually engaging digital experiences that prioritize user interaction.",
         list: ["User Experience Research", "Website Interface Design", "Wireframes & Interactive Prototypes", "Product Interface Design", "Mobile Application UI Design"],
-        img: uiux,
+        // img: uiux,
+        img: 'https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774499228/uiux_b1ffnt.webp',
         accentCode: "#E6517E"
     },
     {
@@ -24,7 +26,8 @@ const services = [
         title: "Web & Mobile Development",
         desc: "We build high-performance websites and mobile applications designed to align with your business goals.",
         list: ["Business Website Development", "WordPress Development", "API Integration & Development", "Front-End Development", "JavaScript Development", "Mobile Application Development"],
-        img: webdev,
+        // img: webdev,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774499227/webdev_l3yx2q.webp",
         accentCode: "#3b82f6"
     },
     {
@@ -33,7 +36,8 @@ const services = [
         title: "Branding & Creative Design",
         desc: "Strong branding plays a vital role in building trust and helping businesses stand out in a competitive market.",
         list: ["Logo Design", "Brand Identity Development", "Marketing & Promotional Creatives", "Corporate Branding", "Visual Identity Systems", "Creative Graphic Designs"],
-        img: branding,
+        // img: branding,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774499227/branding_rzdiwb.webp",
         accentCode: "#FDC700"
     },
     {
@@ -42,7 +46,8 @@ const services = [
         title: "Digital Marketing",
         desc: "Our marketing strategies are focused on enhancing online visibility and generating quality leads.",
         list: ["Search Engine Optimization (SEO)", "Social Media Marketing", "Google Ads & PPC Advertising", "Performance Marketing Campaigns", "Email Marketing Campaigns", "Lead Generation Strategies"],
-        img: dm,
+        // img: dm,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774499227/dm_crf7ln.webp",
         accentCode: "#51A2FF"
     },
     {
@@ -51,7 +56,8 @@ const services = [
         title: "Media Production & Content Creation",
         desc: "As professional ad film makers in Hyderabad, we create high-quality media content that helps businesses present their stories.",
         list: ["Promotional & Advertising Videos", "Corporate Video Production", "Product Photography for Marketing"],
-        img: media,
+        // img: media,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774499227/media_achg2t.webp",
         accentCode: "#FF6900"
     }
 ];
