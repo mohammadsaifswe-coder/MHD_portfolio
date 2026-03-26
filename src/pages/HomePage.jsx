@@ -13,6 +13,7 @@ import Counter from '@/components/homePage/Counter'
 import FAQ from '@/components/homePage/FAQ'
 import HomeContact from '@/components/homePage/HomeContact'
 import TechStack from '@/components/homePage/TechStack'
+import OurTeam from '@/components/homePage/OurTeam'
 
 export default function HomePage() {
     return (
@@ -64,9 +65,12 @@ export default function HomePage() {
 
             <HomeAbout/>    
 
-            <TechStack/>
+            <OurTeam/>
 
             <ChooseUs/>
+
+            <TechStack/>
+
 
             <Counter/>
 
