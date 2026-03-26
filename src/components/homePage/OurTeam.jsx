@@ -30,7 +30,7 @@ export default function OurTeam() {
         <section className="bg-black text-white py-20 px-4">
             <div className="container">
                 {/* Section Title */}
-                <h2 className="text-center text-2xl md:text-3xl font-semibold tracking-[0.1em] uppercase mb-16">
+                <h2 className="text-center text-2xl md:text-3xl font-semibold tracking-widest uppercase mb-16">
                     OUR TEAM
                 </h2>
 
