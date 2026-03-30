@@ -384,7 +384,7 @@ export default function MainServices() {
                 </div>
 
                 {/* 3. Navigation Dots */}
-                <div className="absolute right-4 flex flex-col items-center gap-6">
+                {/* <div className="absolute right-4 flex flex-col items-center gap-6">
                     {services.map((service, i) => (
                         <button key={service.id} onClick={() => paginate(i)} className="relative flex items-center justify-center w-2 h-2">
                             <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
@@ -399,8 +399,49 @@ export default function MainServices() {
                             )}
                         </button>
                     ))}
+                </div> */}
+
+
+
+                <div className="absolute right-4 flex flex-col items-center gap-6">
+                    {services.map((service, i) => {
+                        const isActive = i === index;
+
+                        return (
+                            <button
+                                key={service.id}
+                                onClick={() => paginate(i)}
+                                className="relative flex items-center justify-center w-2 h-2"
+                            >
+                                <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="liquid-pill"
+                                        className="absolute w-2 rounded-full z-10"
+                                        style={{
+                                            backgroundColor: service.accentCode || '#3b82f6',
+                                            boxShadow: `0 0 12px ${service.accentCode || '#3b82f6'}aa`
+                                        }}
+                                        initial={{ height: 8 }}
+                                        animate={{ height: 32 }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 40,
+                                            mass: 6
+                                        }}
+                                    >
+                                        <div className="absolute top-1 left-0.5 w-0.5 h-1 bg-white/30 rounded-full blur-[0.2px]" />
+                                    </motion.div>
+                                )}
+                            </button>
+                        );
+                    })}
                 </div>
-            </div>
+
+
+            </div >
         </section >
     );
 }
