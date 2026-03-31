@@ -4,32 +4,32 @@ const projects = [
   {
     title: "Beauty Bay Lounge",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/1_e8qiq7.png",
-    link: "https://beautybaylounge.com/"
+    link: "https://beautybaylounge.com"
   },
   {
     title: "Austin Event Centers",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951427/7_iwvzdh.png",
-    link: "https://austineventcenters.com/"
+    link: "https://austineventcenters.com"
   },
   {
     title: "Hari hara Kshethram",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774952634/4_m7fa5t.png",
-    link: "https://hariharakshethram.com/index-new.php/"
+    link: "https://hariharakshethram.com/index-new.php"
   },
   {
     title: "Rainiersoft Global",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/3_pow629.png",
-    link: "https://rainiersoftglobal.com/"
+    link: "https://rainiersoftglobal.com"
   },
   {
     title: "Urs Choice Gifts",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/4_ohfgle.png",
-    link: "https://urschoicegifts.com/"
+    link: "https://urschoicegifts.com"
   },
   {
     title: "Bhavy's Kitchen",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/5_hon4vr.png",
-    link: "https://bhavyskitchen.com/"
+    link: "https://bhavyskitchen.com"
   },
   {
     title: "Lakhotia Education",
@@ -39,7 +39,7 @@ const projects = [
   {
     title: "Sri Balaji Tax Services",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/2_dlpfrg.png",
-    link: "https://sribalajitaxservices.com/"
+    link: "https://sribalajitaxservices.com"
   }
 ];
 
