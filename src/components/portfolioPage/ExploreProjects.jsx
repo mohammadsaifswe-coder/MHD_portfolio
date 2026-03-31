@@ -13,7 +13,7 @@ const projects = [
   },
   {
     title: "Hari hara Kshethram",
-    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/8_ifuuf8.png",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774952634/4_m7fa5t.png",
     link: "https://hariharakshethram.com/"
   },
   {
