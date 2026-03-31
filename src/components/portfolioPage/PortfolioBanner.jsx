@@ -26,16 +26,12 @@ export default function PortfolioBanner() {
                 alt="rocket"
                 className="sm:block hidden absolute top-2/3 sm:top-10 sm:right-[4%] right-0 w-40 md:w-28 z-10 animate-float"
             />
-            {/* <img
-                src={rocket}
-                alt="rocket"
-                className="sm:block hidden absolute top-2/3 sm:top-30 sm:right-[45%] right-0 w-40 rotate-250 md:w-28 z-10"
-            /> */}
+           
 
             <img
                 src={rocket}
                 alt="rocket"
-                className="absolute top-2/3 sm:top-20 sm:right-[30%] right-0 w-28 sm:w-32 md:w-28 rotate-250 z-10"
+                className="absolute top-3/4 sm:top-20 sm:right-[45%] right-0 w-28 sm:w-32 md:w-28 rotate-250 z-10"
             />
 
             <div className="container relative z-20 text-white w-full ">
