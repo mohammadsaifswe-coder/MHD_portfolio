@@ -356,7 +356,7 @@ export default function MainServices() {
                                             initial={{ opacity: 0, scale: 0.9 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             src={services[index].img}
-                                            className="relative z-10 w-full h-full object-contain p-8"
+                                            className="relative z-10 w-full h-full object-contain "
                                         />
                                         <div className="absolute inset-x-0 bottom-0 h-1/3 z-20" style={{ background: `linear-gradient(to top, black, transparent)` }} />
                                     </div>
@@ -384,25 +384,6 @@ export default function MainServices() {
                 </div>
 
                 {/* 3. Navigation Dots */}
-                {/* <div className="absolute right-4 flex flex-col items-center gap-6">
-                    {services.map((service, i) => (
-                        <button key={service.id} onClick={() => paginate(i)} className="relative flex items-center justify-center w-2 h-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                            {i === index && (
-                                <motion.div
-                                    layoutId="liquid-pill"
-                                    className="absolute w-2 rounded-full z-10"
-                                    style={{ backgroundColor: service.accentCode || '#3b82f6' }}
-                                    animate={{ height: 32 }}
-                                    transition={{ type: "spring", stiffness: 300, damping: 40 }}
-                                />
-                            )}
-                        </button>
-                    ))}
-                </div> */}
-
-
-
                 <div className="absolute right-4 flex flex-col items-center gap-6">
                     {services.map((service, i) => {
                         const isActive = i === index;
