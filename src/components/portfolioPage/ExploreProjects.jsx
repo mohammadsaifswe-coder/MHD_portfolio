@@ -14,7 +14,7 @@ const projects = [
   {
     title: "Hari hara Kshethram",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774952634/4_m7fa5t.png",
-    link: "https://hariharakshethram.com/"
+    link: "https://hariharakshethram.com/index-new.php/"
   },
   {
     title: "Rainiersoft Global",
@@ -78,11 +78,11 @@ export default function ExploreProjects() {
             </div>
 
             {/* Hover Blur Overlay */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-md">
+            <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/70 backdrop-blur-xs">
               <h3 className="text-white text-2xl font-bold mb-2">
                 {project.title}
               </h3>
-              <p className="text-white/80 text-sm uppercase tracking-widest border-b border-white/40 pb-1">
+              <p className="text-green-500/80 text-sm uppercase tracking-widest border-b border-white/40 pb-1">
                 View Project
               </p>
             </div>
