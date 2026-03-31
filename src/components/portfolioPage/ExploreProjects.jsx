@@ -67,7 +67,7 @@ export default function ExploreProjects() {
             <img
               src={project.imgUrl}
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-500 object-topa group-hover:scale-110"
             />
 
             {/* Bottom Static Overlay (Title always visible slightly) */}
