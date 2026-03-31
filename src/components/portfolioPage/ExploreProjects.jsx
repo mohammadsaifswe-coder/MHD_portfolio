@@ -24,33 +24,31 @@ const projects = [
 
 export default function ExploreProjects() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [direction, setDirection] = useState(0);
   const projectsPerPage = 8;
 
-  // Calculate slice
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
   const totalPages = Math.ceil(projects.length / projectsPerPage);
 
-  // Animation Variants: Slide Left on Exit, Slide in from Right on Entry
   const variants = {
     enter: (direction) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
     }),
     center: {
       x: 0,
-      opacity: 1
+      opacity: 1,
     },
     exit: (direction) => ({
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
-    })
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
   };
 
-  const [direction, setDirection] = useState(0);
-
   const paginate = (newPage) => {
+    if (newPage === currentPage) return;
     setDirection(newPage > currentPage ? 1 : -1);
     setCurrentPage(newPage);
   };
@@ -61,8 +59,10 @@ export default function ExploreProjects() {
         <h2 className="text-white text-4xl md:text-5xl font-bold tracking-widest uppercase">EXPLORE</h2>
       </div>
 
-      <div className="relative max-w-6xl mx-auto min-h-[800px]">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
+      {/* The Container needs relative and a fixed height to prevent collapsing during absolute transition */}
+      <div className="relative max-w-6xl mx-auto min-h-225 md:min-h-350">
+        {/* Removed mode="wait" to allow simultaneous animation */}
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentPage}
             custom={direction}
@@ -70,8 +70,13 @@ export default function ExploreProjects() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.2 } }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full"
+            // Snappier transition with no lag
+            transition={{
+              x: { type: "spring", stiffness: 150, damping: 35 },
+              opacity: { duration: 0.3 }
+            }}
+            // absolute top-0 ensures the new page slides directly over/under the old one
+            className="absolute top-0 left-0 w-full grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {currentProjects.map((project, index) => (
               <a
@@ -79,20 +84,16 @@ export default function ExploreProjects() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block overflow-hidden rounded-sm bg-zinc-900 aspect-[16/10]"
+                className="group relative block overflow-hidden rounded-sm bg-zinc-900 aspect-16/10"
               >
                 <img
                   src={project.imgUrl}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 object-top group-hover:scale-110"
                 />
-
-                {/* Gradient Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/90 to-transparent">
                   <h3 className="text-white text-lg font-medium tracking-wide">{project.title}</h3>
                 </div>
-
-                {/* Hover Effect */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/70 backdrop-blur-xs">
                   <h3 className="text-white text-2xl font-bold mb-2">{project.title}</h3>
                   <p className="text-green-500 text-sm uppercase tracking-widest border-b border-white/40 pb-1">View Project</p>
@@ -104,10 +105,10 @@ export default function ExploreProjects() {
       </div>
 
       {/* Pagination UI */}
-      <div className="flex justify-center items-center mt-12 space-x-6 text-zinc-500 text-xs tracking-widest uppercase">
+      <div className="flex justify-center items-center mt-12 space-x-6 text-zinc-500 text-xs tracking-widest uppercase relative z-10">
         <button 
           onClick={() => currentPage > 1 && paginate(currentPage - 1)}
-          className={`hover:text-white transition ${currentPage === 1 ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`}
+          className={`hover:text-white transition-colors ${currentPage === 1 ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           PREV
         </button>
@@ -116,7 +117,7 @@ export default function ExploreProjects() {
           <button
             key={i}
             onClick={() => paginate(i + 1)}
-            className={`transition ${currentPage === i + 1 ? 'text-white font-bold underline underline-offset-4' : 'hover:text-zinc-300'}`}
+            className={`transition-colors ${currentPage === i + 1 ? 'text-white font-bold underline underline-offset-8' : 'hover:text-zinc-300 cursor-pointer'}`}
           >
             {i + 1}
           </button>
@@ -124,7 +125,7 @@ export default function ExploreProjects() {
 
         <button 
           onClick={() => currentPage < totalPages && paginate(currentPage + 1)}
-          className={`hover:text-white transition ${currentPage === totalPages ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`}
+          className={`hover:text-white transition-colors ${currentPage === totalPages ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           NEXT
         </button>
