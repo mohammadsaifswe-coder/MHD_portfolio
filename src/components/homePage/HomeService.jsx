@@ -197,7 +197,7 @@ const HomeService = () => {
                 }}
             />
 
-            <div className='absolute inset-0 bg-[#232323]/90 ' />
+            <div className='absolute inset-0 bg-[#232323]/90 backdrop-blur-xs ' />
             {/* backdrop-blur-md */}
 
             <div className='container w-full h-full flex flex-col justify-center gap-10 relative z-10 mx-auto'>
