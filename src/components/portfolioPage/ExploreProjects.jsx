@@ -60,21 +60,15 @@ export default function ExploreProjects() {
           EXPLORE
         </h2>
       </div>
-
-      {/* PARENT CONTAINER: No hardcoded min-height anymore */}
       <div className="relative max-w-6xl mx-auto">
         
-        {/* 1. GHOST GRID (Invisible)
-            This stays in the normal flow to push the container height 
-            dynamically based on the device screen size. */}
+     
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 invisible pointer-events-none" aria-hidden="true">
           {currentProjects.map((_, i) => (
-            <div key={`ghost-${i}`} className="aspect-[16/10]"></div>
+            <div key={`ghost-${i}`} className="aspect-16/10"></div>
           ))}
         </div>
 
-        {/* 2. ANIMATED GRID (Absolute)
-            This slides on top of the ghost grid space. */}
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentPage}
@@ -95,7 +89,7 @@ export default function ExploreProjects() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block overflow-hidden rounded-sm bg-zinc-900 aspect-[16/10]"
+                className="group relative block overflow-hidden rounded-sm bg-zinc-900 aspect-16/10"
               >
                 <img
                   src={project.imgUrl}
@@ -103,14 +97,12 @@ export default function ExploreProjects() {
                   className="w-full h-full object-cover transition-transform duration-500 object-top group-hover:scale-110"
                 />
                 
-                {/* Bottom Title Gradient */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/90 via-black/40 to-transparent">
                   <h3 className="text-white text-lg font-medium tracking-wide">
                     {project.title}
                   </h3>
                 </div>
 
-                {/* Hover Reveal with Blur */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/70 backdrop-blur-xs">
                   <h3 className="text-white text-2xl font-bold mb-2">{project.title}</h3>
                   <p className="text-green-500 text-sm uppercase tracking-widest border-b border-white/40 pb-1">
@@ -123,7 +115,6 @@ export default function ExploreProjects() {
         </AnimatePresence>
       </div>
 
-      {/* Pagination UI - Always stays below the grid now */}
       <div className="flex justify-center items-center mt-12 space-x-6 text-zinc-500 text-xs tracking-widest uppercase relative z-10">
         <button 
           onClick={() => currentPage > 1 && paginate(currentPage - 1)}
