@@ -7,6 +7,7 @@ import AboutPage from './pages/AboutPage'
 import Header from './components/global/Header'
 import ServicePage from './pages/ServicePage'
 import ContactPage from './pages/ContactPage'
+import PortfolioPage from './pages/PortfolioPage'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/service' element={<ServicePage />} />
+        <Route path='/portfolio' element={<PortfolioPage />} />
         <Route path='/contact' element={<ContactPage />} />
       </Routes>
       <Footer />
