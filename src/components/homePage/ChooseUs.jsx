@@ -1,6 +1,6 @@
 import React from 'react'
 import { MoveRight } from 'lucide-react'
-import Choose from '../../assets/home/choose.webp'
+const  Choose =  'https://res.cloudinary.com/dt9lwlxfb/image/upload/why_chose_home_rslibz.webp'
 import animeted from '../../assets/home/span.each-object.webp'
 
 export default function ChooseUs() {
@@ -62,8 +62,7 @@ export default function ChooseUs() {
                     {/* Description Paragraph */}
                     <div className="space-y-4 pt-4">
                         <p className="text-gray-400 text-sm leading-relaxed max-w-2xl">
-                            Collaborate with wireframe and development team on the proper execution of ideas.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                           Collaborate across industries to deliver strategic solutions that drive business growth. Helping companies scale through innovative services, digital transformation, and result-driven execution.
                         </p>
 
                         <button className="group relative flex items-center gap-3 bg-white hover:bg-green-500 text-black px-7 py-3 rounded-full font-bold text-sm transition-all duration-300 ease-in-out hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] active:scale-95 cursor-pointer ">
