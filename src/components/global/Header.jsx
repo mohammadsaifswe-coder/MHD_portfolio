@@ -68,6 +68,7 @@ export default function Header() {
                         <button
                             onClick={() => setIsOpen(true)}
                             className="md:hidden text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+                            aria-label="Open Menu"
                         >
                             <Menu size={24} />
                         </button>

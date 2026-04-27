@@ -289,7 +289,9 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                     ))}
                 </ul>
 
-                <button className='border rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors sm:static absolute bottom-1 left-5 '>
+                <button className='border rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors sm:static absolute bottom-1 left-5 '
+                aria-label="Start Project"
+                >
                     START A PROJECT
                 </button>
             </div>
@@ -298,6 +300,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                 <button
                     onClick={onNext}
                     className='cursor-pointer lg:p-6 p-3 rounded-full bg-black shadow-[inset_0px_0px_16px_0px_gray,0px_0px_2px_1px_black] active:scale-95 transition-transform'
+                    aria-label="Next Slide"
                 >
                     <FiArrowRight className='md:text-3xl text-xl' />
                 </button>
