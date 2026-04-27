@@ -11,7 +11,7 @@ export default function HeroName() {
 
                 <div className='flex flex-col relative'>
                     <span className='text-[6vw] md:text-[50px] lg:text-[70px] font-light leading-none opacity-90 wrap-break-word md:whitespace-nowrap'>
-                        Businesssolutions
+                         Business Solutions
                     </span>
 
                     <div
