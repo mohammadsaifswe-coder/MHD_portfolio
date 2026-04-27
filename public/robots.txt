@@ -12,4 +12,4 @@ Disallow: /admin/login
 Disallow: /admin/dashboard
 
 # Tell Google where your sitemap is (replace with your real domain)
-Sitemap: https://www.yourdomain.com/sitemap.xml
+Sitemap: https://www.kbkportfolio.com/sitemap.xml
