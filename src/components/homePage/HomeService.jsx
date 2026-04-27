@@ -3,11 +3,16 @@ import { FiArrowRight } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 // Assets
 import serbg from '../../assets/home/test.webp';
-import development from '../../assets/home/service/development.webp';
-import dmimg from '../../assets/home/service/digital-marketing.webp';
-import brand from '../../assets/home/service/brand-designing.webp';
-import media from '../../assets/home/service/media.webp';
-import uiux from '../../assets/home/service/uiux.webp';
+// import development from '../../assets/home/service/development.webp';
+// import dmimg from '../../assets/home/service/digital-marketing.webp';
+// import uiux from '../../assets/home/service/uiux.webp';
+// import brand from '../../assets/home/service/brand-designing.webp';
+// import media from '../../assets/home/service/media.webp';
+const brand = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/brand_zxmh48.webp';
+const media = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/media_oays7c.webp';
+const development = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/developer_rcaej1.webp';
+const dmimg = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/DM_oowr1k.webp';
+const uiux = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/UI_UX_f14pyv.webp';
 
 
 import ser21 from '../../assets/home/test-2.webp';
@@ -252,7 +257,7 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
         >
             <div className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center'>
                 <img
-                    className='w-full md:h-full overflow-hidden lg:object-cover object-contain rounded-xl'
+                    className='w-full md:h-fir overflow-hidden lg:object-cover object-contain rounded-xl'
                     style={imgStyle}
                     src={item.mainImg}
                     alt={item.title}
