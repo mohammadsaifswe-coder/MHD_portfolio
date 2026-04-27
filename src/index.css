@@ -1,10 +1,19 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+/* @import "@fontsource-variable/geist"; */
+/* You only need ONE of these. Use the index.css one as it's more explicit */
+@import "@fontsource-variable/geist/index.css"; 
 
-/* @custom-variant dark (&:is(.dark *)); */
+:root {
+  /* This tells your app to use the font you just imported */
+  font-family: "Geist Variable", sans-serif;
+}
 
+/* Optional: If you want to be extra safe for older browsers */
+body {
+  font-family: "Geist Variable", sans-serif;
+}
 .container{
     width: 90vw;
     /* max-width: 1400px; */

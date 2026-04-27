@@ -74,7 +74,7 @@ export default function SelectedWorks() {
     };
 
     return (
-        <section className="h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 smpt-10 pb-30 sm:pb-20">
+        <section className="min-h-150 h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 sm:pt-10 pb-30 sm:pb-20">
 
             {/* background */}
             <div
@@ -255,6 +255,7 @@ export default function SelectedWorks() {
                                     src={WORKS[page].img}
                                     className="w-full h-full object-contain rounded-2xl"
                                     alt="work preview"
+                                    loading="lazy"
                                 />
                             </motion.div>
                         </AnimatePresence>
