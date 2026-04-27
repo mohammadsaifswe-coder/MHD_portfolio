@@ -79,7 +79,7 @@ export default function SelectedWorks() {
             {/* background */}
             <div
                 className="absolute bottom-0 left-0 w-full h-[25vh] md:h-[30vh] lg:h-[45vh] bg-cover bg-top z-20 pointer-events-none"
-                style={{ backgroundImage: `url(${SelectedWorksBg})`,backgroundColor: '#000' }}
+                style={{ backgroundImage: `url(${SelectedWorksBg})` }}
             />
 
 
