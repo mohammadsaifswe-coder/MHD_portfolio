@@ -3,24 +3,24 @@ import React, { useEffect, useState } from 'react';
 export default function BlinkingAvailable() {
     const [city, setCity] = useState("");
 
-    useEffect(() => {
-        const fetchLocation = async () => {
-            try {
-                // ip-api.com is much more reliable for frontend-only requests
-                const response = await fetch("http://ip-api.com/json/");
-                const data = await response.json();
+    // useEffect(() => {
+    //     const fetchLocation = async () => {
+    //         try {
+    //             // ip-api.com is much more reliable for frontend-only requests
+    //             const response = await fetch("https://ip-api.com/json/");
+    //             const data = await response.json();
 
-                if (data && data.status === "success" && data.city) {
-                    setCity(`in ${data.city}`);
-                }
-            } catch (error) {
-                console.error("Location fetch failed:", error);
-                // Fallback: If it fails, we leave city empty so the UI doesn't look broken
-            }
-        };
+    //             if (data && data.status === "success" && data.city) {
+    //                 setCity(`in ${data.city}`);
+    //             }
+    //         } catch (error) {
+    //             console.error("Location fetch failed:", error);
+    //             // Fallback: If it fails, we leave city empty so the UI doesn't look broken
+    //         }
+    //     };
 
-        fetchLocation();
-    }, []);
+    //     fetchLocation();
+    // }, []);
 
     return (
         <div className='flex flex-row items-center gap-3 w-fit whitespace-nowrap border border-white/10 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm shadow-xl'>
