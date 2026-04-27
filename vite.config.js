@@ -12,12 +12,19 @@ export default defineConfig({
     cssInjectedByJsPlugin()
   ],
   build: {
-    sourcemap: true, 
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'framer-motion'],
+        },
+      },
+    },
   },
   server: {
-    port: 5173,      
+    port: 5173,
     strictPort: true,
-    host: true,    
+    host: true,
   },
   resolve: {
     alias: {
