@@ -74,12 +74,12 @@ export default function SelectedWorks() {
     };
 
     return (
-        <section className="min-h-150 h-fit w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 sm:pt-10 pb-30 sm:pb-20">
+        <section className="min-h-150 md:min-h-175 w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 sm:pt-10 pb-30 sm:pb-20">
 
             {/* background */}
             <div
                 className="absolute bottom-0 left-0 w-full h-[25vh] md:h-[30vh] lg:h-[45vh] bg-cover bg-top z-20 pointer-events-none"
-                style={{ backgroundImage: `url(${SelectedWorksBg})` }}
+                style={{ backgroundImage: `url(${SelectedWorksBg})`,backgroundColor: '#000' }}
             />
 
 
