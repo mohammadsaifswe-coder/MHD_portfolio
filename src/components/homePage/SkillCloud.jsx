@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { fetchSimpleIcons } from "react-icon-cloud";
-import { IconCloud } from "../ui/icon-cloud";
-// const IconCloud = React.lazy(() => import("../ui/icon-cloud").then(module => ({ default: module.IconCloud })));
+// import { IconCloud } from "../ui/icon-cloud";
+const IconCloud = React.lazy(() => import("../ui/icon-cloud").then(module => ({ default: module.IconCloud })));
 
 const slugs = [
     "typescript", "javascript", "react", "html5", "css3", "nodedotjs",
@@ -61,14 +61,14 @@ export default function SkillCloud() {
     return (
         <>
 
-            <div className="relative animate-float flex items-center justify-center w-full h-[40vh] md:h-[70vh] lg:h-[90vh] 2xl:h-[90vh]">
+            {/* <div className="relative animate-float flex items-center justify-center w-full h-[40vh] md:h-[70vh] lg:h-[90vh] 2xl:h-[90vh]">
                 <IconCloud images={whiteIconUrls} />
-            </div>
-            {/* <div className="relative w-full h-75 md:h-125 flex items-center justify-center overflow-hidden">
+            </div> */}
+            <div className="relative w-full h-75 md:h-125 flex items-center justify-center overflow-hidden">
                 <Suspense fallback={<div className="h-75 w-full" />}>
                     <IconCloud images={whiteIconUrls} />
                 </Suspense>
-            </div> */}
+            </div>
         </>
     );
 }
