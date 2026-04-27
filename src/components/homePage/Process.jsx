@@ -96,7 +96,7 @@ export default function Process() {
                   overflow-hidden mb-4 sm:mb-5 md:mb-6 bg-black/20
                   ${isActive ? 'border-white/60' : 'border-white/30'}`}
                 >
-                  <img src={step.icon} alt="" className="w-full h-full object-contain" />
+                  <img src={step.icon} alt={step?.icon} className="w-full h-full object-contain" />
                 </div>
 
                 <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 leading-snug text-white">

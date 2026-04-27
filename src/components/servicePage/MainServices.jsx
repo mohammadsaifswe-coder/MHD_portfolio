@@ -350,7 +350,7 @@ export default function MainServices() {
                                     }}
                                 >
                                     <div className="bg-black rounded-[39px] overflow-hidden h-full relative pointer-events-none">
-                                        <img src={bgover} alt="" className="absolute inset-0 z-0 w-full h-full object-cover" />
+                                        <img src={bgover} alt={bgover} className="absolute inset-0 z-0 w-full h-full object-cover" />
                                         <motion.img
                                             key={services[index].img}
                                             initial={{ opacity: 0, scale: 0.9 }}
