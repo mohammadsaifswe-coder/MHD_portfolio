@@ -60,7 +60,7 @@ export default function HomePage() {
                 <img
                     src={heroBg}
                     alt=""
-                    fetchpriority="high"
+                    fetchPriority="high"
                     loading="eager"
                     className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
                 />

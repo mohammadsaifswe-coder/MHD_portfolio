@@ -11,6 +11,9 @@ export default defineConfig({
     tailwindcss(),
     cssInjectedByJsPlugin()
   ],
+  build: {
+    sourcemap: true, 
+  },
   server: {
     port: 5173,      
     strictPort: true,
