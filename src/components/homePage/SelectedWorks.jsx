@@ -1,44 +1,44 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SelectedWorksBg from '../../assets/home/selected-works.webp'
-import development from '../../assets/home/development.webp'
-import digitaMarketing from '../../assets/home/digitaMarketing.webp'
-import media from '../../assets/home/media.webp'
-import uiux from '../../assets/home/uiux.webp'
-import graphicDesign from '../../assets/home/graphicDesign.webp'
+// import development from '../../assets/home/development.webp'
+// import digitaMarketing from '../../assets/home/digitaMarketing.webp'
+// import media from '../../assets/home/media.webp'
+// import uiux from '../../assets/home/uiux.webp'
+// import graphicDesign from '../../assets/home/graphicDesign.webp'
 
 const WORKS = [
 
     {
         id: 1,
         title: 'Development',
-        img: development,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/development_omhgm1.webp",
         tags: ['React/Next.js', 'E-Commerce', 'Cloud Architecture', 'Custom API']
     },
 
     {
         id: 2,
         title: 'UI/UX Design',
-        img: uiux,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/uiux_mj5ce6.webp",
         tags: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems']
     },
     {
         id: 3,
         title: 'Graphic Design',
-        img: graphicDesign,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/graphic_ztm0gk.webp",
         tags: ['Brand Identity', 'Typography', 'Print Media', 'Illustration', 'Typography']
     },
     {
         id: 4,
         title: 'Digital Marketing',
-        img: digitaMarketing,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/digitaMarketing_tchrbn.webp",
         tags: ['SEO & SEM', 'Social Strategy', 'Content Ads', 'Analytics', 'SEO & SEM']
     },
 
     {
         id: 5,
         title: 'Media Service',
-        img: media,
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/Group_54_1_ik2b7h.png",
         tags: ['Video Production', 'Photography', 'Motion Graphics', 'Post-Production']
     },
 
