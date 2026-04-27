@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bgImage from '../../assets/home/process/bg-green.webp';
 import Image1 from '../../assets/home/process/Image1.webp';
 import Image2 from '../../assets/home/process/Image2.webp';
@@ -32,6 +32,8 @@ const processSteps = [
 ];
 
 export default function Process() {
+
+  const [activeStep, setActiveStep] = useState(null);
   return (
     <section className="bg-black text-white pt-20 pb-10 md:pb-30 px-6 md:px-10  flex flex-col justify-center overflow-hidden h-full ">
 
@@ -43,74 +45,85 @@ export default function Process() {
 
 
 
-          {processSteps.map((step, index) => (
-            <div
-              key={step.id}
-              className={`
-                relative group w-full 
-                max-w-full sm:max-w-sm md:max-w-md lg:max-w-[33%]
-                
-                min-h-50 sm:min-h-70 md:min-h-90 
-                
-                border border-white/20 
-                p-4 sm:p-6 md:p-7 lg:p-8
-                
-                flex flex-col justify-between
-                transition-all duration-500 ease-in-out cursor-pointer
-                bg-[#0A0A0A] overflow-hidden
-                
-                z-10 hover:z-50
-                md:transform-[translate(var(--tx),var(--ty))]
-                hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-[1.02] md:hover:scale-105
+        {processSteps.map((step, index) => {
+        // Boolean check for this specific card
+        const isActive = activeStep === step.id;
+
+        return (
+          <div
+            key={step.id}
+            // Toggle active state on click
+            onClick={() => setActiveStep(isActive ? null : step.id)}
+            // Optional: Mouse users still get hover feel
+            onMouseEnter={() => setActiveStep(step.id)}
+            onMouseLeave={() => setActiveStep(null)}
+            
+            className={`
+              relative w-full max-w-full sm:max-w-sm md:max-w-md lg:max-w-[33%]
+              min-h-50 sm:min-h-70 md:min-h-90 
+              border p-4 sm:p-6 md:p-7 lg:p-8
+              flex flex-col justify-between
+              transition-all duration-500 ease-in-out cursor-pointer
+              bg-[#0A0A0A] overflow-hidden
+              
+              /* Logic-based classes */
+              ${isActive 
+                ? 'z-50 border-white/60 -translate-y-2 md:-translate-y-4 scale-[1.02] md:scale-105' 
+                : 'z-10 border-white/20'
+              }
+              
+              md:transform-[translate(var(--tx),var(--ty))]
             `}
-              style={{
-                '--tx': `${index * -20}px`,
-                '--ty': `${index * 20}px`,
-              }}
-            >
-              {/* Background */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 bg-cover bg-center scale-110 group-hover:scale-100"
-                style={{ backgroundImage: `url(${step.bgImage})` }}
-              />
+            style={{
+              '--tx': `${index * -20}px`,
+              '--ty': `${index * 20}px`,
+            }}
+          >
+            {/* Background - Controlled by isActive */}
+            <div
+              className={`absolute inset-0 transition-all duration-700 bg-cover bg-center 
+                ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
+              style={{ backgroundImage: `url(${step.bgImage})` }}
+            />
 
-
-              {/* Content */}
-              <div className="relative z-10 h-full flex flex-col">
-
-                {/* Top */}
-                <div className="mb-3 sm:mb-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16
-          rounded-full border border-white/30 
-          flex items-center justify-center 
-          overflow-hidden mb-4 sm:mb-5 md:mb-6 bg-black/20"
-                  >
-                    <img src={step.icon} alt="" className="w-full h-full object-contain" />
-                  </div>
-
-                  <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 leading-snug">
-                    {step.title}
-                  </h4>
-
-                  <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-snug">
-                    {step.subtitle}
-                  </p>
+            {/* Content Container */}
+            <div className="relative z-10 h-full flex flex-col">
+              
+              {/* Top Section */}
+              <div className="mb-3 sm:mb-4">
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16
+                  rounded-full border flex items-center justify-center transition-colors
+                  overflow-hidden mb-4 sm:mb-5 md:mb-6 bg-black/20
+                  ${isActive ? 'border-white/60' : 'border-white/30'}`}
+                >
+                  <img src={step.icon} alt="" className="w-full h-full object-contain" />
                 </div>
 
-                {/* Bottom */}
-                <div className="mt-auto pt-3 sm:pt-4 border-t border-white/20 flex items-end gap-2 sm:gap-3">
+                <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 leading-snug text-white">
+                  {step.title}
+                </h4>
 
-                  <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-none">
-                    {step.id}
-                  </span>
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-snug text-gray-300">
+                  {step.subtitle}
+                </p>
+              </div>
 
-                  <p className="text-[8px] sm:text-[9px] md:text-[14px] leading-tight   tracking-wideest">
-                    {step.description}
-                  </p>
-                </div>
+              {/* Bottom Section */}
+              <div className={`mt-auto pt-3 sm:pt-4 border-t flex items-end gap-2 sm:gap-3 transition-colors duration-500
+                ${isActive ? 'border-white/50 text-white' : 'border-white/20 text-gray-400'}`}>
+
+                <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-none">
+                  {step.id}
+                </span>
+
+                <p className="text-[8px] sm:text-[9px] md:text-[14px] leading-tight tracking-widest">
+                  {step.description}
+                </p>
               </div>
             </div>
-          ))}
+          </div>
+        );
+      })}
         </div>
       </div>
 
