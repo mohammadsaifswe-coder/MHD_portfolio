@@ -1,4 +1,14 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+
+const sitemapLinks = [
+  { name: 'Home', url: '/' },
+  { name: 'About', url: '/about' },
+  { name: 'Services', url: '/services' },
+  { name: 'Projects', url: '/project' },
+  { name: 'Contact', url: '/contact' },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,7 +17,7 @@ export default function Footer() {
     <footer className="bg-black text-white  py-16">
       <div className="container ">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 md:gap-8">
-          
+
           {/* Working Globally Indicator */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2">
@@ -23,13 +33,24 @@ export default function Footer() {
 
           {/* Sitemap Column */}
           <div className="flex gap-6">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-semibold">Sitemap</p>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-semibold">
+              Sitemap
+            </p>
             <ul className="flex flex-col gap-4 text-lg">
-              {['About', 'Works', 'Services', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase()}`} className="hover:text-[#07C42C] transition-colors duration-300">
-                    {item}
-                  </a>
+              {sitemapLinks.map((link) => (
+                <li key={link.name}>
+                  <NavLink
+                    to={link.url}
+                    // Use 'end' for the Home link so it doesn't stay active 
+                    // when you are on /about or /works
+                    end={link.url === '/'}
+                    className={({ isActive }) => `
+            transition-colors duration-300 
+            ${isActive ? 'text-[#07C42C] font-bold' : 'text-white hover:text-[#07C42C]'}
+          `}
+                  >
+                    {link.name}
+                  </NavLink>
                 </li>
               ))}
             </ul>

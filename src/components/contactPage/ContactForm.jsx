@@ -86,18 +86,8 @@ export default function ContactForm() {
             <h3 className="text-xl font-medium mb-8">Contact US</h3>
 
             <div className="space-y-8">
-              <div className="flex items-start gap-4 group">
-                <div className="p-1 border border-white rounded-full group-hover:border-green-500 transition-colors">
-                  <MapPin size={20} className="text-gray-400" />
-                </div>
-                <p className="text-sm text-gray-400 leading-relaxed max-w-60">
-                  H-No:2-1-8/4/1/NR, Suite 2A, Saraswathi Colony, Uppal,
-                  Hyderabad, Telangana, India - 500039.
 
-                </p>
-              </div>
 
-              <div className="bg-white h-px w-2/5"> </div>
 
               <div className="flex items-center gap-4 group cursor-pointer">
                 <div className="p-1 border border-white rounded-full group-hover:border-green-500 transition-colors">
@@ -114,6 +104,30 @@ export default function ContactForm() {
                   <Phone size={20} className="text-gray-400" />
                 </div>
                 <span className="text-sm text-gray-400">+91 81215 96699</span>
+              </div>
+              <div className="bg-white h-px w-2/5"> </div>
+
+
+              <div className="flex items-start gap-4 group">
+                <div className="p-1 border border-white rounded-full group-hover:border-green-500 transition-colors">
+                  <MapPin size={20} className="text-gray-400" />
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed max-w-60">
+                  H-No:2-1-8/4/1/NR, Suite 2A, Saraswathi Colony, Uppal,
+                  Hyderabad, Telangana, India - 500039.
+
+                </p>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="p-1 border border-white rounded-full group-hover:border-green-500 transition-colors">
+                  <MapPin size={20} className="text-gray-400" />
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed max-w-60">
+                  H-No:2-1-8/4/1/NR, Suite 2A, Saraswathi Colony, Uppal,
+                  Hyderabad, Telangana, India - 500039.
+
+                </p>
               </div>
             </div>
           </div>

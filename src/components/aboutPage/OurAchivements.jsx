@@ -49,7 +49,7 @@ export default function OurAchivements() {
 
                 {/* Achievements List */}
                 <div className="space-y-3">
-                    {achievements.map((item, index) => (
+                    {[...achievements].reverse().map((item, index) => (
                         <div
                             key={index}
                             className="group flex flex-wrap md:flex-nowrap items-center justify-between gap-4 bg-white/3 hover:bg-white/[0.07] border border-white/5 px-6 py-4 md:py-6 rounded-2xl transition-all duration-300"

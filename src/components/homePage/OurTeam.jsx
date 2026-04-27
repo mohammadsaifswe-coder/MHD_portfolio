@@ -11,7 +11,7 @@ const teamMembers = [
     { name: "Mr. Shiva Shankar", role: "Director", company: "KBK Broadcasting Pvt. Ltd" },
     { name: "Mr. Saif Mohammad", role: "Business Development Manager / CRM", company: "KBK Business Solutions Pvt Ltd" },
     { name: "Mr. Gaddam Harish", role: "HR Manager", company: "KBK Group" },
-    { name: "Mr. Nayan Dhongadi", role: "Web Developer", company: "KBK Group" },
+    { name: "Mr. Jaffer", role: "Manager", company: "Equinox IT Solutions" },
 ];
 
 export default function OurTeam() {

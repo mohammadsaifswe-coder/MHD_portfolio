@@ -38,7 +38,7 @@ export default function PortfolioBanner() {
                 <div className="relative w-fit md:my-24 my-5"  >
 
                     <h3 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-wider uppercase">
-                        Portfolio
+                       Recent Projects
                     </h3>
                     {/* <img src={astronaut} alt="nbg" className='absolute -top-22 -right-14 z-99 w-30 ' /> */}
                     <img src={nbg} alt="nbg" className='absolute top-0 right-0 -z-99 w-12' />

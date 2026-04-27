@@ -34,7 +34,7 @@ export default function AboutBanner() {
           ABOUT <span className="text-3xl md:text-5xl ">us</span>
         </h1>
         <p className="mt-6 text-gray-300 text-lg md:text-xl md:max-w-2/3 max-w-full font-light leading-relaxed">
-          KBK Business Solutions is a forward-thinking agency dedicated to delivering effective marketing and digital solutions. We help brands build a strong online identity and connect with their target audience through smart strategies and creative ideas.
+          KBK Business Solutions is a forward thinking agency dedicated to delivering effective marketing and digital solutions. We help brands build a strong online identity and connect with their target audience through smart strategies and creative ideas.
         </p>
       </div>
 

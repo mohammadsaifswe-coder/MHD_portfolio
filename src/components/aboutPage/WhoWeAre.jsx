@@ -70,7 +70,7 @@ export default function WhoWeAre() {
                     <div>
                         <h3 className="text-2xl font-semibold mb-4">Where Strategy Meets Creative Design</h3>
                         <p className="text-gray-400 text-sm leading-relaxed">
-                            We partner with forward-thinking brands to build data-driven strategies, engaging campaigns, and impactful digital experiences that deliver measurable results.
+                            We partner with forward thinking brands to build data-driven strategies, engaging campaigns, and impactful digital experiences that deliver measurable results.
 
                         </p>
                     </div>
