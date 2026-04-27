@@ -12,7 +12,7 @@ const WORKS = [
     {
         id: 1,
         title: 'Development',
-        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/development_omhgm1.webp",
+        img: "https://res.cloudinary.com/dt9lwlxfb/image/upload/Image_3_siutpb.png",
         tags: ['React/Next.js', 'E-Commerce', 'Cloud Architecture', 'Custom API']
     },
 
