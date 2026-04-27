@@ -20,7 +20,7 @@ export default function HomePage() {
         <>
 
             {/* hero section */}
-            <div
+            {/* <div
                 className="md:min-h-screen w-full bg-zinc-950 bg-cover bg-center bg-no-repeat overflow-x-hidden pt-5"
                 style={{ backgroundImage: `url(${heroBg})` }}
             >
@@ -49,36 +49,72 @@ export default function HomePage() {
                         <HeroName />
                     </div>
 
-                    {/* <div className="h-50"></div> */}
+        </div >
+            </div > */
+            }
+
+
+
+            <div className="relative md:min-h-screen w-full bg-zinc-950 overflow-x-hidden pt-5">
+                {/* 1. OPTIMIZED BACKGROUND IMAGE */}
+                <img
+                    src={heroBg}
+                    alt=""
+                    fetchpriority="high"
+                    loading="eager"
+                    className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+                />
+
+                {/* 2. CONTENT CONTAINER (Higher z-index) */}
+                <div className="container h-full relative z-10 mx-auto">
+                    <div className="flex flex-col md:flex-row justify-between items-start h-full ">
+
+                        <div className="flex justify-between items-center w-full md:w-fit">
+                            <YearRings />
+                            <div className="block md:hidden">
+                                <BlinkingAvailable />
+                            </div>
+                        </div>
+
+                        {/* This is a heavy component; ensure it is lazy loaded as discussed */}
+                        <SkillCloud />
+
+                        <div className="hidden md:block">
+                            <BlinkingAvailable />
+                        </div>
+                    </div>
+
+                    <div className="md:-mt-25">
+                        <HeroName />
+                    </div>
                 </div>
             </div>
-
             {/* selected works section */}
 
             <SelectedWorks />
 
             {/* Services section */}
 
-            <HomeService/>
+            <HomeService />
 
-            <Process/>
+            <Process />
 
-            <HomeAbout/>    
+            <HomeAbout />
 
-            <OurTeam/>
+            <OurTeam />
 
-            <ChooseUs/>
+            <ChooseUs />
 
-            <TechStack/>
+            <TechStack />
 
 
-            <Counter/>
+            <Counter />
 
-            <FAQ/>
+            <FAQ />
 
-            <HomeContact/>
+            <HomeContact />
 
-            
+
 
             {/* <div className="h-50 bg-gray-300/20"></div> */}
 
