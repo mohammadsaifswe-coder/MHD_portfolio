@@ -42,6 +42,7 @@ export default function OurTeam() {
                             initial={false}
                             animate={{
                                 backgroundColor: highlightedIndex === index ? "#e5e7eb" : "#000000",
+                                // We use a conditional for the main name, but standard gray for subtext
                                 color: highlightedIndex === index ? "#000000" : "#ffffff",
                             }}
                             transition={{ duration: 0.4 }}
@@ -50,10 +51,16 @@ export default function OurTeam() {
                             <h3 className="text-lg md:text-lg font-medium mb-2 leading-tight">
                                 {member.name}
                             </h3>
-                            <p className="text-xs uppercase tracking-wider text-gray-500 mb-1 font-semibold">
+
+                            {/* FIX 1: Change text-gray-500 to text-gray-400 (Passes 4.5:1 on Black) */}
+                            <p className={`text-xs uppercase tracking-wider mb-1 font-semibold transition-colors duration-400 ${highlightedIndex === index ? "text-zinc-800" : "text-gray-400"
+                                }`}>
                                 {member.role}
                             </p>
-                            <p className="text-[10px] uppercase tracking-widest text-gray-600">
+
+                            {/* FIX 2: Change text-gray-600 to text-gray-400 for better visibility at 10px */}
+                            <p className={`text-[10px] uppercase tracking-widest transition-colors duration-400 ${highlightedIndex === index ? "text-zinc-600" : "text-gray-400"
+                                }`}>
                                 {member.company}
                             </p>
                         </motion.div>
