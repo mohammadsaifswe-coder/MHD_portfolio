@@ -105,12 +105,12 @@ export default function WhoWeAre() {
                     <div className="bg-[#0f0f0f] border border-white/5 rounded-[32px] p-8 text-center">
                         <div className="mb-8">
                             <h2 className="text-5xl font-bold">10+</h2>
-                            <p className="text-gray-500 text-xs mt-2">Latest Projects Completed</p>
+                            <p className="text-gray-400 text-xs mt-2">Latest Projects Completed</p>
                         </div>
                         <div className="w-12 h-0.5 bg-red-600 mx-auto mb-8"></div>
                         <div>
                             <h2 className="text-5xl font-bold">98%</h2>
-                            <p className="text-gray-500 text-xs mt-2">Clients Satisfied and Repeating</p>
+                            <p className="text-gray-400 text-xs mt-2">Clients Satisfied and Repeating</p>
                         </div>
                     </div>
 

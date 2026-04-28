@@ -133,7 +133,7 @@ export default function OurExperts() {
 
                         {/* Content */}
                         <div className="relative z-10">
-                            <span className="text-gray-500 uppercase tracking-widest text-[10px] font-bold block mb-4">
+                            <span className="text-gray-400 uppercase tracking-widest text-[10px] font-bold block mb-4">
                                 Join Our Team
                             </span>
                             <h3 className="text-white text-2xl font-semibold mb-8 leading-snug">

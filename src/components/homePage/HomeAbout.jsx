@@ -45,7 +45,7 @@ export default function HomeAbout() {
                     </NavLink>
 
                     <div className="pt-8 w-full">
-                        <p className="text-gray-500 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium">Find me on</p>
+                        <p className="text-gray-400 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium">Find me on</p>
                         <div className="flex gap-4 justify-center lg:justify-start">
                             {[
                                 { Icon: FaInstagram, link: "https://www.instagram.com/bharathkakkireniofficial/", label: "Follow on Instagram" },

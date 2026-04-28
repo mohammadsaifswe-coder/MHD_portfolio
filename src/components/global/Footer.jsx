@@ -35,7 +35,7 @@ export default function Footer() {
 
           {/* Sitemap Column */}
           <div className="flex gap-6">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-semibold">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-semibold">
               Sitemap
             </p>
             <ul className="flex flex-col gap-4 text-lg">
