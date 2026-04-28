@@ -20,7 +20,7 @@ export default function Footer() {
 
           {/* Working Globally Indicator */}
           <div className="lg:col-span-2">
-              <img src={logo} alt="logo" width="150" height="50" className="h-auto w-32" />
+            <img src={logo} alt="logo" width="150" height="50" className="h-auto w-32" />
             <div className="flex items-center gap-2 ">
 
               <span className="relative flex h-2 w-2">
@@ -60,10 +60,73 @@ export default function Footer() {
           {/* Socials Column */}
           <div className="flex  gap-6">
             <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-semibold">Socials</span>
-            <ul className="flex flex-col gap-4 text-lg">
-              <li><a href="#" className="hover:text-[#07C42C] transition-colors duration-300">Twitter (X)</a></li>
-              <li><a href="#" className="hover:text-[#07C42C] transition-colors duration-300">Dribbble</a></li>
-              <li><a href="#" className="hover:text-[#07C42C] transition-colors duration-300">LinkedIn</a></li>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="https://www.facebook.com/kbkbusinesssolution"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#07C42C] transition-colors duration-300"
+                  aria-label="Visit our Facebook page"
+                >
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/kbkbusinesssolutions/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#07C42C] transition-colors duration-300"
+                  aria-label="Follow us on Instagram"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com/kbkbusinesssol"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#07C42C] transition-colors duration-300"
+                  aria-label="Follow us on Twitter X"
+                >
+                  Twitter (X)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/company/kbkbusinesssolutions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#07C42C] transition-colors duration-300"
+                  aria-label="Connect with us on LinkedIn"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/channel/UCWAuR4k7v4LW3bKvGkzDLFg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#07C42C] transition-colors duration-300"
+                  aria-label="Subscribe to our YouTube channel"
+                >
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://in.pinterest.com/KBKBusinessSolutions1/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#07C42C] transition-colors duration-300"
+                  aria-label="Follow us on Pinterest"
+                >
+                  Pinterest
+                </a>
+              </li>
             </ul>
           </div>
 
