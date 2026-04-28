@@ -77,13 +77,13 @@ export default function Expertise() {
           <div className="absolute w-72 h-72 bg-teal-500/20 blur-[120px] rounded-full" />
           
           {/* The Video Element */}
-          <div className="relative z-10 w-full max-w-md aspect-square rounded-full overflow-hidden border border-gray-700/50 ">
+          <div className="relative z-10 w-full aspect-square rounded-full overflow-hidden border border-gray-700/50 ">
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover scale-110"
+              className="w-full h-full object-cover scale-120"
               src={videoURL}
             />
           </div>
