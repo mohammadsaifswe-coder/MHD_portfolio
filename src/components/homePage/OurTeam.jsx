@@ -53,7 +53,7 @@ export default function OurTeam() {
                             </h3>
 
                             {/* FIX 1: Change text-gray-500 to text-gray-400 (Passes 4.5:1 on Black) */}
-                            <p className={`text-xs uppercase tracking-wider mb-1 font-semibold transition-colors duration-400 ${highlightedIndex === index ? "text-zinc-800" : "text-gray-400"
+                            <p className={`text-xs uppercase tracking-wider mb-1 font-semibold transition-colors duration-400 ${highlightedIndex === index ? "text-black" : "text-gray-400"
                                 }`}>
                                 {member.role}
                             </p>
