@@ -59,7 +59,7 @@ export default function Footer() {
 
           {/* Socials Column */}
           <div className="flex  gap-6">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-semibold">Socials</span>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-semibold">Socials</span>
             <ul className="flex flex-col gap-4 text-lg">
               <li><a href="#" className="hover:text-[#07C42C] transition-colors duration-300">Twitter (X)</a></li>
               <li><a href="#" className="hover:text-[#07C42C] transition-colors duration-300">Dribbble</a></li>

@@ -59,7 +59,7 @@ export default function OurTeam() {
                             </p>
 
                             {/* FIX 2: Change text-gray-600 to text-gray-400 for better visibility at 10px */}
-                            <p className={`text-[10px] uppercase tracking-widest transition-colors duration-400 ${highlightedIndex === index ? "text-zinc-600" : "text-gray-400"
+                            <p className={`text-[10px] uppercase tracking-widest transition-colors duration-400 ${highlightedIndex === index ? "text-black" : "text-gray-400"
                                 }`}>
                                 {member.company}
                             </p>
