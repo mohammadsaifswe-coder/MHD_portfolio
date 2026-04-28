@@ -20,7 +20,7 @@ export default function Footer() {
 
           {/* Working Globally Indicator */}
           <div className="lg:col-span-2">
-              <img src={logo} alt="logo" />
+              <img src={logo} alt="logo" width="150" height="50" className="h-auto w-32" />
             <div className="flex items-center gap-2 ">
 
               <span className="relative flex h-2 w-2">
