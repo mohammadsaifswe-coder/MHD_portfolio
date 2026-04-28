@@ -82,7 +82,7 @@ export default function AboutContact() {
                         
                         {/* Name */}
                         <div className="flex flex-col gap-2 group">
-                            <label className="text-xs uppercase tracking-widest text-gray-400">Name <span className='text-green-500'>*</span></label>
+                            <label htmlFor="name-input" className="text-xs uppercase tracking-widest text-gray-400">Name <span className='text-green-500'>*</span></label>
                             <input
                                 type="text"
                                 name="name"
@@ -94,7 +94,7 @@ export default function AboutContact() {
 
                         {/* Email */}
                         <div className="flex flex-col gap-2 group">
-                            <label className="text-xs uppercase tracking-widest text-gray-400">Email <span className='text-green-500'>*</span></label>
+                            <label htmlFor="email-input" className="text-xs uppercase tracking-widest text-gray-400">Email <span className='text-green-500'>*</span></label>
                             <input
                                 type="text" // Using text to handle custom email validation via regex on submit
                                 name="email"
@@ -106,7 +106,7 @@ export default function AboutContact() {
 
                         {/* Interest */}
                         <div className="flex flex-col gap-2 group relative">
-                            <label className="text-xs uppercase tracking-widest text-gray-400">You are interested in</label>
+                            <label htmlFor="intrest-input" className="text-xs uppercase tracking-widest text-gray-400">You are interested in</label>
                             <select
                                 name="interest"
                                 value={formData.interest}
@@ -122,7 +122,7 @@ export default function AboutContact() {
 
                         {/* Budget */}
                         <div className="flex flex-col gap-2 group relative">
-                            <label className="text-xs uppercase tracking-widest text-gray-400">Budget in INR</label>
+                            <label htmlFor="budget-input" className="text-xs uppercase tracking-widest text-gray-400">Budget in INR</label>
                             <select
                                 name="budget"
                                 value={formData.budget}
@@ -140,7 +140,7 @@ export default function AboutContact() {
 
                     {/* Details */}
                     <div className="flex flex-col gap-2 group pt-4">
-                        <label className="text-xs uppercase tracking-widest text-gray-400">Project details</label>
+                        <label htmlFor="details-input" className="text-xs uppercase tracking-widest text-gray-400">Project details</label>
                         <textarea
                             name="details"
                             value={formData.details}
@@ -154,6 +154,7 @@ export default function AboutContact() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10">
                         <button
                             type="submit"
+                            aria-label="Submit your message"
                             className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer"
                         >
                             Submit Message

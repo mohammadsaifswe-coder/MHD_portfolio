@@ -62,7 +62,7 @@ export default function HomeContact() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
 
                         <div className="flex flex-col gap-2 group">
-                            <label className="text-xs uppercase tracking-widest">Name <span className='text-green-500'>*</span></label>
+                            <label htmlFor="name-input" className="text-xs uppercase tracking-widest">Name <span className='text-green-500'>*</span></label>
                             <input
                                 type="text"
                                 name="name"
@@ -73,7 +73,7 @@ export default function HomeContact() {
                         </div>
 
                         <div className="flex flex-col gap-2 group">
-                            <label className="text-xs uppercase tracking-widest text-white">Email <span className='text-green-500'>*</span></label>
+                            <label htmlFor="email-input" className="text-xs uppercase tracking-widest text-white">Email <span className='text-green-500'>*</span></label>
                             <input
                                 type="email"
                                 name="email"
@@ -84,7 +84,7 @@ export default function HomeContact() {
                         </div>
 
                         <div className="flex flex-col gap-2 group relative">
-                            <label className="text-xs uppercase tracking-widest text-white">You are interested in</label>
+                            <label htmlFor="intrest-input" className="text-xs uppercase tracking-widest text-white">You are interested in</label>
                             <select
                                 name="interest"
                                 value={formData.interest}
@@ -99,7 +99,7 @@ export default function HomeContact() {
                         </div>
 
                         <div className="flex flex-col gap-2 group relative">
-                            <label className="text-xs uppercase tracking-widest text-white">Budget in INR</label>
+                            <label htmlFor="budget-input" className="text-xs uppercase tracking-widest text-white">Budget in INR</label>
                             <select
                                 name="budget"
                                 value={formData.budget}
@@ -116,7 +116,7 @@ export default function HomeContact() {
                     </div>
 
                     <div className="flex flex-col gap-2 group pt-4">
-                        <label className="text-xs uppercase tracking-widest text-white">Project details</label>
+                        <label htmlFor="detauks-input" className="text-xs uppercase tracking-widest text-white">Project details</label>
                         <textarea
                             name="details"
                             value={formData.details}
@@ -130,6 +130,7 @@ export default function HomeContact() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10">
                         <button
                             type="submit"
+                            aria-label="Submit your message"
                             className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer"
                         >
                             Submit Message
