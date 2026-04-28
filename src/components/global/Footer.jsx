@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import logo from '/kbk-logo.webp'
 
 const sitemapLinks = [
   { name: 'Home', url: '/' },
@@ -20,7 +20,9 @@ export default function Footer() {
 
           {/* Working Globally Indicator */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2">
+              <img src={logo} alt="logo" />
+            <div className="flex items-center gap-2 ">
+
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#07C42C] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#07C42C]"></span>
