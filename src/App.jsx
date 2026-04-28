@@ -8,11 +8,13 @@ import Header from './components/global/Header'
 import ServicePage from './pages/ServicePage'
 import ContactPage from './pages/ContactPage'
 import PortfolioPage from './pages/PortfolioPage'
+import ScrollToTop from './components/global/ScrollToTop'
 
 export default function App() {
   return (
     <>
       <Header />
+      <ScrollToTop/>
       <main id="main-content">
 
         <Routes>

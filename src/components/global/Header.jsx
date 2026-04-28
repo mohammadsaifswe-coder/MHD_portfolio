@@ -55,6 +55,7 @@ export default function Header() {
                                 <NavLink
                                     key={link.to}
                                     to={link.to}
+                                    aria-label="Links"
                                     className={({ isActive }) =>
                                         `text-sm tracking-widest transition-colors duration-300 hover:text-blue-400 ${isActive ? 'text-blue-400 font-bold' : 'text-gray-300'}`
                                     }
@@ -118,6 +119,7 @@ export default function Header() {
                                                 className={({ isActive }) =>
                                                     `text-2xl font-light tracking-[0.2em] transition-all ${isActive ? 'text-blue-400 pl-4 border-l-2 border-blue-400' : 'text-gray-400'}`
                                                 }
+                                                aria-label="links"
                                             >
                                                 {link.name}
                                             </NavLink>

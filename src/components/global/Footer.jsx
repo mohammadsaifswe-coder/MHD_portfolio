@@ -41,8 +41,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <NavLink
                     to={link.url}
-                    // Use 'end' for the Home link so it doesn't stay active 
-                    // when you are on /about or /works
+                    aria-label="footer link"
                     end={link.url === '/'}
                     className={({ isActive }) => `
             transition-colors duration-300 
