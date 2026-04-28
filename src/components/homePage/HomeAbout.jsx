@@ -48,16 +48,17 @@ export default function HomeAbout() {
                         <p className="text-gray-500 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium">Find me on</p>
                         <div className="flex gap-4 justify-center lg:justify-start">
                             {[
-                                { Icon: FaInstagram, link: "https://www.instagram.com/bharathkakkireniofficial/" },
-                                { Icon: FaLinkedin, link: "https://www.linkedin.com/in/bharathkumarkakkireni" },
-                                { Icon: X, link: "https://x.com/KakkireniB?s=20" },
-                                { Icon: Mail, link: "mailto:info@kbkbusinesssolutions.com" }
-                            ].map(({ Icon, link }, idx) => (
+                                { Icon: FaInstagram, link: "https://www.instagram.com/bharathkakkireniofficial/", label: "Follow on Instagram" },
+                                { Icon: FaLinkedin, link: "https://www.linkedin.com/in/bharathkumarkakkireni", label: "Connect on LinkedIn" },
+                                { Icon: X, link: "https://x.com/KakkireniB?s=20", label: "Follow on X (Twitter)" },
+                                { Icon: Mail, link: "mailto:info@kbkbusinesssolutions.com", label: "Send an Email" }
+                            ].map(({ Icon, link, label }, idx) => (
                                 <a
                                     key={idx}
                                     href={link}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label={label} // <--- THIS FIXES THE LIGHTHOUSE ERROR
                                     className="p-3 bg-zinc-900/50 border border-white/10 rounded-full hover:bg-green-600/30 hover:border-green-600 transition-all duration-300 group"
                                 >
                                     <Icon size={18} className="transition-colors group-hover:text-green-500" />
