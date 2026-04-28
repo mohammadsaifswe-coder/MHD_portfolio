@@ -38,8 +38,10 @@ export default function HomeAbout() {
                         to improve brand visibility and business performance.
                     </p>
 
-                    <NavLink to="/about" className="flex items-center gap-2 bg-gray-200 hover:bg-white text-black px-8 py-3 rounded-full font-bold transition-all duration-300 group cursor-pointer"  aria-label="About">
-                        Learn More <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <NavLink to="/about" className="flex items-center gap-2 bg-gray-200 hover:bg-white text-black px-8 py-3 rounded-full font-bold transition-all duration-300 group cursor-pointer" aria-label="Learn more about my development experience">
+                        Learn More
+                        <span className="sr-only">about my professional background</span>
+                        <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </NavLink>
 
                     <div className="pt-8 w-full">
