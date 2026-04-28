@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import heroBg from '../assets/banner-bg.webp'
 import YearRings from '../components/homePage/YearRings'
 import SkillCloud from '@/components/homePage/SkillCloud'
@@ -13,7 +13,8 @@ import Counter from '@/components/homePage/Counter'
 import FAQ from '@/components/homePage/FAQ'
 import HomeContact from '@/components/homePage/HomeContact'
 import TechStack from '@/components/homePage/TechStack'
-import OurTeam from '@/components/homePage/OurTeam'
+// import OurTeam from '@/components/homePage/OurTeam'
+const OurTeam = lazy(() => import('@/components/homePage/OurTeam'));
 
 export default function HomePage() {
     return (
@@ -101,7 +102,10 @@ export default function HomePage() {
 
             <HomeAbout />
 
-            <OurTeam />
+            {/* <OurTeam /> */}
+            <Suspense fallback={<div className="h-20 bg-black" />}>
+                <OurTeam />
+            </Suspense>
 
             <ChooseUs />
 

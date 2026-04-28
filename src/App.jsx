@@ -9,23 +9,28 @@ import ServicePage from './pages/ServicePage'
 import ContactPage from './pages/ContactPage'
 import PortfolioPage from './pages/PortfolioPage'
 import ScrollToTop from './components/global/ScrollToTop'
+import { domAnimation, LazyMotion } from 'framer-motion'
 
 export default function App() {
   return (
     <>
-      <Header />
-      <ScrollToTop/>
-      <main id="main-content">
 
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/about' element={<AboutPage />} />
-          <Route path='/services' element={<ServicePage />} />
-          <Route path='/project' element={<PortfolioPage />} />
-          <Route path='/contact' element={<ContactPage />} />
-        </Routes>
-      </main>
-      <Footer />
+      <LazyMotion features={domAnimation}>
+
+        <Header />
+        <ScrollToTop />
+        <main id="main-content">
+
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/about' element={<AboutPage />} />
+            <Route path='/services' element={<ServicePage />} />
+            <Route path='/project' element={<PortfolioPage />} />
+            <Route path='/contact' element={<ContactPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </LazyMotion>
     </>
   )
 }
