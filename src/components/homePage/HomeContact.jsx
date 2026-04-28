@@ -64,6 +64,7 @@ export default function HomeContact() {
                         <div className="flex flex-col gap-2 group">
                             <label htmlFor="name-input" className="text-xs uppercase tracking-widest">Name <span className='text-green-500'>*</span></label>
                             <input
+                                id="name-input"
                                 type="text"
                                 name="name"
                                 value={formData.name}
@@ -75,6 +76,7 @@ export default function HomeContact() {
                         <div className="flex flex-col gap-2 group">
                             <label htmlFor="email-input" className="text-xs uppercase tracking-widest text-white">Email <span className='text-green-500'>*</span></label>
                             <input
+                                id="email-input"
                                 type="email"
                                 name="email"
                                 value={formData.email}
@@ -86,6 +88,7 @@ export default function HomeContact() {
                         <div className="flex flex-col gap-2 group relative">
                             <label htmlFor="intrest-input" className="text-xs uppercase tracking-widest text-white">You are interested in</label>
                             <select
+                                id="intrest-input"
                                 name="interest"
                                 value={formData.interest}
                                 onChange={handleChange}
@@ -101,6 +104,7 @@ export default function HomeContact() {
                         <div className="flex flex-col gap-2 group relative">
                             <label htmlFor="budget-input" className="text-xs uppercase tracking-widest text-white">Budget in INR</label>
                             <select
+                                id="budget-input"
                                 name="budget"
                                 value={formData.budget}
                                 onChange={handleChange}
@@ -118,6 +122,7 @@ export default function HomeContact() {
                     <div className="flex flex-col gap-2 group pt-4">
                         <label htmlFor="detauks-input" className="text-xs uppercase tracking-widest text-white">Project details</label>
                         <textarea
+                            id="detauks-input"
                             name="details"
                             value={formData.details}
                             onChange={handleChange}

@@ -48,7 +48,7 @@ export default function AboutContact() {
         // 2. Success Logic
         console.log("Final Form Submission:", formData);
         toast.success("Message sent! We'll get back to you soon.");
-        
+
         // Reset form after successful submission
         setFormData({
             name: '',
@@ -62,7 +62,7 @@ export default function AboutContact() {
     return (
         <section className=" relative bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden py-20">
             {/* TOAST PROVIDER - Styled for Dark UI */}
-            <Toaster 
+            <Toaster
                 position="top-right"
                 toastOptions={{
                     style: {
@@ -79,11 +79,12 @@ export default function AboutContact() {
             <div className="relative z-10 w-full max-w-4xl flex flex-col items-center">
                 <form className="w-full space-y-10" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-                        
+
                         {/* Name */}
                         <div className="flex flex-col gap-2 group">
                             <label htmlFor="name-input" className="text-xs uppercase tracking-widest text-gray-400">Name <span className='text-green-500'>*</span></label>
                             <input
+                                id="name-input"
                                 type="text"
                                 name="name"
                                 value={formData.name}
@@ -96,6 +97,7 @@ export default function AboutContact() {
                         <div className="flex flex-col gap-2 group">
                             <label htmlFor="email-input" className="text-xs uppercase tracking-widest text-gray-400">Email <span className='text-green-500'>*</span></label>
                             <input
+                                id="email-input"
                                 type="text" // Using text to handle custom email validation via regex on submit
                                 name="email"
                                 value={formData.email}
@@ -108,6 +110,7 @@ export default function AboutContact() {
                         <div className="flex flex-col gap-2 group relative">
                             <label htmlFor="intrest-input" className="text-xs uppercase tracking-widest text-gray-400">You are interested in</label>
                             <select
+                                id="intrest-input"
                                 name="interest"
                                 value={formData.interest}
                                 onChange={handleChange}
@@ -124,6 +127,7 @@ export default function AboutContact() {
                         <div className="flex flex-col gap-2 group relative">
                             <label htmlFor="budget-input" className="text-xs uppercase tracking-widest text-gray-400">Budget in INR</label>
                             <select
+                                id="budget-input"
                                 name="budget"
                                 value={formData.budget}
                                 onChange={handleChange}
@@ -142,6 +146,7 @@ export default function AboutContact() {
                     <div className="flex flex-col gap-2 group pt-4">
                         <label htmlFor="details-input" className="text-xs uppercase tracking-widest text-gray-400">Project details</label>
                         <textarea
+                            id="details-input"
                             name="details"
                             value={formData.details}
                             onChange={handleChange}
