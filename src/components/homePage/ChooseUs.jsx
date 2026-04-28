@@ -2,6 +2,7 @@ import React from 'react'
 import { MoveRight } from 'lucide-react'
 const  Choose =  'https://res.cloudinary.com/dt9lwlxfb/image/upload/why_chose_home_rslibz.webp'
 import animeted from '../../assets/home/span.each-object.webp'
+import { NavLink } from 'react-router-dom'
 
 export default function ChooseUs() {
     return (
@@ -65,7 +66,7 @@ export default function ChooseUs() {
                            Collaborate across industries to deliver strategic solutions that drive business growth. Helping companies scale through innovative services, digital transformation, and result-driven execution.
                         </p>
 
-                        <button className="group relative flex items-center gap-3 bg-white hover:bg-green-500 text-black px-7 py-3 rounded-full font-bold text-sm transition-all duration-300 ease-in-out hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] active:scale-95 cursor-pointer ">
+                        <NavLink to="/contact" className="group w-fit relative flex items-center gap-3 bg-white hover:bg-green-500 text-black px-7 py-3 rounded-full font-bold text-sm transition-all duration-300 ease-in-out hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] active:scale-95 cursor-pointer ">
                             <span className="relative z-10">Get Started Now</span>
 
                             {/* Arrow Container with sliding animation */}
@@ -78,7 +79,7 @@ export default function ChooseUs() {
 
                             {/* Subtle Shine Effect on Hover */}
                             <div className="absolute inset-0 rounded-full bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
-                        </button>
+                        </NavLink>
                     </div>
                 </div>
 

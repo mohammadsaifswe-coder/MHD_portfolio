@@ -61,7 +61,7 @@ const TECH_DATA = {
         { name: 'Meta', logo: meta },
         { name: 'HubSpot', logo: hubspot },
         { name: 'Ahrefs', logo: ahrefs },
-        { name: 'Semrush', logo: semrush },
+        // { name: 'Semrush', logo: semrush },
         { name: 'Mailchimp', logo: mailchimp },
         { name: 'Brevo', logo: brevo },
         { name: 'Razorpay', logo: razorpay },

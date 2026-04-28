@@ -179,7 +179,10 @@ export default function SelectedWorks() {
                         <div className="w-full lg:w-2/5 items-center justify-center lg:justify-end hidden lg:flex">
                             <div className="flex items-baseline select-none">
                                 <span className="text-4xl lg:text-5xl font-semi-bold text-white/90">20</span>
-                                <span className="text-4xl lg:text-5xl font-semi-bold text-[#00C950]">26</span>
+                                {/* <span className="text-4xl lg:text-5xl font-semi-bold text-[#00C950]">26</span> */}
+                                <span className="text-4xl lg:text-5xl font-semi-bold text-[#00C950]">
+                                    {String(new Date().getFullYear()).slice(-2)}
+                                </span>
                             </div>
                         </div>
 

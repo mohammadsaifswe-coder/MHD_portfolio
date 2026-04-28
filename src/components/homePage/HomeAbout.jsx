@@ -3,6 +3,7 @@ import { Mail, MoveRight, X } from 'lucide-react';
 import bharatSirProf from '../../assets/home/Bharth-Sir-prof.webp';
 import Background from '../../assets/home/Background.webp';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 export default function HomeAbout() {
     return (
@@ -37,9 +38,9 @@ export default function HomeAbout() {
                         to improve brand visibility and business performance.
                     </p>
 
-                    <button className="flex items-center gap-2 bg-gray-200 hover:bg-white text-black px-8 py-3 rounded-full font-bold transition-all duration-300 group cursor-pointer">
+                    <NavLink to="/about" className="flex items-center gap-2 bg-gray-200 hover:bg-white text-black px-8 py-3 rounded-full font-bold transition-all duration-300 group cursor-pointer">
                         Learn More <MoveRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </NavLink>
 
                     <div className="pt-8 w-full">
                         <p className="text-gray-500 text-xs sm:text-sm mb-4 uppercase tracking-widest font-medium">Find me on</p>
