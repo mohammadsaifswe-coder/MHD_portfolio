@@ -2,24 +2,158 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const projects = [
-  // ... (Your 8 projects from the previous array)
-  { title: "Beauty Bay Lounge", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/1_e8qiq7.png", link: "https://beautybaylounge.com" },
-  { title: "Austin Event Centers", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951427/7_iwvzdh.png", link: "https://austineventcenters.com" },
-  { title: "Hari hara Kshethram", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774952634/4_m7fa5t.png", link: "https://hariharakshethram.com/index-new.php" },
-  { title: "Rainiersoft Global", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/3_pow629.png", link: "https://rainiersoftglobal.com" },
-  { title: "Urs Choice Gifts", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/4_ohfgle.png", link: "https://urschoicegifts.com" },
-  { title: "Bhavy's Kitchen", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/5_hon4vr.png", link: "https://bhavyskitchen.com" },
-  { title: "Lakhotia Education", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951427/6_wsfdsg.png", link: "https://www.lakhotiaedu.com" },
-  { title: "Sri Balaji Tax Services", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/2_dlpfrg.png", link: "https://sribalajitaxservices.com" },
-  // Adding mock Page 2 items for testing
-  { title: "Project Nine", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/1_e8qiq7.png", link: "#" },
-  { title: "Project Ten", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951427/7_iwvzdh.png", link: "#" },
-  { title: "Project Nine", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/1_e8qiq7.png", link: "#" },
-  { title: "Project Ten", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951427/7_iwvzdh.png", link: "#" },
-  { title: "Project Nine", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/1_e8qiq7.png", link: "#" },
-  { title: "Project Ten", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951427/7_iwvzdh.png", link: "#" },
-  { title: "Project Nine", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951426/1_e8qiq7.png", link: "#" },
-  { title: "Project Ten", imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/v1774951427/7_iwvzdh.png", link: "#" },
+
+  {
+    title: "Hari Hara kshetram",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/hhktemple_f3mpim.webp",
+    link: "https://hariharakshethram.com/"
+  },
+  {
+    title: "Beautybaylounge",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/Buautybaylounge_frumcs.webp",
+    link: "https://beautybaylounge.com/"
+  },
+  {
+    title: "Austin Event centers",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/austinevent_m4bci5.webp",
+    link: "https://austineventcenters.com/"
+  },
+  {
+    title: "KBK Multi Speciality Hospitals",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/kbkhospital_aowjom.webp",
+    link: "https://kbkhospitals.com/"
+  },
+  {
+    title: "Bhavy’s Kitchen",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/bhavyskitchen_zrzbbe.webp",
+    link: "https://bhavyskitchen.com/"
+  },
+  {
+    title: "Global pulse farms",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/globalspice_yvjzck.webp",
+    link: "https://globalpulse.farm/"
+  },
+  {
+    title: "Global Teq Training academy",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/globalteq_xvz6nq.webp",
+    link: "https://www.global-teq.com/"
+  },
+  {
+    title: "Global teq Overseas education",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/globaledu_shffqe.webp",
+    link: "https://globalteqedu.com/"
+  },
+  {
+    title: "Unipro",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/unipro_aojnnj.webp",
+    link: "https://www.uniprolimited.com/"
+  },
+  {
+    title: "Cibil dekho",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/cibil_v4m1kp.webp",
+    link: "https://cibildekho.com/"
+  },
+  {
+    title: "Vedha kidney & super speciality hospital",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/vedas_digp1i.webp",
+    link: "https://www.vedhahospitals.com/"
+  },
+  {
+    title: "Texas capital Parteners",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/texascapital_hicyjf.webp",
+    link: "https://txcapitalpartners.com/"
+  },
+  {
+    title: "Lakhotia college of design",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/lakhotia_fm4evv.webp",
+    link: "https://www.lakhotiaedu.com/"
+  },
+  {
+    title: "Neuro vascular",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/DRSURESH_juxmjb.webp",
+    link: "https://neuroandvascular.com/"
+  },
+  {
+    title: "Md.Asif cardiologist",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/drasif_sw2yuj.webp",
+    link: "https://drasifcardio.com/"
+  },
+  {
+    title: "Dento max",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/dentomax_ji4gu5.webp",
+    link: "https://dentomaxhyd.in/"
+  },
+  {
+    title: "Clear vision lasik & laser treatment",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/laservision_dtfgf0.webp",
+    link: "https://clearvisionlasik.co.in/"
+  },
+  {
+    title: "Dr.Khaleelullah (advanced orthopedic center)",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/drkh_dkylwq.webp",
+    link: "https://drkhaleelullaortho.com/"
+  },
+  {
+    title: "Feder path",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/feder_l21y32.webp",
+    link: "https://federpath.com/"
+  },
+  {
+    title: "Avani care solutions",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/avni_ofm7vg.webp",
+    link: "https://www.avanicaresolutions.com/"
+  },
+  {
+    title: "Central RX",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/central_vzdhoj.webp",
+    link: "https://centralrx.org/"
+  },
+  {
+    title: "Sridhaa (heart&endocrine)",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/Image_y5ztyz.webp",
+    link: "https://sridhaaheartandendocrinecentre.in/"
+  },
+  {
+    title: "Matic group",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/maticgrp_asitxz.webp",
+    link: "https://maticgroup.in/"
+  },
+  {
+    title: "Denso",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/denso_gt4tqz.webp",
+    link: "https://www.denso.com/global/en/"
+  },
+  {
+    title: "CISCO",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/cisco_jnfq4r.webp",
+    link: "https://www.cisco.com/"
+  },
+  {
+    title: "Thomson Reuters",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/cocounsel_g3unmd.webp",
+    link: "https://www.thomsonreuters.com/en"
+  },
+  {
+    title: "Sri Balaji Tax services",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/sbts_zu9niv.webp",
+    link: "https://sribalajitaxservices.com/"
+  },
+  {
+    title: "TeaWorld",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/teaworld_vmopth.webp",
+    link: "https://teaworldindia.co.in/"
+  },
+  {
+    title: "AAdhya’s life line",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/life_mvufu5.webp",
+    link: "https://aadhyaslifeline.com/"
+  },
+  {
+    title: "SBA tax consultants",
+    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/SBA_c8144v.webp",
+    link: "https://sbataxconsultants.com/"
+  },
+ 
 ];
 
 export default function ExploreProjects() {
@@ -54,15 +188,15 @@ export default function ExploreProjects() {
   };
 
   return (
-   <section className="bg-black py-20 px-6 sm:px-12 lg:px-24 min-h-screen overflow-hidden">
+    <section className="bg-black py-20 px-6 sm:px-12 lg:px-24 min-h-screen overflow-hidden">
       <div className="text-center mb-16">
         <h2 className="text-white text-4xl md:text-5xl font-bold tracking-widest uppercase">
           EXPLORE
         </h2>
       </div>
       <div className="relative max-w-6xl mx-auto">
-        
-     
+
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 invisible pointer-events-none" aria-hidden="true">
           {currentProjects.map((_, i) => (
             <div key={`ghost-${i}`} className="aspect-16/10"></div>
@@ -96,7 +230,7 @@ export default function ExploreProjects() {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 object-top group-hover:scale-110"
                 />
-                
+
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/90 via-black/40 to-transparent">
                   <h3 className="text-white text-lg font-medium tracking-wide">
                     {project.title}
@@ -116,14 +250,14 @@ export default function ExploreProjects() {
       </div>
 
       <div className="flex justify-center items-center mt-12 space-x-6 text-zinc-500 text-xs tracking-widest uppercase relative z-10">
-        <button 
+        <button
           onClick={() => currentPage > 1 && paginate(currentPage - 1)}
           className={`hover:text-white transition-colors ${currentPage === 1 ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`}
           disabled={currentPage === 1}
         >
           PREV
         </button>
-        
+
         {[...Array(totalPages)].map((_, i) => (
           <button
             key={i}
@@ -134,7 +268,7 @@ export default function ExploreProjects() {
           </button>
         ))}
 
-        <button 
+        <button
           onClick={() => currentPage < totalPages && paginate(currentPage + 1)}
           className={`hover:text-white transition-colors ${currentPage === totalPages ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`}
           disabled={currentPage === totalPages}
