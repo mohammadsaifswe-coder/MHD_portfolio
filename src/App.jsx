@@ -11,27 +11,32 @@ import PortfolioPage from './pages/PortfolioPage'
 import ScrollToTop from './components/global/ScrollToTop'
 import { domAnimation, LazyMotion } from 'framer-motion'
 import PopUpForm from './components/global/PopUpForm'
+import { FormProvider } from './context/FormContext'
 
 export default function App() {
   return (
     <>
-      {/* <PopUpForm/> */}
-      <LazyMotion features={domAnimation}>
+      <FormProvider>
 
-        <Header />
-        <ScrollToTop />
-        <main id="main-content">
+        <PopUpForm />
+        <LazyMotion features={domAnimation}>
 
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/about' element={<AboutPage />} />
-            <Route path='/services' element={<ServicePage />} />
-            <Route path='/project' element={<PortfolioPage />} />
-            <Route path='/contact' element={<ContactPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </LazyMotion>
+          <Header />
+          <ScrollToTop />
+          <main id="main-content">
+
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/about' element={<AboutPage />} />
+              <Route path='/services' element={<ServicePage />} />
+              <Route path='/project' element={<PortfolioPage />} />
+              <Route path='/contact' element={<ContactPage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </LazyMotion>
+      </FormProvider>
+
     </>
   )
 }

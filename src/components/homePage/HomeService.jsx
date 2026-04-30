@@ -17,6 +17,7 @@ const uiux = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/UI_UX_f14pyv.web
 
 import ser21 from '../../assets/home/test-2.webp';
 import ser22 from '../../assets/home/test.webp';
+import { useFormPopup } from '@/context/FormContext';
 
 const SERVICE_DATA = [
     {
@@ -64,6 +65,7 @@ const REAL_END_INDEX = TOTAL_SERVICE + REAL_SLIDE_COUNT - 1;
 
 // Updated Speed Variable
 // const SLOW_SPEED = 1800;
+
 
 const HomeService = () => {
     const [current, setCurrent] = useState(INITIAL_INDEX);
@@ -240,6 +242,8 @@ const HomeService = () => {
 };
 
 const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed }) => {
+    const { openForm } = useFormPopup();
+
     const slideStyle = {
         transform: `translateX(calc(-${current * 100}% + ${drag}%))`,
         transition: isTransition ? `transform ${speed}ms ease` : '',
@@ -289,8 +293,10 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
                     ))}
                 </ul>
 
-                <button className='border rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors sm:static absolute bottom-1 left-5 '
-                aria-label="Start Project"
+                <button
+                    onClick={openForm}
+                    className='border rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors sm:static absolute bottom-1 left-5 '
+                    aria-label="Start Project"
                 >
                     START A PROJECT
                 </button>

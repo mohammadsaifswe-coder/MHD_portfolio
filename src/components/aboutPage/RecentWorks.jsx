@@ -6,6 +6,7 @@ import RSG from '../../assets/about/RSG.webp'
 import BK from '../../assets/about/BK.webp'
 import UCG from '../../assets/about/UCG.webp'
 import counterBG from '../../assets/home/counterBG.webp'
+import { useFormPopup } from '@/context/FormContext';
 
 const projects = [
     { id: 1, img: BBL, title: "Beauty Bay Lounge", link: "https://beautybaylounge.com/" },
@@ -19,6 +20,8 @@ const projects = [
 ];
 
 export default function RecentWorks() {
+    const { openForm } = useFormPopup();
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const scrollRef = useRef(null);
 
@@ -174,12 +177,13 @@ export default function RecentWorks() {
                                     Let's make something great work together.
                                 </p>
                                 <div className="hidden sm:block w-px h-4 bg-white/20" />
-                                <a
-                                    href="#"
-                                    className="text-green-500 font-bold hover:text-green-400 transition-colors tracking-tight text-sm md:text-base"
+                                <button
+                                    onClick={openForm}
+                                    aria-label="Get Free Quote"
+                                    className="text-green-500 font-bold hover:text-green-400 transition-colors tracking-tight text-sm md:text-base cursor-pointer"
                                 >
                                     Get Free Quote
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>

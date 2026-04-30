@@ -1,41 +1,39 @@
 import React, { useState } from 'react';
 import { X, User, Mail, Briefcase, MessageSquare, ArrowRight } from 'lucide-react';
+import { useFormPopup } from '../../context/FormContext';
 
 export default function PopUpForm() {
-  const [isOpen, setIsOpen] = useState(true);
+  const {isOpen, closeForm ,openForm} =useFormPopup();
 
-  const toggleForm = () => setIsOpen(!isOpen);
+  // if (!isOpen) return null;
 
-  // Function to handle clicking the backdrop
-  const handleBackdropClick = (e) => {
-    // This ensures that if the user clicks the dark area, the form closes
-    setIsOpen(false);
-  };
+  // const toggleForm = () => setIsOpen(!isOpen);
+
+  // // Function to handle clicking the backdrop
+  // const handleBackdropClick = (e) => {
+  //   // This ensures that if the user clicks the dark area, the form closes
+  //   setIsOpen(false);
+  // };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gray-950">
+    <div className="relative flex items-center justify-center bg-gray-950">
       {/* Trigger Button */}
-      <button 
-        onClick={() => setIsOpen(true)}
+      {/* <button 
+        onClick={openForm}
         className="px-8 py-4 bg-emerald-500 text-gray-900 font-bold rounded-full hover:scale-105 transition-transform shadow-lg shadow-emerald-500/20"
       >
         Contact Our Agency
-      </button>
+      </button> */}
 
-      {/* OVERLAY / BACKDROP 
-         We attach the close function here.
-      */}
+     
       <div 
         className={`fixed inset-0 bg-black/80 backdrop-blur-md z-8888 transition-opacity duration-500 ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
-        onClick={handleBackdropClick} // <--- Closes when clicking outside
+        onClick={closeForm}
       >
         
-        {/* FORM CONTAINER 
-           We use e.stopPropagation() so clicking inside the form 
-           doesn't trigger the backdrop's onClick.
-        */}
+       
         <div className={`fixed left-0 right-0 top-0 flex justify-center p-4 z-9999 transition-all duration-700 ease-out transform ${
           isOpen ? 'translate-y-12 opacity-100' : '-translate-y-full opacity-0'
         }`}>
@@ -47,7 +45,7 @@ export default function PopUpForm() {
             
             {/* Close Icon Button */}
             <button 
-              onClick={toggleForm}
+              onClick={closeForm}
               className="absolute top-5 right-5 text-gray-500 hover:text-emerald-400 transition-colors bg-white/5 p-2 rounded-full"
             >
               <X size={20} />
