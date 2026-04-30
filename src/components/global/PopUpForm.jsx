@@ -34,7 +34,7 @@ export default function PopUpForm() {
       >
         
        
-        <div className={`fixed left-0 right-0 top-0 flex justify-center p-4 z-9999 transition-all duration-700 ease-out transform ${
+        <div className={`fixed left-0 right-0 -top-10 sm:top-0 flex justify-center p-4 z-9999 transition-all duration-700 ease-out transform ${
           isOpen ? 'translate-y-12 opacity-100' : '-translate-y-full opacity-0'
         }`}>
           
@@ -60,7 +60,7 @@ export default function PopUpForm() {
               <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
                 Let's Build <br /> <span className="text-emerald-500">Something Amazing</span>
               </h2>
-              <p className="text-gray-400 text-lg leading-relaxed">
+              <p className="text-gray-400 text-lg leading-relaxed hidden sm:block">
                 Transform your vision into reality with cutting-edge technology and premium design.
               </p>
               <div className="flex items-center space-x-6 text-[10px] text-emerald-400/70 font-black uppercase tracking-tighter">
