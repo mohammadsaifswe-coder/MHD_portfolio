@@ -1,6 +1,9 @@
+import { useFormPopup } from '@/context/FormContext';
 import React from 'react'
 
 export default function HeroName() {
+        const { openForm } = useFormPopup();
+    
     return (
         <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
 
@@ -11,7 +14,7 @@ export default function HeroName() {
 
                 <div className='flex flex-col relative'>
                     <span className='text-[6vw] md:text-[50px] lg:text-[70px] font-light leading-none opacity-90 wrap-break-word md:whitespace-nowrap'>
-                         Business Solutions
+                        Business Solutions
                     </span>
 
                     <div
@@ -31,7 +34,11 @@ export default function HeroName() {
 
 
             <button
+                onClick={openForm}
+                aria-label="Start Project"
+
                 className="
+                cursor-pointer
         border text-white rounded-md
         px-4 py-2
         text-sm md:text-base
