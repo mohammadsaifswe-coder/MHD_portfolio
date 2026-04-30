@@ -10,11 +10,12 @@ import ContactPage from './pages/ContactPage'
 import PortfolioPage from './pages/PortfolioPage'
 import ScrollToTop from './components/global/ScrollToTop'
 import { domAnimation, LazyMotion } from 'framer-motion'
+import PopUpForm from './components/global/PopUpForm'
 
 export default function App() {
   return (
     <>
-
+      {/* <PopUpForm/> */}
       <LazyMotion features={domAnimation}>
 
         <Header />
