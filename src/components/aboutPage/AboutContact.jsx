@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import counterBG from '../../assets/home/counterBG.webp';
+import { handleUniversalSubmit } from '@/lib/formHandlers';
 
 export default function AboutContact() {
-    const [formData, setFormData] = useState({
+    const initialState = {
         name: '',
         email: '',
-        interest: 'Web Development',
+        service: 'Web Development', // Using 'service' to match your EmailJS template
         budget: 'Select range',
         details: ''
-    });
+    };
+
+    const [formData, setFormData] = useState(initialState);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Strict blocking: prevents user from even typing these characters
+        // Prevent injection/breakage characters
         const blockedChars = /[<>!#?*]/g;
         const sanitizedValue = value.replace(blockedChars, "");
 
@@ -23,7 +26,6 @@ export default function AboutContact() {
             [name]: sanitizedValue
         }));
 
-        // Optional: show a small warning in console or a toast if they try to use blocked chars
         if (value !== sanitizedValue) {
             toast.error("Special characters are blocked for security", { id: 'blocked-char' });
         }
@@ -32,36 +34,23 @@ export default function AboutContact() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // 1. Validation Logic
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!formData.name.trim()) {
-            return toast.error("Please enter your name");
-        }
-        if (!emailPattern.test(formData.email)) {
-            return toast.error("Please enter a valid email address");
-        }
-        if (formData.budget === 'Select range') {
-            return toast.error("Please select a budget range");
-        }
-
-        // 2. Success Logic
-        console.log("Final Form Submission:", formData);
-        toast.success("Message sent! We'll get back to you soon.");
-
-        // Reset form after successful submission
-        setFormData({
-            name: '',
-            email: '',
-            interest: 'Web Development',
-            budget: 'Select range',
-            details: ''
+        // Let handleUniversalSubmit deal with the EmailJS logic and validation
+        handleUniversalSubmit({
+            e,
+            formData,
+            setFormData,
+            setIsSubmitting,
+            initialState,
+            formName: "About Page Contact Form",
+            onSuccess: () => {
+                // console.log("Form submitted from About Page");
+            }
         });
     };
 
     return (
-        <section className=" relative bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden py-20">
-            {/* TOAST PROVIDER - Styled for Dark UI */}
+        <section className="relative bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden py-20">
+            {/* TOAST PROVIDER - Consistent Dark UI */}
             <Toaster
                 position="top-right"
                 toastOptions={{
@@ -82,8 +71,11 @@ export default function AboutContact() {
 
                         {/* Name */}
                         <div className="flex flex-col gap-2 group">
-                            <label htmlFor="name-input" className="text-xs uppercase tracking-widest text-gray-400">Name <span className='text-green-500'>*</span></label>
+                            <label htmlFor="name-input" className="text-xs uppercase tracking-widest text-gray-400">
+                                Name <span className='text-green-500'>*</span>
+                            </label>
                             <input
+                                required
                                 id="name-input"
                                 type="text"
                                 name="name"
@@ -95,10 +87,13 @@ export default function AboutContact() {
 
                         {/* Email */}
                         <div className="flex flex-col gap-2 group">
-                            <label htmlFor="email-input" className="text-xs uppercase tracking-widest text-gray-400">Email <span className='text-green-500'>*</span></label>
+                            <label htmlFor="email-input" className="text-xs uppercase tracking-widest text-gray-400">
+                                Email <span className='text-green-500'>*</span>
+                            </label>
                             <input
+                                required
                                 id="email-input"
-                                type="text" // Using text to handle custom email validation via regex on submit
+                                type="email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -106,13 +101,13 @@ export default function AboutContact() {
                             />
                         </div>
 
-                        {/* Interest */}
+                        {/* Service (Formerly Interest) */}
                         <div className="flex flex-col gap-2 group relative">
-                            <label htmlFor="intrest-input" className="text-xs uppercase tracking-widest text-gray-400">You are interested in</label>
+                            <label htmlFor="service-input" className="text-xs uppercase tracking-widest text-gray-400">You are interested in</label>
                             <select
-                                id="intrest-input"
-                                name="interest"
-                                value={formData.interest}
+                                id="service-input"
+                                name="service"
+                                value={formData.service}
                                 onChange={handleChange}
                                 className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pr-8 text-white"
                             >
@@ -146,6 +141,7 @@ export default function AboutContact() {
                     <div className="flex flex-col gap-2 group pt-4">
                         <label htmlFor="details-input" className="text-xs uppercase tracking-widest text-gray-400">Project details</label>
                         <textarea
+                            required
                             id="details-input"
                             name="details"
                             value={formData.details}
@@ -158,15 +154,16 @@ export default function AboutContact() {
 
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10">
                         <button
+                            disabled={isSubmitting}
                             type="submit"
                             aria-label="Submit your message"
-                            className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer"
+                            className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            Submit Message
+                            {isSubmitting ? "Sending..." : "Submit Message"}
                         </button>
 
                         <div className="text-sm font-light text-white">
-                            say hello — <a href="mailto:hello@kbkbusinesssolutions.com" className="text-[#07C42C] hover:underline transition-all">hello@kbkbusinesssolutions.com</a>
+                            say hello — <a href="mailto:sales@kbkbusinesssolutions.com" className="text-[#07C42C] hover:underline transition-all">sales@kbkbusinesssolutions.com</a>
                         </div>
                     </div>
                 </form>
