@@ -104,7 +104,19 @@ export default function ContactForm() {
                   <MapPin size={20} className="text-gray-400" />
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed max-w-60">
-                  H-No:2-1-8/4/1/NR, Suite 2A, Saraswathi Colony, Uppal, Hyderabad, Telangana, India - 500039.
+                  H-No:2-1-8/4/1/NR, Suite 2A, Saraswathi Colony, Uppal,
+                  Hyderabad, Telangana, India - 500039.
+
+                </p>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="p-1 border border-white rounded-full group-hover:border-green-500 transition-colors">
+                  <MapPin size={20} className="text-gray-400" />
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed max-w-60">
+                  8500 N Stemmons FWY, Suite 5080,Dallas ,TX 75247.
+
                 </p>
               </div>
             </div>
