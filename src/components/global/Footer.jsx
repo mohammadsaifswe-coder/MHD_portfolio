@@ -83,7 +83,7 @@ export default function Footer() {
                   Instagram
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a
                   href="https://x.com/kbkbusinesssol"
                   target="_blank"
@@ -93,7 +93,7 @@ export default function Footer() {
                 >
                   Twitter (X)
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a
                   href="https://www.linkedin.com/company/kbkbusinesssolutions"
