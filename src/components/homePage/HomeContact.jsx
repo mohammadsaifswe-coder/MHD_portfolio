@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import counterBG from '../../assets/home/counterBG.webp';
+import { handleUniversalSubmit } from '@/lib/formHandlers';
+import toast from 'react-hot-toast';
 
 export default function HomeContact() {
-
-
-    const [formData, setFormData] = useState({
+    const initialState = {
         name: '',
         email: '',
-        interest: 'Web Development',
+        service: 'Web Development',
         budget: 'Select range',
         details: ''
-    });
+    };
+
+    const [formData, setFormData] = useState(initialState);
+    // 1. Added Missing State
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
         const blockedChars = /[<>!#?*]/g;
-
         const sanitizedValue = value.replace(blockedChars, "");
 
         setFormData((prev) => ({
@@ -25,23 +27,33 @@ export default function HomeContact() {
         }));
 
         if (value !== sanitizedValue) {
-            console.warn("Special characters < and > are not allowed for security.");
+            toast.error("Special characters are not allowed for security.");
         }
-
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Final Form Submission:", formData);
+        
+        // 2. Pass the state and handlers to the universal function
+        handleUniversalSubmit({
+            e,
+            formData,
+            setFormData,
+            setIsSubmitting, // Now defined
+            initialState,
+            formName: "Home Page Contact Form",
+            onSuccess: () => {
+                console.log("Form successfully submitted from Home Page");
+            }
+        });
     };
 
-
     return (
-        <section className="contianer relative  bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
-
+        <section className="contianer relative bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
             <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
                 <img
                     src={counterBG}
-                    alt={counterBG}
+                    alt="Background Decor"
                     className="w-full max-w-4xl h-auto object-cover rotate-180 opacity-80 scale-100"
                     style={{
                         maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
@@ -51,7 +63,6 @@ export default function HomeContact() {
             </div>
 
             <div className="relative z-10 w-full max-w-4xl flex flex-col items-center">
-
                 <div className="text-center mb-16">
                     <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
                         Let’s start <br /> creating together
@@ -60,10 +71,10 @@ export default function HomeContact() {
 
                 <form className="w-full space-y-10" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-
                         <div className="flex flex-col gap-2 group">
                             <label htmlFor="name-input" className="text-xs uppercase tracking-widest">Name <span className='text-green-500'>*</span></label>
                             <input
+                                required
                                 id="name-input"
                                 type="text"
                                 name="name"
@@ -76,6 +87,7 @@ export default function HomeContact() {
                         <div className="flex flex-col gap-2 group">
                             <label htmlFor="email-input" className="text-xs uppercase tracking-widest text-white">Email <span className='text-green-500'>*</span></label>
                             <input
+                                required
                                 id="email-input"
                                 type="email"
                                 name="email"
@@ -86,20 +98,19 @@ export default function HomeContact() {
                         </div>
 
                         <div className="flex flex-col gap-2 group relative">
-                            <label htmlFor="intrest-input" className="text-xs uppercase tracking-widest text-white">You are interested in</label>
+                            <label htmlFor="service" className="text-xs uppercase tracking-widest text-white">You are interested in</label>
                             <select
-                                id="intrest-input"
-                                name="interest"
-                                value={formData.interest}
+                                id="service"
+                                name="service"
+                                value={formData.service}
                                 onChange={handleChange}
-                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pl-2  text-white"
+                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pl-2 text-white"
                             >
                                 <option className="bg-black" value="Web Development">Website Development</option>
                                 <option className="bg-black" value="UI/UX Design">UI/UX Design</option>
                                 <option className="bg-black" value="Brand Identity">Graphic design</option>
                                 <option className="bg-black" value="Digital Marketing">Digital Marketing</option>
                                 <option className="bg-black" value="Media Service">Media Service</option>
-
                             </select>
                             <span className="absolute right-0 bottom-4 pointer-events-none opacity-50 text-xs">▼</span>
                         </div>
@@ -123,9 +134,10 @@ export default function HomeContact() {
                     </div>
 
                     <div className="flex flex-col gap-2 group pt-4">
-                        <label htmlFor="detauks-input" className="text-xs uppercase tracking-widest text-white">Project details</label>
+                        <label htmlFor="details-input" className="text-xs uppercase tracking-widest text-white">Project details</label>
                         <textarea
-                            id="detauks-input"
+                            required
+                            id="details-input"
                             name="details"
                             value={formData.details}
                             onChange={handleChange}
@@ -137,11 +149,12 @@ export default function HomeContact() {
 
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10">
                         <button
+                            disabled={isSubmitting} // 3. Use isSubmitting to disable button
                             type="submit"
                             aria-label="Submit your message"
-                            className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer"
+                            className="border border-white px-8 py-3 rounded-lg text-xs font-normal uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            Submit Message
+                            {isSubmitting ? 'Sending...' : 'Submit Message'}
                         </button>
 
                         <div className="text-sm font-light text-white">
@@ -149,7 +162,6 @@ export default function HomeContact() {
                         </div>
                     </div>
                 </form>
-
             </div>
         </section>
     );
