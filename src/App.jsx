@@ -12,10 +12,13 @@ import ScrollToTop from './components/global/ScrollToTop'
 import { domAnimation, LazyMotion } from 'framer-motion'
 import PopUpForm from './components/global/PopUpForm'
 import { FormProvider } from './context/FormContext'
+import { Toaster } from 'react-hot-toast'
 
 export default function App() {
   return (
     <>
+
+      <Toaster position="top-center" reverseOrder="{false}" />
       <FormProvider>
 
         <PopUpForm />
