@@ -92,11 +92,14 @@ export default function HomeContact() {
                                 name="interest"
                                 value={formData.interest}
                                 onChange={handleChange}
-                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pr-8 text-white"
+                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pl-2  text-white"
                             >
-                                <option className="bg-black" value="Web Development">Web Development</option>
-                                <option className="bg-black" value="Brand Identity">Brand Identity</option>
+                                <option className="bg-black" value="Web Development">Website Development</option>
                                 <option className="bg-black" value="UI/UX Design">UI/UX Design</option>
+                                <option className="bg-black" value="Brand Identity">Graphic design</option>
+                                <option className="bg-black" value="Digital Marketing">Digital Marketing</option>
+                                <option className="bg-black" value="Media Service">Media Service</option>
+
                             </select>
                             <span className="absolute right-0 bottom-4 pointer-events-none opacity-50 text-xs">▼</span>
                         </div>
@@ -108,7 +111,7 @@ export default function HomeContact() {
                                 name="budget"
                                 value={formData.budget}
                                 onChange={handleChange}
-                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pr-8 text-white"
+                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pl-2 text-white"
                             >
                                 <option className="bg-black" value="Select range">Select range</option>
                                 <option className="bg-black" value="₹5k - ₹10k">₹5k - ₹10k</option>
@@ -142,7 +145,7 @@ export default function HomeContact() {
                         </button>
 
                         <div className="text-sm font-light text-white">
-                            say hello — <a href="mailto:hello@kbkbusinesssolutions.com" className="text-[#07C42C] hover:underline transition-all">hello@kbkbusinesssolutions.com</a>
+                            say hello — <a href="mailto:sales@kbkbusinesssolutions.com" className="text-[#07C42C] hover:underline transition-all">sales@kbkbusinesssolutions.com</a>
                         </div>
                     </div>
                 </form>

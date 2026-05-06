@@ -93,7 +93,9 @@ export default function ContactForm() {
                 <div className="p-1 border border-white rounded-full group-hover:border-green-500 transition-colors">
                   <Mail size={20} className="text-gray-400" />
                 </div>
-                <span className="text-sm text-gray-400">info@kbkbusinesssolutions.com</span>
+                <a href="mailto:sales@kbkbusinesssolutions.com"> <span className="text-sm text-gray-400">sales@kbkbusinesssolutions.com</span></a>
+
+
               </div>
 
               <div className="bg-white h-px w-2/5"> </div>
@@ -189,11 +191,13 @@ export default function ContactForm() {
                     name="interest"
                     value={formData.interest}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm appearance-none cursor-pointer"
+                    className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm pl-2 appearance-none cursor-pointer"
                   >
-                    <option className="bg-black">You are interested in</option>
-                    <option className="bg-black">Web Development</option>
-                    <option className="bg-black">UI/UX Design</option>
+                    <option className="bg-black" value="Web Development">Website Development</option>
+                    <option className="bg-black" value="UI/UX Design">UI/UX Design</option>
+                    <option className="bg-black" value="Brand Identity">Graphic design</option>
+                    <option className="bg-black" value="Digital Marketing">Digital Marketing</option>
+                    <option className="bg-black" value="Media Service">Media Service</option>
                   </select>
                   <div className="absolute right-0 bottom-4 pointer-events-none text-gray-600">▼</div>
                 </div>
@@ -204,11 +208,12 @@ export default function ContactForm() {
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm appearance-none cursor-pointer"
+                    className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm appearance-none cursor-pointer pl-2"
                   >
-                    <option className="bg-black">Budget in USD</option>
-                    <option className="bg-black">$1000 - $5000</option>
-                    <option className="bg-black">$5000+</option>
+                    <option className="bg-black" value="Select range">Select range</option>
+                    <option className="bg-black" value="₹5k - ₹10k">₹5k - ₹10k</option>
+                    <option className="bg-black" value="₹10k - ₹25k">₹10k - ₹25k</option>
+                    <option className="bg-black" value="₹25k+">₹25k+</option>
                   </select>
                   <div className="absolute right-0 bottom-4 pointer-events-none text-gray-600">▼</div>
                 </div>
@@ -234,7 +239,9 @@ export default function ContactForm() {
                   </button>
 
                   <p className="text-[12px] text-gray-500 tracking-wide">
-                    say hello - <span className="text-green-500 hover:underline cursor-pointer">hello@kbkbusinesssolutions.com</span>
+                    say hello -
+                    <a href="mailto:sales@kbkbusinesssolutions.com"><span className="text-green-500 hover:underline cursor-pointer">sales@kbkbusinesssolutions.com</span></a>
+                    
                   </p>
                 </div>
               </form>

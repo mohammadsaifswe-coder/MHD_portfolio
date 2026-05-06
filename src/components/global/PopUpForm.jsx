@@ -5,26 +5,10 @@ import { useFormPopup } from '../../context/FormContext';
 export default function PopUpForm() {
   const {isOpen, closeForm ,openForm} =useFormPopup();
 
-  // if (!isOpen) return null;
-
-  // const toggleForm = () => setIsOpen(!isOpen);
-
-  // // Function to handle clicking the backdrop
-  // const handleBackdropClick = (e) => {
-  //   // This ensures that if the user clicks the dark area, the form closes
-  //   setIsOpen(false);
-  // };
 
   return (
     <div className="relative flex items-center justify-center bg-gray-950">
-      {/* Trigger Button */}
-      {/* <button 
-        onClick={openForm}
-        className="px-8 py-4 bg-emerald-500 text-gray-900 font-bold rounded-full hover:scale-105 transition-transform shadow-lg shadow-emerald-500/20"
-      >
-        Contact Our Agency
-      </button> */}
-
+   
      
       <div 
         className={`fixed inset-0 bg-black/80 backdrop-blur-md z-8888 transition-opacity duration-500 ${
@@ -86,9 +70,10 @@ export default function PopUpForm() {
                 <select className="w-full bg-[#112222]/50 border border-emerald-900/40 rounded-xl py-4 pl-12 pr-4 text-gray-400 focus:outline-none focus:border-emerald-500/60 focus:bg-[#112222] transition-all appearance-none cursor-pointer">
                   <option>Select Project Type</option>
                   <option>Website Development</option>
-                  <option>Mobile App</option>
-                  <option>Branding & Design</option>
-                  <option>E-commerce</option>
+                  <option>UI/UX Desing</option>
+                  <option>Graphic Design</option>
+                  <option>Digital Marketing</option>
+                  <option>Media Service</option>
                 </select>
               </div>
 
