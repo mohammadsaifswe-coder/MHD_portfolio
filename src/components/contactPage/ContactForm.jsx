@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { handleUniversalSubmit } from '@/lib/formHandlers'; 
+import { handleUniversalSubmit } from '@/lib/formHandlers';
 
 export default function ContactForm() {
   const initialState = {
@@ -29,7 +29,7 @@ export default function ContactForm() {
     }
 
     if (sanitizedValue !== value) {
-        toast.error("Invalid character removed", { id: 'char-error' });
+      toast.error("Invalid character removed", { id: 'char-error' });
     }
 
     setFormData(prev => ({ ...prev, [name]: sanitizedValue }));
@@ -94,7 +94,10 @@ export default function ContactForm() {
                 <div className="p-1 border border-white rounded-full group-hover:border-green-500 transition-colors">
                   <Phone size={20} className="text-gray-400" />
                 </div>
-                <span className="text-sm text-gray-400">+91 81215 96699</span>
+                <div className="flex flex-col gap-2">
+                  <a href="tel:+91 83410-28666" className="text-sm text-gray-400">+91 83410-28666</a>
+                  <a href="tel:+91 81215-96699" className="text-sm text-gray-400">+91 81215-96699</a>
+                </div>
               </div>
 
               <div className="bg-white/10 h-px w-2/5"></div>
