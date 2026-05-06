@@ -6,7 +6,7 @@ export default function AboutContact() {
     const initialState = {
         name: '',
         email: '',
-        service: 'Web Development', // Using 'service' to match your EmailJS template
+        service: 'Web Development', 
         budget: 'Select range',
         details: ''
     };
@@ -17,7 +17,6 @@ export default function AboutContact() {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Prevent injection/breakage characters
         const blockedChars = /[<>!#?*]/g;
         const sanitizedValue = value.replace(blockedChars, "");
 
@@ -34,7 +33,6 @@ export default function AboutContact() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Let handleUniversalSubmit deal with the EmailJS logic and validation
         handleUniversalSubmit({
             e,
             formData,
@@ -50,7 +48,6 @@ export default function AboutContact() {
 
     return (
         <section className="relative bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden py-20">
-            {/* TOAST PROVIDER - Consistent Dark UI */}
             <Toaster
                 position="top-right"
                 toastOptions={{
