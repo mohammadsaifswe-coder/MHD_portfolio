@@ -36,37 +36,41 @@ export default function AboutContact() {
 
 
 
+
     const budgetRanges = {
         "Web Development": [
-            "₹15k - ₹30k",
-            "₹30k - ₹60k",
-            "₹60k+"
+            "₹40k - ₹60k",
+            "₹60k - ₹80k",
+            "₹80k - ₹1lakh",
+            "₹1lakh+"
         ],
 
         "UI/UX Design": [
             "₹10k - ₹20k",
             "₹20k - ₹40k",
-            "₹40k+"
+            "₹40k - ₹60k",
+            "₹60k+"
         ],
 
         "App Development": [
-            "₹5k - ₹10k",
-            "₹10k - ₹25k",
-            "₹25k+"
+            "₹3lakh - ₹6lakh",
+            "₹6lakh - ₹8lakh",
+            "₹8lakh+"
         ],
 
         "Digital Marketing": [
-            "₹10k - ₹25k / month",
-            "₹25k - ₹50k / month",
+            "₹30k - ₹40k / month",
+            "₹40k - ₹50k / month",
             "₹50k+ / month"
         ],
 
         "Media Service": [
-            "₹15k - ₹30k",
-            "₹30k - ₹60k",
-            "₹60k+"
+            "₹25k - ₹35k",
+            "₹35k - ₹45k",
+            "₹45k+"
         ]
     };
+
 
     const currentBudgetRanges = budgetRanges[formData.service] || [];
 
@@ -254,8 +258,8 @@ export default function AboutContact() {
                                                 setIsBudgetOpen(false);
                                             }}
                                             className={`w-full text-left px-4 py-3 text-sm cursor-pointer transition-colors ${formData.budget === range
-                                                    ? "bg-[#07C42C]/10 text-[#07C42C]"
-                                                    : "text-gray-300 hover:bg-white/10 hover:text-white"
+                                                ? "bg-[#07C42C]/10 text-[#07C42C]"
+                                                : "text-gray-300 hover:bg-white/10 hover:text-white"
                                                 }`}
                                         >
                                             {range}

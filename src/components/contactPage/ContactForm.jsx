@@ -42,33 +42,35 @@ export default function ContactForm() {
 
   const budgetRanges = {
     "Web Development": [
-      "₹15k - ₹30k",
-      "₹30k - ₹60k",
-      "₹60k+"
+      "₹40k - ₹60k",
+      "₹60k - ₹80k",
+      "₹80k - ₹1lakh",
+      "₹1lakh+"
     ],
 
     "UI/UX Design": [
       "₹10k - ₹20k",
       "₹20k - ₹40k",
-      "₹40k+"
+      "₹40k - ₹60k",
+      "₹60k+"
     ],
 
     "App Development": [
-      "₹5k - ₹10k",
-      "₹10k - ₹25k",
-      "₹25k+"
+      "₹3lakh - ₹6lakh",
+      "₹6lakh - ₹8lakh",
+      "₹8lakh+"
     ],
 
     "Digital Marketing": [
-      "₹10k - ₹25k / month",
-      "₹25k - ₹50k / month",
+      "₹30k - ₹40k / month",
+      "₹40k - ₹50k / month",
       "₹50k+ / month"
     ],
 
     "Media Service": [
-      "₹15k - ₹30k",
-      "₹30k - ₹60k",
-      "₹60k+"
+      "₹25k - ₹35k",
+      "₹35k - ₹45k",
+      "₹45k+"
     ]
   };
 
