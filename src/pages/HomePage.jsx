@@ -56,7 +56,7 @@ export default function HomePage() {
 
 
 
-            <div className="relative md:min-h-screen w-full bg-zinc-950 overflow-x-hidden pt-5">
+            <div className="relative w-full bg-zinc-950 overflow-x-hidden pt-5">
                 {/* 1. OPTIMIZED BACKGROUND IMAGE */}
                 <img
                     src={heroBg}

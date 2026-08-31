@@ -7,7 +7,7 @@ import astronaut from '../../assets/contact/astronaut.webp'
 
 export default function ContactBanner() {
     return (
-        <section className="relative w-full h-120 sm:h-150 overflow-hidden bg-black flex items-start sm:items-center pt-10 sm:pt-0 ">
+        <section className="relative w-full h-120 sm:h-130 overflow-hidden bg-black flex items-start sm:items-center pt-10 sm:pt-0 ">
 
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center opacity-100"

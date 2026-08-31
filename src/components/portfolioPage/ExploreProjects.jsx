@@ -123,11 +123,11 @@ const projects = [
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/denso_gt4tqz.webp",
     link: "https://www.denso.com/global/en/"
   },
-  {
-    title: "CISCO",
-    imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/cisco_jnfq4r.webp",
-    link: "https://www.cisco.com/"
-  },
+  // {
+  //   title: "CISCO",
+  //   imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/cisco_jnfq4r.webp",
+  //   link: "https://www.cisco.com/"
+  // },
   {
     title: "Thomson Reuters",
     imgUrl: "https://res.cloudinary.com/dt9lwlxfb/image/upload/cocounsel_g3unmd.webp",
@@ -188,8 +188,8 @@ export default function ExploreProjects() {
   };
 
   return (
-    <section className="bg-black py-20 px-6 sm:px-12 lg:px-24 min-h-screen overflow-hidden">
-      <div className="text-center mb-16">
+    <section className="bg-black py-16 px-6 sm:px-12 lg:px-24 min-h-screen overflow-hidden">
+      <div className="text-center mb-12">
         <h2 className="text-white text-4xl md:text-5xl font-bold tracking-widest uppercase">
           EXPLORE
         </h2>

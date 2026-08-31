@@ -4,7 +4,7 @@ import astronaut from '../../assets/portfolio/astronaut.webp'
 
 export default function PortfolioSection() {
     return (
-        <section className="bg-black text-white py-16 px-6 md:py-24">
+        <section className="bg-black text-white py-16 px-6 md:py-16">
             <div className="container">
                 {/* Small Label */}
                 <span className="text-[10px] uppercase tracking-[0.2em] mb-8 block">

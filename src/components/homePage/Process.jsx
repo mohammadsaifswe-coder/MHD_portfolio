@@ -35,7 +35,7 @@ export default function Process() {
 
   const [activeStep, setActiveStep] = useState(null);
   return (
-    <section className="bg-black text-white pt-20 pb-10 md:pb-30 px-6 md:px-10  flex flex-col justify-center overflow-hidden h-full ">
+    <section className="bg-black text-white pt-10 pb-10 md:pb-30 px-6 md:px-10  flex flex-col justify-center overflow-hidden h-full ">
 
       <div className="  container overflow-visible!">
 

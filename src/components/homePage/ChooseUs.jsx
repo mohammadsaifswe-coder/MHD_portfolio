@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 
 export default function ChooseUs() {
     return (
-        <section className="bg-black text-white py-16 flex items-center relative">
+        <section className="bg-black text-white py-12 flex items-center relative">
 
             {/* <div className="absolute z-990  left-[80vw] lg:left-0 bottom-[55%] lg:bottom-0 mt-30 animate-float">
 

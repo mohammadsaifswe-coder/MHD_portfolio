@@ -74,7 +74,7 @@ export default function SelectedWorks() {
     };
 
     return (
-        <section className="min-h-150 md:min-h-175 w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 sm:pt-10 pb-30 sm:pb-20">
+        <section className="min-h-150 md:min-h-176 w-full bg-linear-to-b from-black via-zinc-800 to-black/80 relative overflow-hidden flex items-center pt-10 sm:pt-1 pb-30 sm:pb-20">
 
             {/* background */}
             <div
