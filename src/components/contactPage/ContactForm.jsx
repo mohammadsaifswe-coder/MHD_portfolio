@@ -15,6 +15,8 @@ export default function ContactForm() {
   const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isBudgetOpen, setIsBudgetOpen] = useState(false);
+  const [isServiceOpen, setIsServiceOpen] = useState(false);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -198,29 +200,67 @@ export default function ContactForm() {
               </div>
 
               <div className="relative">
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={(e) => {
-                    handleChange(e);
-
-                    setFormData((prev) => ({
-                      ...prev,
-                      service: e.target.value,
-                      budget: ""
-                    }));
-
-                    setIsBudgetOpen(false);
-                  }}
-                  className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm appearance-none cursor-pointer"
+                {/* Custom Dropdown Button */}
+                <button
+                  type="button"
+                  id="service"
+                  onClick={() => setIsServiceOpen((prev) => !prev)}
+                  className="w-full bg-transparent border-b border-white/20 py-2 pr-4 text-left focus:border-[#07C42C] outline-none cursor-pointer text-sm text-white flex items-center justify-between"
                 >
-                  <option className="bg-black" value="Web Development">Website Development</option>
-                  <option className="bg-black" value="UI/UX Design">UI/UX Design</option>
-                  <option className="bg-black" value="App Development">App Development</option>
-                  <option className="bg-black" value="Digital Marketing">Digital Marketing</option>
-                  <option className="bg-black" value="Media Service">Media Service</option>
-                </select>
-                <div className="absolute right-0 bottom-4 pointer-events-none text-gray-600">▼</div>
+                  <span className={formData.service ? "text-gray-400 " : "text-gray-400"}>
+                    {formData.service || "Select service"}
+                  </span>
+                  <span className={`text-xs opacity-50 transition-transform duration-200 ${isServiceOpen ? "rotate-180" : ""}`}>
+                    ▼
+                  </span>
+                </button>
+
+                {/* Dropdown Options */}
+                {isServiceOpen && (
+                  <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-black border border-white/20 rounded-md overflow-hidden shadow-xl cursor-pointer">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          service: "",
+                          budget: ''
+                        }));
+                        setIsServiceOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-400 hover:bg-white/10 hover:text-white transition-colors"
+                    >
+                      Select service
+                    </button>
+
+                    {[
+                      "Web Development",
+                      "UI/UX Design",
+                      "App Development",
+                      "Digital Marketing",
+                      "Media Service"
+                    ].map((serviceItem) => (
+                      <button
+                        type="button"
+                        key={serviceItem}
+                        onClick={() => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            service: serviceItem,
+                            budget: ''
+                          }));
+                          setIsServiceOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 text-sm transition-colors cursor-pointer ${formData.service === serviceItem
+                          ? "bg-[#07C42C]/10 text-[#07C42C]"
+                          : "text-gray-300 hover:bg-white/10 hover:text-white"
+                          }`}
+                      >
+                        {serviceItem}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="relative">
@@ -275,8 +315,8 @@ export default function ContactForm() {
                           setIsBudgetOpen(false);
                         }}
                         className={`w-full text-left px-4 py-3 text-sm transition-colors cursor-pointer ${formData.budget === range
-                            ? "bg-[#07C42C]/10 text-[#07C42C]"
-                            : "text-gray-300 hover:bg-white/10 hover:text-white"
+                          ? "bg-[#07C42C]/10 text-[#07C42C]"
+                          : "text-gray-300 hover:bg-white/10 hover:text-white"
                           }`}
                       >
                         {range}
