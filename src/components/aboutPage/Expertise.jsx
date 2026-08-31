@@ -32,7 +32,7 @@ const services = [
 
 export default function Expertise() {
   return (
-    <section className="min-h-screen bg-black text-white py-20 px-6 md:px-12 lg:px-24 font-sans">
+    <section className=" bg-black text-white py-1 px-6 md:px-12 lg:px-24 font-sans">
       <div className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Column: Content */}

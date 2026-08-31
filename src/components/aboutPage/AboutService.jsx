@@ -26,7 +26,7 @@ const services = [
 
 export default function AboutService() {
     return (
-        <section className="bg-black text-white py-20">
+        <section className="bg-black text-white py-16">
 
             <div className="container">
 

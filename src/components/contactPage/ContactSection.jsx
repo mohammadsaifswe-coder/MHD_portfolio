@@ -2,14 +2,14 @@ import React from 'react'
 
 export default function ContactSection() {
     return (
-        <section className="bg-black text-white py-16 px-6 md:py-24">
+        <section className="bg-black text-white py-16 px-6 md:py-20">
             <div className="container">
                 {/* Small Label */}
                 <span className="text-[10px] uppercase tracking-[0.2em] mb-8 block">
                     Contact
                 </span>
                 {/* 1. Added 'flex' (fixed typo), 'w-full' and 'text-center' to help children align */}
-                <div className="flex flex-col justify-center items-center w-full min-h-[50vh]">
+                <div className="flex flex-col justify-center items-center w-full min-h-[40vh]">
 
                     <div className="w-full sm:w-[60%] flex flex-col items-center ">
 

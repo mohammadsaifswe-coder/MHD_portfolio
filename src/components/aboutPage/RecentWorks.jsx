@@ -61,7 +61,7 @@ export default function RecentWorks() {
     }, [totalDots]);
 
     return (
-        <section className="bg-black pb-10">
+        <section className="bg-black pb-10 pt-10">
             <div className="container mx-auto ">
                 {/* Header */}
                 <div className="text-center mb-12">
@@ -146,7 +146,7 @@ export default function RecentWorks() {
 
 
                 {/* Bottom CTA with Glow */}
-                <div className="relative h-80 w-full flex items-center justify-center overflow-hidden">
+                <div className="relative h-60 w-full flex items-center justify-center overflow-hidden">
                     {/* 1. Background Image with Masking */}
                     <div
                         className="absolute inset-0 pointer-events-none opacity-40"

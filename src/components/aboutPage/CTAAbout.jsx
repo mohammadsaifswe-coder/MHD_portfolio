@@ -4,7 +4,7 @@ import saturn from '../../assets/about/saturn.webp';
 
 export default function CTAAbout() {
     return (
-        <section className="relative w-full min-h-[70vh] py-24 px-4 bg-black overflow-hidden flex flex-col items-center justify-center">
+        <section className="relative w-full min-h-[50vh] py-16 px-4 bg-black overflow-hidden flex flex-col items-center justify-center">
             <div className="bg-linear-to-b from-black to-transparent z-99 h-20 w-full absolute top-0"></div>
             <div className="bg-linear-to-t from-black to-transparent z-99 h-20 w-full absolute bottom-0"></div>
 

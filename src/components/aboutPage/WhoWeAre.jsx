@@ -8,7 +8,7 @@ export default function WhoWeAre() {
     return (
         <section className="bg-black text-white pb-20 px-6 lg:px-20 overflow-hidden">
             {/* Header Content */}
-            <div className="flex flex-col items-center text-center mb-20">
+            <div className="flex flex-col items-center text-center mb-6">
                 <p className="text-xs uppercase tracking-[2px] text-white mb-6">Who We Are</p>
                 <div className="flex flex-col items-start md:items-center text-start md:text-center w-full px-4">
                     <h2 className="text-2xl font-normal max-w-5xl leading-tight md:leading-[1.2]">

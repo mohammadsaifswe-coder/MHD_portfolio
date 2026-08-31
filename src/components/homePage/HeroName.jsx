@@ -5,7 +5,7 @@ export default function HeroName() {
         const { openForm } = useFormPopup();
     
     return (
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-10 mt-8">
 
             <div className='text-white flex items-baseline gap-4 select-none'>
                 <span className='text-[18vw] md:text-[120px] lg:text-[150px] font-bold leading-none tracking-tighter'>

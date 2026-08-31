@@ -103,7 +103,7 @@ export default function TechStack() {
         return () => clearInterval(interval);
     }, [activeTab]);
     return (
-        <div className=" bg-black text-white py-16 px-4 font-sans">
+        <div className=" bg-black text-white py-12 px-4 font-sans">
             <div className="container mx-auto text-center">
                 <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-8">
                     Our Tech Stack

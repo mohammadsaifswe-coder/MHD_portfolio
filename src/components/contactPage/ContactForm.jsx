@@ -14,6 +14,7 @@ export default function ContactForm() {
 
   const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isBudgetOpen, setIsBudgetOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +36,48 @@ export default function ContactForm() {
     setFormData(prev => ({ ...prev, [name]: sanitizedValue }));
   };
 
+
+
+
+
+  const budgetRanges = {
+    "Web Development": [
+      "₹15k - ₹30k",
+      "₹30k - ₹60k",
+      "₹60k+"
+    ],
+
+    "UI/UX Design": [
+      "₹10k - ₹20k",
+      "₹20k - ₹40k",
+      "₹40k+"
+    ],
+
+    "App Development": [
+      "₹5k - ₹10k",
+      "₹10k - ₹25k",
+      "₹25k+"
+    ],
+
+    "Digital Marketing": [
+      "₹10k - ₹25k / month",
+      "₹25k - ₹50k / month",
+      "₹50k+ / month"
+    ],
+
+    "Media Service": [
+      "₹15k - ₹30k",
+      "₹30k - ₹60k",
+      "₹60k+"
+    ]
+  };
+
+  const currentBudgetRanges =
+    budgetRanges[formData.service] || [];
+
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,7 +95,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="relative bg-black text-white px-6 overflow-hidden pb-32">
+    <section className="relative bg-black text-white px-6 overflow-hidden pb-22">
       <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,#1a3d2c_0%,transparent_50%)] opacity-80 pointer-events-none" />
 
       <Toaster
@@ -68,7 +111,7 @@ export default function ContactForm() {
       />
 
       <div className="container mx-auto relative z-10">
-        <div className="text-center mb-20 pt-20">
+        <div className="text-center mb-20 pt-10">
           <h2 className="text-4xl md:text-6xl font-semibold tracking-tight leading-tight">
             Let’s start <br /> creating together
           </h2>
@@ -156,12 +199,22 @@ export default function ContactForm() {
                 <select
                   name="service"
                   value={formData.service}
-                  onChange={handleChange}
-                  className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm pl-2 appearance-none cursor-pointer"
+                  onChange={(e) => {
+                    handleChange(e);
+
+                    setFormData((prev) => ({
+                      ...prev,
+                      service: e.target.value,
+                      budget: ""
+                    }));
+
+                    setIsBudgetOpen(false);
+                  }}
+                  className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm appearance-none cursor-pointer"
                 >
                   <option className="bg-black" value="Web Development">Website Development</option>
                   <option className="bg-black" value="UI/UX Design">UI/UX Design</option>
-                  <option className="bg-black" value="Brand Identity">Graphic design</option>
+                  <option className="bg-black" value="App Development">App Development</option>
                   <option className="bg-black" value="Digital Marketing">Digital Marketing</option>
                   <option className="bg-black" value="Media Service">Media Service</option>
                 </select>
@@ -169,19 +222,68 @@ export default function ContactForm() {
               </div>
 
               <div className="relative">
-                <select
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-green-500 transition-colors text-gray-400 text-sm appearance-none cursor-pointer pl-2"
+                {/* Selected Budget */}
+                <button
+                  type="button"
+                  onClick={() => setIsBudgetOpen((prev) => !prev)}
+                  className="w-full bg-transparent border-b border-white/20 py-3 text-left focus:outline-none focus:border-green-500 transition-colors text-sm text-gray-400 cursor-pointer flex items-center justify-between"
                 >
-                  <option className="bg-black" value="Select range">Select range</option>
-                  <option className="bg-black" value="₹5k - ₹10k">₹5k - ₹10k</option>
-                  <option className="bg-black" value="₹10k - ₹25k">₹10k - ₹25k</option>
-                  <option className="bg-black" value="₹25k+">₹25k+</option>
-                </select>
-                <div className="absolute right-0 bottom-4 pointer-events-none text-gray-600">▼</div>
+                  <span className={formData.budget ? "text-white" : "text-gray-400"}>
+                    {formData.budget || "Select budget range"}
+                  </span>
+
+                  <span
+                    className={`text-gray-600 text-xs transition-transform duration-200 ${isBudgetOpen ? "rotate-180" : ""
+                      }`}
+                  >
+                    ▼
+                  </span>
+                </button>
+
+                {/* Dropdown */}
+                {isBudgetOpen && (
+                  <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-black border border-white/20 rounded-md overflow-hidden shadow-xl">
+
+                    {/* Default option */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          budget: ""
+                        }));
+                        setIsBudgetOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-400 hover:bg-white/10 hover:text-white transition-colors"
+                    >
+                      Select budget range
+                    </button>
+
+                    {/* Dynamic Budget Options */}
+                    {currentBudgetRanges.map((range) => (
+                      <button
+                        key={range}
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            budget: range
+                          }));
+
+                          setIsBudgetOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 text-sm transition-colors cursor-pointer ${formData.budget === range
+                            ? "bg-[#07C42C]/10 text-[#07C42C]"
+                            : "text-gray-300 hover:bg-white/10 hover:text-white"
+                          }`}
+                      >
+                        {range}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
+
 
               <div className="md:col-span-2">
                 <textarea

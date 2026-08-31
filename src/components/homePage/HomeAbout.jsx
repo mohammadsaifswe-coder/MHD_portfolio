@@ -23,7 +23,7 @@ export default function HomeAbout() {
                     </span>
 
                     <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl font-medium leading-tight mt-5">
-                        KBK Business Solutions – <br className="hidden sm:block" />
+                        KBK Business Solutions <br className="hidden sm:block" />
                         <span className="text-gray-300">Complete IT & Digital Growth Partner</span>
                     </h2>
 

@@ -15,6 +15,44 @@ export default function HomeContact() {
     const [formData, setFormData] = useState(initialState);
     // 1. Added Missing State
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isBudgetOpen, setIsBudgetOpen] = useState(false);
+
+
+
+    const budgetRanges = {
+        "Web Development": [
+            "₹15k - ₹30k",
+            "₹30k - ₹60k",
+            "₹60k+"
+        ],
+
+        "UI/UX Design": [
+            "₹10k - ₹20k",
+            "₹20k - ₹40k",
+            "₹40k+"
+        ],
+
+        "App Development": [
+            "₹5k - ₹10k",
+            "₹10k - ₹25k",
+            "₹25k+"
+        ],
+
+        "Digital Marketing": [
+            "₹10k - ₹25k / month",
+            "₹25k - ₹50k / month",
+            "₹50k+ / month"
+        ],
+
+        "Media Service": [
+            "₹15k - ₹30k",
+            "₹30k - ₹60k",
+            "₹60k+"
+        ]
+    };
+
+    const currentBudgetRanges = budgetRanges[formData.service] || [];
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -33,7 +71,7 @@ export default function HomeContact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         // 2. Pass the state and handlers to the universal function
         handleUniversalSubmit({
             e,
@@ -49,7 +87,7 @@ export default function HomeContact() {
     };
 
     return (
-        <section className="contianer relative bg-black text-white flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
+        <section className="contianer relative bg-black text-white flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
             <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
                 <img
                     src={counterBG}
@@ -103,12 +141,21 @@ export default function HomeContact() {
                                 id="service"
                                 name="service"
                                 value={formData.service}
-                                onChange={handleChange}
-                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pl-2 text-white"
+                                // onChange={handleChange}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+
+                                    setFormData(prev => ({
+                                        ...prev,
+                                        service: value,
+                                        budget: ''
+                                    }));
+                                }}
+                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg text-white"
                             >
                                 <option className="bg-black" value="Web Development">Website Development</option>
                                 <option className="bg-black" value="UI/UX Design">UI/UX Design</option>
-                                <option className="bg-black" value="Brand Identity">Graphic design</option>
+                                <option className="bg-black" value="App Development">App Development</option>
                                 <option className="bg-black" value="Digital Marketing">Digital Marketing</option>
                                 <option className="bg-black" value="Media Service">Media Service</option>
                             </select>
@@ -116,20 +163,79 @@ export default function HomeContact() {
                         </div>
 
                         <div className="flex flex-col gap-2 group relative">
-                            <label htmlFor="budget-input" className="text-xs uppercase tracking-widest text-white">Budget in INR</label>
-                            <select
-                                id="budget-input"
-                                name="budget"
-                                value={formData.budget}
-                                onChange={handleChange}
-                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pl-2 text-white"
+                            <label
+                                htmlFor="budget-input"
+                                className="text-xs uppercase tracking-widest text-gray-400"
                             >
-                                <option className="bg-black" value="Select range">Select range</option>
-                                <option className="bg-black" value="₹5k - ₹10k">₹5k - ₹10k</option>
-                                <option className="bg-black" value="₹10k - ₹25k">₹10k - ₹25k</option>
-                                <option className="bg-black" value="₹25k+">₹25k+</option>
-                            </select>
-                            <span className="absolute right-0 bottom-4 pointer-events-none opacity-50 text-xs">▼</span>
+                                Budget in INR
+                            </label>
+
+                            {/* Dropdown Button */}
+                            <button
+                                type="button"
+                                id="budget-input"
+                                onClick={() => setIsBudgetOpen((prev) => !prev)}
+                                className="w-full bg-transparent border-b border-white/20 py-2 text-left focus:border-[#07C42C] outline-none cursor-pointer text-lg text-white flex items-center justify-between"
+                            >
+                                <span
+                                    className={
+                                        formData.budget
+                                            ? "text-white"
+                                            : "text-gray-400"
+                                    }
+                                >
+                                    {formData.budget || "Select budget range"}
+                                </span>
+
+                                <span
+                                    className={`text-xs opacity-50 transition-transform duration-200 ${isBudgetOpen ? "rotate-180" : ""
+                                        }`}
+                                >
+                                    ▼
+                                </span>
+                            </button>
+
+                            {/* Dropdown Options */}
+                            {isBudgetOpen && (
+                                <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-black border border-white/20 rounded-md overflow-hidden shadow-xl cursor-pointer">
+
+                                    {/* Default option */}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                budget: ""
+                                            }));
+                                            setIsBudgetOpen(false);
+                                        }}
+                                        className="w-full text-left px-4 py-3 text-sm text-gray-400 hover:bg-white/10 hover:text-white transition-colors"
+                                    >
+                                        Select budget range
+                                    </button>
+
+                                    {/* Dynamic options */}
+                                    {currentBudgetRanges.map((range) => (
+                                        <button
+                                            type="button"
+                                            key={range}
+                                            onClick={() => {
+                                                setFormData((prev) => ({
+                                                    ...prev,
+                                                    budget: range
+                                                }));
+                                                setIsBudgetOpen(false);
+                                            }}
+                                            className={`w-full text-left px-4 py-3 text-sm transition-colors cursor-pointer ${formData.budget === range
+                                                ? "bg-[#07C42C]/10 text-[#07C42C]"
+                                                : "text-gray-300 hover:bg-white/10 hover:text-white"
+                                                }`}
+                                        >
+                                            {range}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 

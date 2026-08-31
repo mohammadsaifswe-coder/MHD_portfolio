@@ -63,7 +63,7 @@ export default function Counter() {
     return (
         <section
             ref={sectionRef}
-            className='relative w-full py-10 md:py-40 px-6 overflow-hidden bg-black'
+            className='relative w-full py-10 md:py-20 px-6 overflow-hidden bg-black'
         >
             {/* Background Glow/Image Wrapper */}
             {/* <div

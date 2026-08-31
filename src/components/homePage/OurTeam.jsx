@@ -27,7 +27,7 @@ export default function OurTeam() {
     }, []);
 
     return (
-        <section className="bg-black text-white py-20 px-4">
+        <section className="bg-black text-white py-12 px-4">
             <div className="container">
                 {/* Section Title */}
                 <h2 className="text-center text-2xl md:text-3xl font-semibold tracking-widest uppercase mb-16">

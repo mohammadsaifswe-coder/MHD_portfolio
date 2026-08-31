@@ -6,13 +6,16 @@ export default function AboutContact() {
     const initialState = {
         name: '',
         email: '',
-        service: 'Web Development', 
+        service: 'Web Development',
         budget: 'Select range',
         details: ''
     };
 
     const [formData, setFormData] = useState(initialState);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isBudgetOpen, setIsBudgetOpen] = useState(false);
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,6 +32,43 @@ export default function AboutContact() {
             toast.error("Special characters are blocked for security", { id: 'blocked-char' });
         }
     };
+
+
+
+
+    const budgetRanges = {
+        "Web Development": [
+            "₹15k - ₹30k",
+            "₹30k - ₹60k",
+            "₹60k+"
+        ],
+
+        "UI/UX Design": [
+            "₹10k - ₹20k",
+            "₹20k - ₹40k",
+            "₹40k+"
+        ],
+
+        "App Development": [
+            "₹5k - ₹10k",
+            "₹10k - ₹25k",
+            "₹25k+"
+        ],
+
+        "Digital Marketing": [
+            "₹10k - ₹25k / month",
+            "₹25k - ₹50k / month",
+            "₹50k+ / month"
+        ],
+
+        "Media Service": [
+            "₹15k - ₹30k",
+            "₹30k - ₹60k",
+            "₹60k+"
+        ]
+    };
+
+    const currentBudgetRanges = budgetRanges[formData.service] || [];
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -47,7 +87,7 @@ export default function AboutContact() {
     };
 
     return (
-        <section className="relative bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden py-20">
+        <section className="relative bg-black text-white flex flex-col items-center justify-center px-6 overflow-hidden py-16">
             <Toaster
                 position="top-right"
                 toastOptions={{
@@ -105,32 +145,124 @@ export default function AboutContact() {
                                 id="service-input"
                                 name="service"
                                 value={formData.service}
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+
+                                    setFormData(prev => ({
+                                        ...prev,
+                                        service: value,
+                                        budget: ''
+                                    }));
+                                }}
                                 className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pr-8 text-white"
                             >
-                                <option className="bg-black" value="Web Development">Web Development</option>
-                                <option className="bg-black" value="Brand Identity">Brand Identity</option>
+                                <option className="bg-black" value="Web Development">Website Development</option>
                                 <option className="bg-black" value="UI/UX Design">UI/UX Design</option>
+                                <option className="bg-black" value="App Development">App Development</option>
+                                <option className="bg-black" value="Digital Marketing">Digital Marketing</option>
+                                <option className="bg-black" value="Media Service">Media Service</option>
                             </select>
                             <span className="absolute right-0 bottom-4 pointer-events-none opacity-50 text-xs">▼</span>
                         </div>
 
                         {/* Budget */}
-                        <div className="flex flex-col gap-2 group relative">
+                        {/* <div className="flex flex-col gap-2 group relative">
                             <label htmlFor="budget-input" className="text-xs uppercase tracking-widest text-gray-400">Budget in INR</label>
                             <select
                                 id="budget-input"
                                 name="budget"
                                 value={formData.budget}
                                 onChange={handleChange}
-                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg pr-8 text-white"
+                                className="bg-transparent border-b border-white/20 py-2 focus:border-[#07C42C] outline-none appearance-none cursor-pointer text-lg text-white"
                             >
-                                <option className="bg-black" value="Select range">Select range</option>
-                                <option className="bg-black" value="₹5k - ₹10k">₹5k - ₹10k</option>
-                                <option className="bg-black" value="₹10k - ₹25k">₹10k - ₹25k</option>
-                                <option className="bg-black" value="₹25k+">₹25k+</option>
+                                <option className="bg-black pl-2" value="Select range">Select range</option>
+                                {currentBudgetRanges.map((range) => (
+                                    <option
+                                        key={range}
+                                        className="bg-black"
+                                        value={range}
+                                    >
+                                        {range}
+                                    </option>
+                                ))}
                             </select>
                             <span className="absolute right-0 bottom-4 pointer-events-none opacity-50 text-xs">▼</span>
+                        </div> */}
+
+                        <div className="flex flex-col gap-2 group relative">
+                            <label
+                                htmlFor="budget-input"
+                                className="text-xs uppercase tracking-widest text-gray-400"
+                            >
+                                Budget in INR
+                            </label>
+
+                            {/* Dropdown Button */}
+                            <button
+                                type="button"
+                                id="budget-input"
+                                onClick={() => setIsBudgetOpen((prev) => !prev)}
+                                className="w-full bg-transparent border-b border-white/20 py-2 text-left focus:border-[#07C42C] outline-none cursor-pointer text-lg text-white flex items-center justify-between"
+                            >
+                                <span
+                                    className={
+                                        formData.budget
+                                            ? "text-white"
+                                            : "text-gray-400"
+                                    }
+                                >
+                                    {formData.budget || "Select budget range"}
+                                </span>
+
+                                <span
+                                    className={`text-xs opacity-50 transition-transform duration-200 ${isBudgetOpen ? "rotate-180" : ""
+                                        }`}
+                                >
+                                    ▼
+                                </span>
+                            </button>
+
+                            {/* Dropdown Options */}
+                            {isBudgetOpen && (
+                                <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-black border border-white/20 rounded-md overflow-hidden shadow-xl">
+
+                                    {/* Default option */}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                budget: ""
+                                            }));
+                                            setIsBudgetOpen(false);
+                                        }}
+                                        className="w-full text-left px-4 py-3 text-sm text-gray-400 hover:bg-white/10 hover:text-white transition-colors"
+                                    >
+                                        Select budget range
+                                    </button>
+
+                                    {/* Dynamic options */}
+                                    {currentBudgetRanges.map((range) => (
+                                        <button
+                                            type="button"
+                                            key={range}
+                                            onClick={() => {
+                                                setFormData((prev) => ({
+                                                    ...prev,
+                                                    budget: range
+                                                }));
+                                                setIsBudgetOpen(false);
+                                            }}
+                                            className={`w-full text-left px-4 py-3 text-sm cursor-pointer transition-colors ${formData.budget === range
+                                                    ? "bg-[#07C42C]/10 text-[#07C42C]"
+                                                    : "text-gray-300 hover:bg-white/10 hover:text-white"
+                                                }`}
+                                        >
+                                            {range}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 
