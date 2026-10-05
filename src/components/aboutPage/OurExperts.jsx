@@ -11,42 +11,42 @@ const experts = [
         id: 2,
         name: 'Mrs. Jaya Vyshnavi',
         role: '   HR Director',
-        company:'KBK Group of Companies',
+        company: 'KBK Group of Companies',
         img: 'https://kbk.group/assets/images/our-team/Jaya%20vishnavi.jpg'
     },
     {
         id: 3,
         name: 'Mr. Srikanth Reddy',
         role: 'General Manager',
-        company:'KBK Group of Companies',
+        company: 'KBK Group of Companies',
         img: 'https://kbk.group/assets/images/our-team/Srikanth%20sir.jpg'
     },
     {
         id: 4,
         name: 'Mr. Shiva Shankar',
         role: 'Director',
-        company:'KBK Broadcasting Pvt. Ltd',
+        company: 'KBK Broadcasting Pvt. Ltd',
         img: 'https://kbk.group/assets/images/our-team/Shanker%20sir.jpg'
     },
     {
         id: 5,
         name: 'Mr. Arun Kumar',
         role: 'HR & Immigration Manager',
-        company:'KBK Group of Companies',
+        company: 'KBK Group of Companies',
         img: 'https://kbk.group/assets/images/our-team/Arun%20sir.jpg'
     },
     {
         id: 6,
         name: 'Saif Mohammad',
         role: 'Professional Services Manager',
-        company:'KBK Business Solutions Pvt Ltd',
-        img: 'https://kbk.group/assets/images/our-team/Mohammed_Saif.jpg'
+        company: 'KBK Business Solutions Pvt Ltd',
+        img: 'https://res.cloudinary.com/dt9lwlxfb/image/upload/v1791195387/Mohammed_Saif_nv8n5i.jpg'
     },
     {
         id: 7,
         name: 'G.Nikeelu',
         role: 'Marketing Chief',
-        company:'KBK Group',
+        company: 'KBK Group',
         img: 'https://kbk.group/assets/images/our-team/Nikeelu%20Gunda.jpg'
     },
 ];
