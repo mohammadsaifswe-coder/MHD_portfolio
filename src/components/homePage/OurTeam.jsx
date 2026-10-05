@@ -9,7 +9,7 @@ const teamMembers = [
     { name: "Mr. Upender", role: "Operations Manager", company: "KBK Group" },
     { name: "Mr. Arun Kumar", role: "HR & Immigration Manager", company: "KBK Group" },
     { name: "Mr. Shiva Shankar", role: "Director", company: "KBK Broadcasting Pvt. Ltd" },
-    { name: "Mr. Saif Mohammad", role: "Business Development Manager / CRM", company: "KBK Business Solutions Pvt Ltd" },
+    { name: "Mr. Saif Mohammad", role: "Professional Services Manager", company: "KBK Business Solutions Pvt Ltd" },
     { name: "Mr. Gaddam Harish", role: "HR Manager", company: "KBK Group" },
     { name: "Mr. Jaffer", role: "Manager", company: "Equinox IT Solutions" },
 ];
