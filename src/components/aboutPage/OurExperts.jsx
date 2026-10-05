@@ -38,7 +38,7 @@ const experts = [
     {
         id: 6,
         name: 'Saif Mohammad',
-        role: 'Business Development Manager',
+        role: 'Professional Services Manager',
         company:'KBK Business Solutions Pvt Ltd',
         img: 'https://kbk.group/assets/images/our-team/Mohammed_Saif.jpg'
     },
