@@ -40,6 +40,7 @@ const experts = [
         name: 'Saif Mohammad',
         role: 'Professional Services Manager',
         company: 'KBK Business Solutions Pvt Ltd',
+        // img: 'https://kbk.group/assets/images/our-team/Mohammed_Saif.jpg'
         img: 'https://res.cloudinary.com/dt9lwlxfb/image/upload/v1791195387/Mohammed_Saif_nv8n5i.jpg'
     },
     {
@@ -95,7 +96,7 @@ export default function OurExperts() {
                 <div className="flex flex-col md:flex-row gap-6">
 
                     {/* Static Card */}
-                    <div className="w-full md:w-80 shrink-0 h-80 rounded-[40px] bg-[#111111] border border-white/5 p-10 flex flex-col justify-center relative overflow-hidden group">
+                    <div className="w-full md:w-80 shrink-0 h-90 rounded-[40px] bg-[#111111] border border-white/5 p-10 flex flex-col justify-center relative overflow-hidden group">
 
                         {/* --- RIPPLE SHAPE (Top Right) --- */}
                         <div className="absolute -top-56 -right-56 w-96 h-96 pointer-events-none z-0">
@@ -170,7 +171,7 @@ export default function OurExperts() {
                                 key={expert.id}
                                 className="w-full sm:w-72 md:w-90 shrink-0 snap-start group"
                             >
-                                <div className="relative h-80 w-full rounded-[40px] overflow-hidden border border-white/5 bg-zinc-900">
+                                <div className="relative h-90 w-full rounded-[40px] overflow-hidden border border-white/5 bg-zinc-900">
                                     <img
                                         src={expert.img}
                                         alt={expert.name}
