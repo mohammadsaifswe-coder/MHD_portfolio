@@ -1,70 +1,441 @@
+// import React, { useEffect, useMemo, useRef, useState } from 'react';
+// import { FiArrowRight } from 'react-icons/fi';
+// import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+// // Assets
+// import serbg from '../../assets/home/test.webp';
+// // import development from '../../assets/home/service/development.webp';
+// // import dmimg from '../../assets/home/service/digital-marketing.webp';
+// // import uiux from '../../assets/home/service/uiux.webp';
+// // import brand from '../../assets/home/service/brand-designing.webp';
+// // import media from '../../assets/home/service/media.webp';
+// const brand = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/brand_zxmh48.webp';
+// const media = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/media_oays7c.webp';
+// const development = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/developer_rcaej1.webp';
+// const dmimg = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/DM_oowr1k.webp';
+// const uiux = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/UI_UX_f14pyv.webp';
+
+
+// import ser21 from '../../assets/home/test-2.webp';
+// import ser22 from '../../assets/home/test.webp';
+// import { useFormPopup } from '@/context/FormContext';
+
+// const SERVICE_DATA = [
+//     {
+//         title: "Development",
+//         description: "We develop scalable websites and mobile applications tailored to meet diverse business needs. Our web development services in Hyderabad focus on delivering high performance, strong security, and seamless functionality across all devices and platforms.",
+//         mainImg: development,
+//         list: ["Business Website Development", "WordPress", "API Development", "Front End Development", "JavaScript", "Mobile App Development"],
+//         rating: 4.5,
+//     },
+//     {
+//         title: "Digital Marketing",
+//         description: "We provide digital marketing solutions designed to increase brand visibility and drive targeted traffic. As the Best Digital Marketing Agency in Hyderabad, we help businesses grow by generating valuable leads through strategic and well-planned online marketing campaigns.",
+//         mainImg: dmimg,
+//         list: ["Search Engine Optimization (SEO)", "Social Media Marketing", "Google Ads & PPC Campaigns", "Performance Marketing", "Email Marketing", "Lead Generation"],
+//         rating: 5,
+//     },
+//     {
+//         title: "Branding & Creative Design",
+//         description: "We build powerful brand identities and creative visual solutions that help businesses stand out and leave a lasting impression. As a leading graphic design company in Hyderabad, we deliver designs that strengthen brand recognition and connect effectively with your audience.",
+//         mainImg: brand,
+//         list: ["Logo Design", "Brand Identity Design", "Marketing Creatives", "Corporate Branding", "Visual Identity Design", "Creative Designs"],
+//         rating: 5,
+//     },
+//     {
+//         title: "Media Production & Content Creation",
+//         description: "We develop professional media content that strengthens brand identity and helps businesses deliver impactful marketing messages through powerful visual storytelling. As experienced corporate film makers in Hyderabad, we create engaging videos that effectively showcase your brand and connect with your audience.",
+//         mainImg: media,
+//         list: ["Promotional & Advertising Videos", "Corporate Video Production", "Product Photography for Marketing"],
+//         rating: 5,
+//     },
+//     {
+//         title: "Innovative UI/UX Design for Digital Platforms",
+//         description: "We create intuitive and engaging digital experiences that focus on usability and accessibility. Inspired by the best UI UX design websites, our solutions deliver modern and user-friendly interfaces that guide visitors smoothly across web and mobile platforms, enhancing overall interaction and user satisfaction.",
+//         mainImg: uiux,
+//         list: ["UX Research", "Website UI Design", "Wireframing & Prototyping", "Product Interface Design", "Mobile App UI Design"],
+//         rating: 5,
+//     },
+// ];
+
+// const TOTAL_SERVICE = 2;
+// const REAL_SLIDE_COUNT = SERVICE_DATA.length;
+// const INITIAL_INDEX = TOTAL_SERVICE;
+// const END_CLONE_INDEX = TOTAL_SERVICE + REAL_SLIDE_COUNT;
+// const REAL_END_INDEX = TOTAL_SERVICE + REAL_SLIDE_COUNT - 1;
+
+// // Updated Speed Variable
+// // const SLOW_SPEED = 1800;
+
+
+// const HomeService = () => {
+//     const [current, setCurrent] = useState(INITIAL_INDEX);
+//     const [isTransition, setIsTransition] = useState(true);
+//     const [isAnimating, setIsAnimating] = useState(false);
+//     const [touchStart, setTouchStart] = useState(null);
+//     const [touchEnd, setTouchEnd] = useState(null);
+//     const [drag, setDrag] = useState(0);
+//     const timerRef = useRef(null);
+
+//     const extendSlides = useMemo(() => [
+//         SERVICE_DATA[SERVICE_DATA.length - 2],
+//         SERVICE_DATA[SERVICE_DATA.length - 1],
+//         ...SERVICE_DATA,
+//         SERVICE_DATA[0],
+//         SERVICE_DATA[1],
+//     ], []);
+
+
+
+//     const getSpeed = () => {
+//         if (window.innerWidth < 640) return 500;   // mobile
+//         if (window.innerWidth < 1024) return 1200; // tablet
+//         return 1800;                               // desktop
+//     };
+
+//     const [speed, setSpeed] = useState(getSpeed());
+
+//     useEffect(() => {
+//         const handleResize = () => {
+//             setSpeed(getSpeed());
+//         };
+
+//         window.addEventListener("resize", handleResize);
+//         return () => window.removeEventListener("resize", handleResize);
+//     }, []);
+
+
+//     // Infinite loop logic updated with SLOW_SPEED
+//     useEffect(() => {
+//         if (current === END_CLONE_INDEX) {
+//             setTimeout(() => {
+//                 setIsTransition(false);
+//                 setCurrent(INITIAL_INDEX);
+//             }, speed);
+//         } else if (current === TOTAL_SERVICE - 1) {
+//             setTimeout(() => {
+//                 setIsTransition(false);
+//                 setCurrent(REAL_END_INDEX);
+//             }, speed);
+//         }
+//     }, [current]);
+
+//     useEffect(() => {
+//         if (!isTransition) {
+//             const timer = setTimeout(() => setIsTransition(true), 50);
+//             return () => clearTimeout(timer);
+//         }
+//     }, [isTransition]);
+
+//     // Animation lock updated with SLOW_SPEED
+//     useEffect(() => {
+//         if (isAnimating) {
+//             const timer = setTimeout(() => setIsAnimating(false), speed);
+//             return () => clearTimeout(timer);
+//         }
+//     }, [isAnimating]);
+
+//     const nextSlide = () => {
+//         if (isAnimating) return;
+//         setIsAnimating(true);
+//         setIsTransition(true);
+//         setCurrent(prev => prev + 1);
+//     };
+
+//     const prevSlide = () => {
+//         if (isAnimating) return;
+//         setIsAnimating(true);
+//         setIsTransition(true);
+//         setCurrent(prev => prev - 1);
+//     };
+
+//     // Touch Handlers
+//     const handleTouchStart = (e) => {
+//         if (window.innerWidth > 768) return;
+//         setTouchStart(e.targetTouches[0].clientX);
+//         setTouchEnd(null);
+//     };
+
+//     const handleTouchMove = (e) => {
+//         if (window.innerWidth > 768 || touchStart === null) return;
+//         const currentX = e.targetTouches[0].clientX;
+//         setTouchEnd(currentX);
+//         const distanceGap = currentX - touchStart;
+//         setDrag((distanceGap / window.innerWidth) * 80);
+//     };
+
+//     const handleTouchEnd = () => {
+//         if (window.innerWidth >= 768) return;
+//         if (!touchStart || !touchEnd) {
+//             setIsTransition(true);
+//             setDrag(0);
+//             setTouchStart(null);
+//             return;
+//         }
+
+//         const touchDistance = touchStart - touchEnd;
+//         const swipePercent = (Math.abs(touchDistance) / window.innerWidth) * 100;
+
+//         if (swipePercent > 20) {
+//             setIsTransition(true);
+//             touchDistance > 0 ? nextSlide() : prevSlide();
+//         } else {
+//             clearTimeout(timerRef.current);
+//             timerRef.current = setTimeout(() => setIsTransition(true), 20);
+//         }
+
+//         setDrag(0);
+//         setTouchStart(null);
+//         setTouchEnd(null);
+//     };
+
+
+//     const dynamicBg = extendSlides[current]?.mainImg || serbg;
+
+
+//     return (
+//         <div className='h-auto relative py-10 md:py-15 text-white overflow-hidden'>
+
+
+//             <div
+//                 className='absolute inset-0 bg-center bg-cover z-0 transition-all duration-1000 ease-in-out'
+//                 style={{
+//                     backgroundImage: `url(${dynamicBg})`,
+//                     opacity: 1,
+//                 }}
+//             />
+
+//             <div className='absolute inset-0 bg-[#232323]/90 backdrop-blur-xs ' />
+//             {/* backdrop-blur-md */}
+
+//             <div className='container w-full h-full flex flex-col justify-center gap-10 relative z-10 mx-auto'>
+//                 <h1 className='text-5xl font-semibold'>Services</h1>
+
+//                 <div
+//                     role="region"
+//                     aria-label="Services carousel"
+//                     onTouchStart={handleTouchStart}
+//                     onTouchMove={handleTouchMove}
+//                     onTouchEnd={handleTouchEnd}
+//                     className='h-full flex flex-row'
+//                 >
+//                     {extendSlides.map((item, idx) => (
+//                         <ServiceSlide
+//                             key={idx}
+//                             item={item}
+//                             idx={idx}
+//                             current={current}
+//                             drag={drag}
+//                             isTransition={isTransition}
+//                             onNext={nextSlide}
+//                             speed={speed}
+//                         />
+//                     ))}
+//                 </div>
+
+
+
+//             </div>
+
+
+//         </div>
+//     );
+// };
+
+// const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed }) => {
+//     const { openForm } = useFormPopup();
+
+//     const slideStyle = {
+//         transform: `translateX(calc(-${current * 100}% + ${drag}%))`,
+//         transition: isTransition ? `transform ${speed}ms ease` : '',
+//     };
+
+//     const imgStyle = {
+//         transform: idx === current + 1 ? 'translateX(-25%) scale(0.5)' : 'scale(1)',
+//         transition: isTransition ? `transform ${speed}ms ease` : '',
+//     };
+
+//     return (
+//         <div
+//             style={slideStyle}
+//             className='flex md:min-w-[85%] min-w-full justify-start md:flex-row flex-col md:items-stretch items-center gap-5 relative'
+//         >
+//             <div className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center'>
+//                 <img
+//                     className='w-full md:h-fir overflow-hidden lg:object-cover object-contain rounded-xl'
+//                     style={imgStyle}
+//                     src={item.mainImg}
+//                     alt={item.title}
+//                 />
+//             </div>
+
+//             <div className='flex flex-col justify-between items-start lg:gap-2 gap-2 mx-8 pb-15 sm:pb-0 md:w-[35%] '>
+//                 <h2 className='text-3xl font-semibold'>{item.title}</h2>
+//                 <p className='lg:text-sm text-xs leading-relaxed font-light tracking-wide  max-w-md'>{item.description}</p>
+
+//                 {/* <div className='border-t w-full opacity-30' /> */}
+//                 <div className='flex flex-col'>
+//                     <div className='flex items-center gap-1 text-[#FFD700]'>
+//                         <FaStar />
+//                         <FaStar />
+//                         <FaStar />
+//                         <FaStar />
+//                         {item?.rating === 4.5 ? <FaStarHalfAlt /> : <FaStar />}
+//                     </div>
+//                 </div>
+//                 <div className='border-t w-full opacity-30' />
+
+//                 <ul className='text-xs grid lg:grid-cols-1 grid-cols-2 lg:gap-3 gap-2'>
+//                     {item.list.map((listItem, listIdx) => (
+//                         <li key={listIdx} className='flex gap-1 text-[14px]'>
+//                             <span className='text-[#07C42C]'>//</span>
+//                             <span>{listItem}</span>
+//                         </li>
+//                     ))}
+//                 </ul>
+
+//                 <button
+//                     onClick={openForm}
+//                     className='border rounded-md lg:px-4 px-3 lg:py-2 py-1 text-xs font-medium cursor-pointer hover:bg-white hover:text-black transition-colors sm:static absolute bottom-1 left-5 '
+//                     aria-label="Start Project"
+//                 >
+//                     START A PROJECT
+//                 </button>
+//             </div>
+
+//             <div className='flex justify-center items-center gap-3 md:static fixed bottom-1 md:bottom-4 right-4'>
+//                 <button
+//                     onClick={onNext}
+//                     className='cursor-pointer lg:p-6 p-3 rounded-full bg-black shadow-[inset_0px_0px_16px_0px_gray,0px_0px_2px_1px_black] active:scale-95 transition-transform'
+//                     aria-label="Next Slide"
+//                 >
+//                     <FiArrowRight className='md:text-3xl text-xl' />
+//                 </button>
+//             </div>
+//         </div>
+//     );
+// };
+
+
+// export default HomeService;
+
+
+
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+
 // Assets
+
 import serbg from '../../assets/home/test.webp';
+
 // import development from '../../assets/home/service/development.webp';
 // import dmimg from '../../assets/home/service/digital-marketing.webp';
 // import uiux from '../../assets/home/service/uiux.webp';
 // import brand from '../../assets/home/service/brand-designing.webp';
 // import media from '../../assets/home/service/media.webp';
+
 const brand = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/brand_zxmh48.webp';
 const media = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/media_oays7c.webp';
 const development = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/developer_rcaej1.webp';
 const dmimg = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/DM_oowr1k.webp';
 const uiux = 'https://res.cloudinary.com/dt9lwlxfb/image/upload/UI_UX_f14pyv.webp';
 
-
 import ser21 from '../../assets/home/test-2.webp';
 import ser22 from '../../assets/home/test.webp';
+
 import { useFormPopup } from '@/context/FormContext';
 
+
 const SERVICE_DATA = [
+
     {
         title: "Development",
         description: "We develop scalable websites and mobile applications tailored to meet diverse business needs. Our web development services in Hyderabad focus on delivering high performance, strong security, and seamless functionality across all devices and platforms.",
         mainImg: development,
-        list: ["Business Website Development", "WordPress", "API Development", "Front End Development", "JavaScript", "Mobile App Development"],
+        // SECOND IMAGE ON HOVER
+        hoverImg: ser21,
+        list: [
+            "Business Website Development",
+            "WordPress",
+            "API Development",
+            "Front End Development",
+            "JavaScript",
+            "Mobile App Development"
+        ],
         rating: 4.5,
     },
+
     {
         title: "Digital Marketing",
         description: "We provide digital marketing solutions designed to increase brand visibility and drive targeted traffic. As the Best Digital Marketing Agency in Hyderabad, we help businesses grow by generating valuable leads through strategic and well-planned online marketing campaigns.",
         mainImg: dmimg,
-        list: ["Search Engine Optimization (SEO)", "Social Media Marketing", "Google Ads & PPC Campaigns", "Performance Marketing", "Email Marketing", "Lead Generation"],
+        hoverImg: ser22,
+        list: [
+            "Search Engine Optimization (SEO)",
+            "Social Media Marketing",
+            "Google Ads & PPC Campaigns",
+            "Performance Marketing",
+            "Email Marketing",
+            "Lead Generation"
+        ],
         rating: 5,
     },
+
     {
         title: "Branding & Creative Design",
         description: "We build powerful brand identities and creative visual solutions that help businesses stand out and leave a lasting impression. As a leading graphic design company in Hyderabad, we deliver designs that strengthen brand recognition and connect effectively with your audience.",
         mainImg: brand,
-        list: ["Logo Design", "Brand Identity Design", "Marketing Creatives", "Corporate Branding", "Visual Identity Design", "Creative Designs"],
+
+        // SECOND IMAGE ON HOVER
+        hoverImg: ser21,
+        list: [
+            "Logo Design",
+            "Brand Identity Design",
+            "Marketing Creatives",
+            "Corporate Branding",
+            "Visual Identity Design",
+            "Creative Designs"
+        ],
         rating: 5,
     },
+
     {
         title: "Media Production & Content Creation",
         description: "We develop professional media content that strengthens brand identity and helps businesses deliver impactful marketing messages through powerful visual storytelling. As experienced corporate film makers in Hyderabad, we create engaging videos that effectively showcase your brand and connect with your audience.",
         mainImg: media,
-        list: ["Promotional & Advertising Videos", "Corporate Video Production", "Product Photography for Marketing"],
+
+        // SECOND IMAGE ON HOVER
+        hoverImg: ser22,
+        list: [
+            "Promotional & Advertising Videos",
+            "Corporate Video Production",
+            "Product Photography for Marketing"
+        ],
         rating: 5,
     },
+
     {
         title: "Innovative UI/UX Design for Digital Platforms",
         description: "We create intuitive and engaging digital experiences that focus on usability and accessibility. Inspired by the best UI UX design websites, our solutions deliver modern and user-friendly interfaces that guide visitors smoothly across web and mobile platforms, enhancing overall interaction and user satisfaction.",
         mainImg: uiux,
-        list: ["UX Research", "Website UI Design", "Wireframing & Prototyping", "Product Interface Design", "Mobile App UI Design"],
+        hoverImg: ser21,
+        list: [
+            "UX Research",
+            "Website UI Design",
+            "Wireframing & Prototyping",
+            "Product Interface Design",
+            "Mobile App UI Design"
+        ],
         rating: 5,
     },
 ];
+
 
 const TOTAL_SERVICE = 2;
 const REAL_SLIDE_COUNT = SERVICE_DATA.length;
 const INITIAL_INDEX = TOTAL_SERVICE;
 const END_CLONE_INDEX = TOTAL_SERVICE + REAL_SLIDE_COUNT;
 const REAL_END_INDEX = TOTAL_SERVICE + REAL_SLIDE_COUNT - 1;
-
-// Updated Speed Variable
-// const SLOW_SPEED = 1800;
 
 
 const HomeService = () => {
@@ -76,6 +447,7 @@ const HomeService = () => {
     const [drag, setDrag] = useState(0);
     const timerRef = useRef(null);
 
+
     const extendSlides = useMemo(() => [
         SERVICE_DATA[SERVICE_DATA.length - 2],
         SERVICE_DATA[SERVICE_DATA.length - 1],
@@ -85,12 +457,12 @@ const HomeService = () => {
     ], []);
 
 
-
     const getSpeed = () => {
-        if (window.innerWidth < 640) return 500;   // mobile
-        if (window.innerWidth < 1024) return 1200; // tablet
-        return 1800;                               // desktop
+        if (window.innerWidth < 640) return 500;
+        if (window.innerWidth < 1024) return 1200;
+        return 1800;
     };
+
 
     const [speed, setSpeed] = useState(getSpeed());
 
@@ -104,20 +476,22 @@ const HomeService = () => {
     }, []);
 
 
-    // Infinite loop logic updated with SLOW_SPEED
     useEffect(() => {
         if (current === END_CLONE_INDEX) {
             setTimeout(() => {
                 setIsTransition(false);
                 setCurrent(INITIAL_INDEX);
             }, speed);
-        } else if (current === TOTAL_SERVICE - 1) {
+        }
+
+        else if (current === TOTAL_SERVICE - 1) {
             setTimeout(() => {
                 setIsTransition(false);
                 setCurrent(REAL_END_INDEX);
             }, speed);
         }
     }, [current]);
+
 
     useEffect(() => {
         if (!isTransition) {
@@ -126,13 +500,14 @@ const HomeService = () => {
         }
     }, [isTransition]);
 
-    // Animation lock updated with SLOW_SPEED
+
     useEffect(() => {
         if (isAnimating) {
             const timer = setTimeout(() => setIsAnimating(false), speed);
             return () => clearTimeout(timer);
         }
     }, [isAnimating]);
+
 
     const nextSlide = () => {
         if (isAnimating) return;
@@ -141,12 +516,14 @@ const HomeService = () => {
         setCurrent(prev => prev + 1);
     };
 
+
     const prevSlide = () => {
         if (isAnimating) return;
         setIsAnimating(true);
         setIsTransition(true);
         setCurrent(prev => prev - 1);
     };
+
 
     // Touch Handlers
     const handleTouchStart = (e) => {
@@ -155,6 +532,7 @@ const HomeService = () => {
         setTouchEnd(null);
     };
 
+
     const handleTouchMove = (e) => {
         if (window.innerWidth > 768 || touchStart === null) return;
         const currentX = e.targetTouches[0].clientX;
@@ -162,6 +540,7 @@ const HomeService = () => {
         const distanceGap = currentX - touchStart;
         setDrag((distanceGap / window.innerWidth) * 80);
     };
+
 
     const handleTouchEnd = () => {
         if (window.innerWidth >= 768) return;
@@ -173,16 +552,21 @@ const HomeService = () => {
         }
 
         const touchDistance = touchStart - touchEnd;
-        const swipePercent = (Math.abs(touchDistance) / window.innerWidth) * 100;
+
+        const swipePercent =
+            (Math.abs(touchDistance) / window.innerWidth) * 100;
 
         if (swipePercent > 20) {
             setIsTransition(true);
             touchDistance > 0 ? nextSlide() : prevSlide();
-        } else {
-            clearTimeout(timerRef.current);
-            timerRef.current = setTimeout(() => setIsTransition(true), 20);
         }
-
+        else {
+            clearTimeout(timerRef.current);
+            timerRef.current = setTimeout(
+                () => setIsTransition(true),
+                20
+            );
+        }
         setDrag(0);
         setTouchStart(null);
         setTouchEnd(null);
@@ -191,11 +575,8 @@ const HomeService = () => {
 
     const dynamicBg = extendSlides[current]?.mainImg || serbg;
 
-
     return (
         <div className='h-auto relative py-10 md:py-15 text-white overflow-hidden'>
-
-
             <div
                 className='absolute inset-0 bg-center bg-cover z-0 transition-all duration-1000 ease-in-out'
                 style={{
@@ -203,12 +584,11 @@ const HomeService = () => {
                     opacity: 1,
                 }}
             />
-
             <div className='absolute inset-0 bg-[#232323]/90 backdrop-blur-xs ' />
-            {/* backdrop-blur-md */}
-
             <div className='container w-full h-full flex flex-col justify-center gap-10 relative z-10 mx-auto'>
-                <h1 className='text-5xl font-semibold'>Services</h1>
+                <h1 className='text-5xl font-semibold'>
+                    Services
+                </h1>
 
                 <div
                     role="region"
@@ -231,64 +611,113 @@ const HomeService = () => {
                         />
                     ))}
                 </div>
-
-
-
             </div>
-
-
         </div>
     );
 };
 
+
 const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed }) => {
     const { openForm } = useFormPopup();
+    const [isHovered, setIsHovered] = useState(false);
 
     const slideStyle = {
         transform: `translateX(calc(-${current * 100}% + ${drag}%))`,
-        transition: isTransition ? `transform ${speed}ms ease` : '',
+        transition: isTransition
+            ? `transform ${speed}ms ease`
+            : '',
     };
 
     const imgStyle = {
-        transform: idx === current + 1 ? 'translateX(-25%) scale(0.5)' : 'scale(1)',
-        transition: isTransition ? `transform ${speed}ms ease` : '',
+        transform:
+            idx === current + 1
+                ? 'translateX(-25%) scale(0.5)'
+                : 'scale(1)',
+
+        transition:
+            isTransition
+                ? `transform ${speed}ms ease`
+                : '',
     };
 
+    const isCurrentSlide = idx === current;
     return (
         <div
             style={slideStyle}
             className='flex md:min-w-[85%] min-w-full justify-start md:flex-row flex-col md:items-stretch items-center gap-5 relative'
         >
-            <div className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center'>
+            <div
+                className='lg:max-w-80 max-w-57.5 w-full flex items-center justify-center relative'
+                onMouseEnter={() => {
+                    if (isCurrentSlide) {
+                        setIsHovered(true);
+                    }
+                }}
+                onMouseLeave={() => {
+                    setIsHovered(false);
+                }}
+            >
                 <img
-                    className='w-full md:h-fir overflow-hidden lg:object-cover object-contain rounded-xl'
+                    className={`w-full md:h-fir overflow-hidden lg:object-cover object-contain  rounded-xl transition-opacity  duration-300 ${isHovered && isCurrentSlide
+                        ? 'opacity-0'
+                        : 'opacity-100'
+                        }
+                    `}
                     style={imgStyle}
                     src={item.mainImg}
                     alt={item.title}
                 />
+
+                <img
+                    className={`absolute inset-0 w-full md:h-fir overflow-hidden lg:object-cover  object-contain rounded-xl transition-opacity duration-300 pointer-events-none
+                        ${isHovered && isCurrentSlide
+                            ? 'opacity-100'
+                            : 'opacity-0'
+                        }
+                    `}
+                    style={imgStyle}
+                    src={item.hoverImg || item.mainImg}
+                    alt={`${item.title} hover`}
+                />
             </div>
+
 
             <div className='flex flex-col justify-between items-start lg:gap-2 gap-2 mx-8 pb-15 sm:pb-0 md:w-[35%] '>
                 <h2 className='text-3xl font-semibold'>{item.title}</h2>
-                <p className='lg:text-sm text-xs leading-relaxed font-light tracking-wide  max-w-md'>{item.description}</p>
 
-                {/* <div className='border-t w-full opacity-30' /> */}
+                <p className='lg:text-sm text-xs leading-relaxed font-light tracking-wide max-w-md'>
+                    {item.description}
+                </p>
+
                 <div className='flex flex-col'>
                     <div className='flex items-center gap-1 text-[#FFD700]'>
                         <FaStar />
                         <FaStar />
                         <FaStar />
                         <FaStar />
-                        {item?.rating === 4.5 ? <FaStarHalfAlt /> : <FaStar />}
+
+                        {item?.rating === 4.5
+                            ? <FaStarHalfAlt />
+                            : <FaStar />
+                        }
                     </div>
                 </div>
+
                 <div className='border-t w-full opacity-30' />
 
                 <ul className='text-xs grid lg:grid-cols-1 grid-cols-2 lg:gap-3 gap-2'>
                     {item.list.map((listItem, listIdx) => (
-                        <li key={listIdx} className='flex gap-1 text-[14px]'>
-                            <span className='text-[#07C42C]'>//</span>
-                            <span>{listItem}</span>
+                        <li
+                            key={listIdx}
+                            className='flex gap-1 text-[14px]'
+                        >
+                            <span className='text-[#07C42C]'>
+                                //
+                            </span>
+
+                            <span>
+                                {listItem}
+                            </span>
                         </li>
                     ))}
                 </ul>
@@ -314,6 +743,5 @@ const ServiceSlide = ({ item, idx, current, drag, isTransition, onNext, speed })
         </div>
     );
 };
-
 
 export default HomeService;

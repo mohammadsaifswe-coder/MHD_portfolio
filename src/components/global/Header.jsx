@@ -14,7 +14,7 @@ export default function Header() {
         { name: "About", to: "/about" },
         { name: "Services", to: "/services" },
         { name: "Recent Projects", to: "/project" },
-        { name: "Contact", to: "/contact" },
+        // { name: "Contact", to: "/contact" },
     ];
 
     useEffect(() => {
